@@ -1,0 +1,32 @@
+{% block content %}
+
+<h1>Clinics</h1>
+
+{# READ table #}
+<table>
+    <thead>
+        {# For the table header row, we print the DB attribute names #}
+        <tr>
+            {% for key in clinics[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {# For each row, print the clinicId, address, city, state, postalCode, phoneNumber #}
+        {% for clinic in clinics %}
+        <tr>
+            <td>{{ clinic.clinicId }}</td>
+            <td>{{ clinic.address }}</td>
+            <td>{{ clinic.city }}</td>
+            <td>{{ clinic.state }}</td>
+            <td>{{ clinic.postalCode }}</td>
+            <td>{{ clinic.phoneNumber }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
