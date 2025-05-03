@@ -1,6 +1,5 @@
+{% extends "main.j2" %}
 {% block content %}
-
-<h1>Clinics</h1>
 
 {# READ table #}
 <table>
@@ -10,6 +9,7 @@
             {% for key in clinics[0].keys() %}
             <th>{{ key }}</th>
             {% endfor %}
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -24,6 +24,8 @@
             <td>{{ clinic.state }}</td>
             <td>{{ clinic.postalCode }}</td>
             <td>{{ clinic.phoneNumber }}</td>
+            <td></td>
+            <td></td>
         </tr>
         {% endfor %}
     </tbody>
