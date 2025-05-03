@@ -1,0 +1,28 @@
+{% extends "main.j2" %}
+{% block content %}
+
+{# READ table #}
+<table>
+    <thead>
+        {# For the table header row, we print the DB attribute names #}
+        <tr>
+            {% for key in statuses[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {# For each row, print the statusId, status #}
+        {% for status in statuses %}
+        <tr>
+            <td>{{ status.statusId }}</td>
+            <td>{{ status.status }}</td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
