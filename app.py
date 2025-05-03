@@ -47,13 +47,13 @@ def bsg_people():
         # Close the DB connection, if it exists
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
-            
+
 @app.route("/appointments", methods=["GET"])
 def get_appointments():
     try:
         dbConnection = db.connectDB()  # Open our database connection
 
-        query2 = "SELECT appointmentId, date, time, Appointments.clinicId, firstName, lastName, status FROM Appointments JOIN Patients ON Appointments.patientId = Patients.patientId JOIN Statuses ON Appointments.statusId = Statuses.statusId;"
+        query2 = "SELECT appointmentId, dateTime, Appointments.clinicId, firstName, lastName, status FROM Appointments JOIN Patients ON Appointments.patientId = Patients.patientId JOIN Statuses ON Appointments.statusId = Statuses.statusId;"
         appointments = db.query(dbConnection, query2).fetchall()
 
         # Render the appointments.j2 file, and also send the renderer appointments information
