@@ -15,14 +15,15 @@
     </thead>
 
     <tbody>
-        {# For each row, print the clinicId, address, city, state, postalCode, phoneNumber #}
+        {# For each row, print the appointmentId,clinicId, dateTime, firstName, lastName, and status #}
         {% for appointment in appointments %}
         <tr>
             <td>{{ appointment.appointmentId }}</td>
             <td>{{ appointment.dateTime }}</td>
             <td>{{ appointment.clinicId }}</td>
-            <td>{{ appointment.patientId }}</td>
-            <td>{{ appointment.statusId }}</td>
+            <td>{{ appointment.firstName }}</td>
+            <td>{{ appointment.lastName }}</td>
+            <td>{{ appointment.status }}</td>
             <td></td>
             <td></td>
         </tr>
