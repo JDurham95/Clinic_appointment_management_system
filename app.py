@@ -45,6 +45,28 @@ def clinics():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
+@app.route("/appointments", methods=["GET"])
+def get_appointments():
+    try:
+        dbConnection = db.connectDB()  # Open our database connection
+
+        appointmentsquery = "SELECT appointmentId, dateTime, Appointments.clinicId, Patients.firstName, Patients.lastName, Statuses.status FROM Appointments JOIN Patients ON Appointments.patientId = Patients.patientId JOIN Statuses ON Appointments.statusId = Statuses.statusId"
+        appointments = db.query(dbConnection, appointmentsquery).fetchall()
+
+        # Render the appointments.j2 file, and also send the renderer appointments information
+        return render_template(
+            "appointments.j2", appointments=appointments
+        )
+    
+    except Exception as e:
+        print(f"Error executing queries: {e}")
+        return "An error occurred while executing the database queries.", 500
+
+    finally:
+        # Close the DB connection, if it exists
+        if "dbConnection" in locals() and dbConnection:
+            dbConnection.close()
+
 @app.route("/patients", methods=["GET"])
 def patients():
     try:
