@@ -1,6 +1,10 @@
 {% extends "main.j2" %}
 {% block content %}
 
+<div class="add-container">
+    <button class="add">Add</button>
+</div>
+
 {# READ table #}
 <table>
     <thead>
@@ -24,11 +28,48 @@
             <td>{{ clinic.state }}</td>
             <td>{{ clinic.postalCode }}</td>
             <td>{{ clinic.phoneNumber }}</td>
-            <td></td>
-            <td></td>
+            <td><button><span class="material-symbols-outlined">edit</span></button></td>
+            <td><button><span class="material-symbols-outlined">delete</span></button></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<div class="add-form-popup">
+    <div class="add-form">
+        <button class="close"><span class="material-symbols-outlined">close</span></button>
+
+        <h2>Add Clinic</h2>
+
+        <form>
+            <div>
+                <label for="address">Address:</label>
+                <input type="text" name="fname">
+            </div>
+
+            <div>
+                <label for="city">City:</label>
+                <input type="text" name="city">
+            </div>
+
+            <div>
+                <label for="state">State:</label>
+                <input type="text" name="state">
+            </div>
+
+            <div>
+                <label for="postalCode">Postal Code:</label>
+                <input type="number" name="postalCode">
+            </div>
+
+            <div>
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="number" name="phoneNumber">
+            </div>
+
+            <button class="submit">Submit</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
