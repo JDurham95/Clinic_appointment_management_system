@@ -1,0 +1,30 @@
+{% extends "main.j2" %}
+{% block content %}
+
+{# READ table #}
+<table>
+    <thead>
+        {# For the table header row, we print the DB attribute names #}
+        <tr>
+            {% for key in tests[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {# For each row, print the testId, name #}
+        {% for test in tests %}
+        <tr>
+            <td>{{ test.testId }}</td>
+            <td>{{ test.name }}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

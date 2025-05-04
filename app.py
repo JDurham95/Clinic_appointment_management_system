@@ -115,7 +115,51 @@ def statuses():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
+@app.route("/tests", methods=["GET"])
+def tests():
+    try:
+        dbConnection = db.connectDB()  # Open our database connection
 
+        # Create and execute our queries
+        query1 = "SELECT testId, name FROM Tests ORDER BY testId;"
+        tests = db.query(dbConnection, query1).fetchall()
+
+        # Render the tests.j2 file, and also send the renderer test information
+        return render_template(
+            "tests.j2", tests=tests
+        )
+
+    except Exception as e:
+        print(f"Error executing queries: {e}")
+        return "An error occurred while executing the database queries.", 500
+
+    finally:
+        # Close the DB connection, if it exists
+        if "dbConnection" in locals() and dbConnection:
+            dbConnection.close()
+
+@app.route("/results", methods=["GET"])
+def results():
+    try:
+        dbConnection = db.connectDB()  # Open our database connection
+
+        # Create and execute our queries
+        query1 = "SELECT testResultId, result FROM Results ORDER BY testResultId;"
+        results = db.query(dbConnection, query1).fetchall()
+
+        # Render the results.j2 file, and also send the renderer result information
+        return render_template(
+            "results.j2", results=results
+        )
+
+    except Exception as e:
+        print(f"Error executing queries: {e}")
+        return "An error occurred while executing the database queries.", 500
+
+    finally:
+        # Close the DB connection, if it exists
+        if "dbConnection" in locals() and dbConnection:
+            dbConnection.close()
 # ########################################
 # ########## LISTENER
 

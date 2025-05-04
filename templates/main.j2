@@ -19,6 +19,8 @@
         <a href="/patients" class="{{ 'active' if request.path == '/patients' }}">Patients</a>
         <a href="/appointments" class="{{ 'active' if request.path == '/appointments' }}">Appointments</a>
         <a href="/statuses" class="{{ 'active' if request.path == '/statuses' }}">Statuses</a>
+        <a href="/results" class="{{ 'active' if request.path == '/results' }}">Results</a>
+        <a href="/tests" class="{{ 'active' if request.path == '/tests' }}">Tests</a>
     </nav>
 
     {% block content %}{% endblock %}
