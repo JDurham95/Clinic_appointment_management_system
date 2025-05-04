@@ -2,12 +2,32 @@ body, html {
     font-family: 'Lato';
 }
 
+html {
+    height: 100vh;
+    background: linear-gradient(180deg, #BCEEFF 0%, #B9F2F2 45.19%, #D2FFDC 100%);
+}
+
 body {
     margin: 0 20px;
 }
 
 h1 {
     text-align: center;
+}
+
+button {
+    background-color: transparent;
+    appearance: none;
+    border: 0;
+}
+
+.add-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+button.add {
+    margin-bottom: 15px;
 }
 
 nav {
@@ -22,11 +42,14 @@ nav a {
     color: #000;
 }
 
-nav a.active {
+nav a.active, button.add, button.submit {
     background-color: #92C1FF;
     border-radius: 10px;
     text-decoration: none;
     padding: 15px;
+    width: fit-content;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 table {
@@ -43,4 +66,64 @@ th, td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: center;
+}
+
+.add-form-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.add-form-popup.active {
+    display: block;
+}
+
+.add-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 35px;
+    border: 1px solid #434343;
+}
+
+.add-form .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
+.add-form h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.add-form form {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 15px;
+    margin: auto;
+}
+
+.add-form label {
+    width: 120px;
+    display: inline-block;
+}
+
+.add-form input {
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid gray;
+}
+
+.add-form button.submit {
+    margin: auto;
 }
