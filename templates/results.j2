@@ -1,10 +1,6 @@
 {% extends "main.j2" %}
 {% block content %}
 
-<div class="add-container">
-    <button class="add">Add</button>
-</div>
-
 {# READ table #}
 <table>
     <thead>
@@ -28,23 +24,5 @@
         {% endfor %}
     </tbody>
 </table>
-
-
-<div class="add-form-popup">
-    <div class="add-form">
-        <button class="close"><span class="material-symbols-outlined">close</span></button>
-
-        <h2>Add Result</h2>
-
-        <form>
-            <div>
-                <label for="result">Result:</label>
-                <input type="text" name="result">
-            </div>
-
-            <button class="submit">Submit</button>
-        </form>
-    </div>
-</div>
 
 {% endblock %}
