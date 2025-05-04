@@ -50,7 +50,11 @@ def get_appointments():
     try:
         dbConnection = db.connectDB()  # Open our database connection
 
-        appointmentsquery = "SELECT appointmentId, dateTime, Appointments.clinicId, Patients.firstName, Patients.lastName, Statuses.status FROM Appointments JOIN Patients ON Appointments.patientId = Patients.patientId JOIN Statuses ON Appointments.statusId = Statuses.statusId"
+        appointmentsquery = "SELECT appointmentId, dateTime, Appointments.clinicId, Patients.firstName, Patients.lastName, Statuses.status \
+                            FROM Appointments \
+                            JOIN Patients ON Appointments.patientId = Patients.patientId \
+                            JOIN Statuses ON Appointments.statusId = Statuses.statusId \
+                            ORDER BY appointmentId;"
         appointments = db.query(dbConnection, appointmentsquery).fetchall()
 
         # Render the appointments.j2 file, and also send the renderer appointments information
