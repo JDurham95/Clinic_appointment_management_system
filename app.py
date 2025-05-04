@@ -22,7 +22,7 @@ def home():
         return "An error occurred while rendering the page.", 500
 
 
-@app.route("/clinics", methods=["GET"])
+@app.route("/clinics", methods=["GET", "POST"])
 def clinics():
     try:
         dbConnection = db.connectDB()  # Open our database connection
@@ -31,9 +31,20 @@ def clinics():
         query1 = "SELECT clinicId, address, city, state, postalCode, phoneNumber FROM Clinics;"
         clinics = db.query(dbConnection, query1).fetchall()
 
+        clinic_id = request.args.get('id')
+        if clinic_id:
+            action = "Update"
+            update_clinic_query = f"SELECT clinicId, address, city, state, postalCode, phoneNumber \
+                FROM Clinics \
+                WHERE clinicId = {clinic_id};"
+            clinic = db.query(dbConnection, update_clinic_query).fetchall()[0]
+        else:
+            action = "Add"
+            clinic = ()
+
         # Render the clinics.j2 file, and also send the renderer clinics information
         return render_template(
-            "clinics.j2", clinics=clinics
+            "clinics.j2", clinics=clinics, clinic=clinic, action=action
         )
 
     except Exception as e:

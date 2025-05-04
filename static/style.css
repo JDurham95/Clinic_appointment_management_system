@@ -68,6 +68,10 @@ th, td {
     text-align: center;
 }
 
+.material-symbols-outlined {
+    color: #000;
+}
+
 .add-form-popup {
     position: fixed;
     top: 0;
