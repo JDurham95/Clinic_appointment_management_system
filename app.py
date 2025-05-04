@@ -144,7 +144,7 @@ def results():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
-        query1 = "SELECT testResultId, result FROM Results ORDER BY testResultId;"
+        query1 = "SELECT Results.testResultId, Results.result FROM Results ORDER BY testResultId;"
         results = db.query(dbConnection, query1).fetchall()
 
         # Render the results.j2 file, and also send the renderer result information

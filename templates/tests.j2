@@ -1,6 +1,10 @@
 {% extends "main.j2" %}
 {% block content %}
 
+<div class="add-container">
+    <button class="add">Add</button>
+</div>
+
 {# READ table #}
 <table>
     <thead>
@@ -20,11 +24,28 @@
         <tr>
             <td>{{ test.testId }}</td>
             <td>{{ test.name }}</td>
-            <td></td>
-            <td></td>
+            <td><button><span class="material-symbols-outlined">edit</span></button></td>
+            <td><button><span class="material-symbols-outlined">delete</span></button></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<div class="add-form-popup">
+    <div class="add-form">
+        <button class="close"><span class="material-symbols-outlined">close</span></button>
+
+        <h2>Add Test</h2>
+
+        <form>
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" name="name">
+            </div>
+
+            <button class="submit">Submit</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

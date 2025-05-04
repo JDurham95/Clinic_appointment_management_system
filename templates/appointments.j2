@@ -1,6 +1,10 @@
 {% extends "main.j2" %}
 {% block content %}
 
+<div class="add-container">
+    <button class="add">Add</button>
+</div>
+
 {# READ table #}
 <table>
     <thead>
@@ -24,11 +28,50 @@
             <td>{{ appointment.firstName }}</td>
             <td>{{ appointment.lastName }}</td>
             <td>{{ appointment.status }}</td>
-            <td></td>
-            <td></td>
+            <td><button><span class="material-symbols-outlined">edit</span></button></td>
+            <td><button><span class="material-symbols-outlined">delete</span></button></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<div class="add-form-popup">
+    <div class="add-form">
+        <button class="close"><span class="material-symbols-outlined">close</span></button>
+
+        <h2>Add Appointment</h2>
+
+        <form>
+            <div>
+                <label for="dateTime">dateTime:</label>
+                <input type="datetime-local" name="dateTime" id="dateTime">
+            </div>
+
+            <div>
+                <label for "clinicId">clinicId:</label>
+                <input list="clinicIds" id="clinicId" name="clinicId">
+
+                <datalist id="clinicIds">
+                    <option value="1">
+                    <option value="2">
+                    <option value="3">git 
+                </datalist>
+            </div>
+
+            <div>
+                <label for "patientId">patientId:</label>
+                <input list ="patientIds" id="patientId" name="patientId">
+
+                <datalist id="patientIds">
+                    <option value="1">
+                    <option value="2">
+                    <option value="3">
+                </datalist>
+            </div>
+
+            <button class="submit">Submit</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

@@ -1,6 +1,10 @@
 {% extends "main.j2" %}
 {% block content %}
 
+<div class="add-container">
+    <button class="add">Add</button>
+</div>
+
 {# READ table #}
 <table>
     <thead>
@@ -10,21 +14,37 @@
             <th>{{ key }}</th>
             {% endfor %}
             <th></th>
-            <th></th>
         </tr>
     </thead>
 
     <tbody>
         {# For each row, print the testResultId, result #}
-        {% for result in result %}
+        {% for result in results %}
         <tr>
             <td>{{ result.testResultId }}</td>
             <td>{{ result.result }}</td>
-            <td></td>
-            <td></td>
+            <td><button><span class="material-symbols-outlined">edit</span></button></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+
+<div class="add-form-popup">
+    <div class="add-form">
+        <button class="close"><span class="material-symbols-outlined">close</span></button>
+
+        <h2>Add Result</h2>
+
+        <form>
+            <div>
+                <label for="result">Result:</label>
+                <input type="text" name="result">
+            </div>
+
+            <button class="submit">Submit</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
