@@ -160,6 +160,35 @@ def results():
         # Close the DB connection, if it exists
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
+
+@app.route("/appointmentstests", methods=["GET"])
+def appointmentstests():
+    try:
+        dbConnection = db.connectDB()  # Open our database connection
+
+        # Create and execute our queries
+        query1 = "SELECT Patients.firstName, Patients.lastName, Appointments.clinicId, Appointments.dateTime, Tests.name, Results.result \
+                FROM AppointmentsTests \
+                JOIN Appointments on AppointmentsTests.appointmentId = Appointments.appointmentId \
+                JOIN Patients on Appointments.patientId = Patients.patientId \
+                JOIN Tests on AppointmentsTests.testId = Tests.testID \
+                JOIN Results on AppointmentsTests.testResultId = Results.testResultId \
+                ORDER BY lastName, dateTime;"
+        appointmentstests = db.query(dbConnection, query1).fetchall()
+
+        # Render the apppointments.j2 file, and also send the renderer appointmentstests information
+        return render_template(
+            "appointmentstests.j2", appointmentstests=appointmentstests
+        )
+
+    except Exception as e:
+        print(f"Error executing queries: {e}")
+        return "An error occurred while executing the database queries.", 500
+
+    finally:
+        # Close the DB connection, if it exists
+        if "dbConnection" in locals() and dbConnection:
+            dbConnection.close()
 # ########################################
 # ########## LISTENER
 

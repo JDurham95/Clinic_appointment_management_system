@@ -1,0 +1,34 @@
+{% extends "main.j2" %}
+{% block content %}
+
+{# READ table #}
+<table>
+    <thead>
+        {# For the table header row, we print the DB attribute names #}
+        <tr>
+            {% for key in appointmentstests[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {# For each row, print the firstName, lastName, clinicId, dateTime, test name, result #}
+        {% for appointmentstest in appointmentstests %}
+        <tr>
+            <td>{{ appointmentstest.firstName }}</td>
+            <td>{{ appointmentstest.lastName }}</td>
+            <td>{{ appointmentstest.clinicId }}</td>
+            <td>{{ appointmentstest.dateTime }}</td>
+            <td>{{ appointmentstest.name }}</td>
+            <td>{{ appointmentstest.result }}</td>
+            <td><button><span class="material-symbols-outlined">edit</span></button></td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
