@@ -28,16 +28,16 @@ def clinics():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
-        query1 = "SELECT clinicId, address, city, state, postalCode, phoneNumber FROM Clinics;"
-        clinics = db.query(dbConnection, query1).fetchall()
+        get_clinics_query = "SELECT clinicId, address, city, state, postalCode, phoneNumber FROM Clinics;"
+        clinics = db.query(dbConnection, get_clinics_query).fetchall()
 
         clinic_id = request.args.get('id')
         if clinic_id:
             action = "Update"
-            update_clinic_query = f"SELECT clinicId, address, city, state, postalCode, phoneNumber \
+            select_clinic_query = f"SELECT clinicId, address, city, state, postalCode, phoneNumber \
                 FROM Clinics \
                 WHERE clinicId = {clinic_id};"
-            clinic = db.query(dbConnection, update_clinic_query).fetchall()[0]
+            clinic = db.query(dbConnection, select_clinic_query).fetchall()[0]
         else:
             action = "Add"
             clinic = ()
@@ -82,20 +82,34 @@ def get_appointments():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
-@app.route("/patients", methods=["GET"])
+@app.route("/patients", methods=["GET", "POST"])
 def patients():
     try:
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
-        query1 = "SELECT patientId, firstName, lastName, email, dateOfBirth, gender, CONCAT('Capital Family Clinic in ', Clinics.city, ', ', Clinics.state) AS clinicName \
+        get_patients_query = "SELECT patientId, firstName, lastName, Patients.phoneNumber, email, dateOfBirth, gender, CONCAT('Capital Family Clinic in ', Clinics.city, ', ', Clinics.state) AS primaryClinic \
                 FROM Patients \
                 JOIN Clinics ON Patients.clinicId = Clinics.clinicId;"
-        patients = db.query(dbConnection, query1).fetchall()
+        patients = db.query(dbConnection, get_patients_query).fetchall()
+
+        get_clinics_query = "SELECT clinicId, city, state FROM Clinics ORDER BY clinicId;"
+        clinics = db.query(dbConnection, get_clinics_query).fetchall()
+        
+        patient_id = request.args.get('id')
+        if patient_id:
+            action = "Update"
+            select_patient_query = f"SELECT patientId, firstName, lastName, phoneNumber, email, dateOfBirth, gender, clinicId \
+                FROM Patients \
+                WHERE patientId = {patient_id};"
+            patient = db.query(dbConnection, select_patient_query).fetchall()[0]
+        else:
+            action = "Add"
+            patient = ()
 
         # Render the patients.j2 file, and also send the renderer patients information
         return render_template(
-            "patients.j2", patients=patients
+            "patients.j2", patients=patients, clinics=clinics, patient=patient, action=action
         )
 
     except Exception as e:
@@ -107,18 +121,29 @@ def patients():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
-@app.route("/statuses", methods=["GET"])
+@app.route("/statuses", methods=["GET", "POST"])
 def statuses():
     try:
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
-        query1 = "SELECT statusId, status FROM Statuses ORDER BY statusId;"
-        statuses = db.query(dbConnection, query1).fetchall()
+        get_status_query = "SELECT statusId, status FROM Statuses ORDER BY statusId;"
+        statuses = db.query(dbConnection, get_status_query).fetchall()
+
+        status_id = request.args.get('id')
+        if status_id:
+            action = "Update"
+            select_status_query = f"SELECT statusId, status \
+                FROM Statuses \
+                WHERE statusId = {status_id};"
+            status = db.query(dbConnection, select_status_query).fetchall()[0]
+        else:
+            action = "Add"
+            status = ()
 
         # Render the statuses.j2 file, and also send the renderer statuses information
         return render_template(
-            "statuses.j2", statuses=statuses
+            "statuses.j2", statuses=statuses, status=status, action=action
         )
 
     except Exception as e:

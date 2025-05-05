@@ -19,10 +19,27 @@
         <tr>
             <td>{{ status.statusId }}</td>
             <td>{{ status.status }}</td>
-            <td><span class="material-symbols-outlined">edit</span></td>
+            <td><a href="{{ url_for('statuses', id=status.statusId) }}"><span class="material-symbols-outlined">edit</span></a></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<div class="add-form-popup {{"active" if action == "Update"}}">
+    <div class="add-form">
+        <button class="close"><span class="material-symbols-outlined">close</span></button>
+
+        <h2>{{action}} Status</h2>
+
+        <form action="/statuses" method="POST">
+            <div class="flex-center">
+                <label for="status">Status: <span class="red">*</span></label>
+                <input type="text" name="status" id="status" value="{{ status.status }}" required>
+            </div>
+
+            <button class="submit">Submit</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

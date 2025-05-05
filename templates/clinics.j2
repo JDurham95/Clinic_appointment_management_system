@@ -42,28 +42,28 @@
         <h2>{{action}} Clinic</h2>
 
         <form action="/clinics" method="POST">
-            <div>
-                <label for="address">Address:</label>
-                <input type="text" name="address" id="address" value="{{ clinic.address }}">
+            <div class="flex-center">
+                <label for="address">Address: <span class="red">*</span></label>
+                <input type="text" name="address" id="address" value="{{ clinic.address }}" required>
             </div>
 
-            <div>
-                <label for="city">City:</label>
-                <input type="text" name="city" id="city" value="{{ clinic['city'] }}">
+            <div class="flex-center">
+                <label for="city">City: <span class="red">*</span></label>
+                <input type="text" name="city" id="city" value="{{ clinic['city'] }}" required>
             </div>
 
-            <div>
-                <label for="state">State:</label>
-                <input type="text" name="state" id="state" value="{{ clinic['state'] }}">
+            <div class="flex-center">
+                <label for="state">State: <span class="red">*</span></label>
+                <input type="text" name="state" id="state" value="{{ clinic['state'] }}" required>
             </div>
 
-            <div>
-                <label for="postalCode">Postal Code:</label>
-                <input type="number" name="postalCode" id="postalCode" value="{{ clinic['postalCode'] }}">
+            <div class="flex-center">
+                <label for="postalCode">Postal Code: <span class="red">*</span></label>
+                <input type="number" name="postalCode" id="postalCode" value="{{ clinic['postalCode'] }}" required>
             </div>
 
-            <div>
-                <label for="phoneNumber">Phone Number:</label>
+            <div class="flex-center">
+                <label for="phoneNumber">Phone Number: <span class="red">*</span></label>
                 <input type="number" name="phoneNumber" id="phoneNumber" value="{{ clinic['phoneNumber'] }}">
             </div>
 
