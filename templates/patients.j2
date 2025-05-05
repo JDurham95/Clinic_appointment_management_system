@@ -1,14 +1,22 @@
 {% extends "main.j2" %}
 {% block content %}
 
+<div class="add-container">
+    <button class="add">Add</button>
+</div>
+
 {# READ table #}
 <table>
     <thead>
         {# For the table header row, we print the DB attribute names #}
         <tr>
-            {% for key in patients[0].keys() %}
-            <th>{{ key }}</th>
-            {% endfor %}
+            <th>patientId</th>
+            <th>firstName</th>
+            <th>lastName</th>
+            <th>email</th>
+            <th>dateOfBirth</th>
+            <th>gender</th>
+            <th>primaryClinic</th>
             <th></th>
         </tr>
     </thead>
@@ -23,11 +31,71 @@
             <td>{{ patient.email }}</td>
             <td>{{ patient.dateOfBirth }}</td>
             <td>{{ patient.gender }}</td>
-            <td>{{ patient.clinicName }}</td>
-            <td><span class="material-symbols-outlined">edit</span></td>
+            <td>{{ patient.primaryClinic }}</td>
+            <td><a href="{{ url_for('patients', id=patient.patientId) }}"><span class="material-symbols-outlined">edit</span></a></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<div class="add-form-popup {{"active" if action == "Update"}}">
+    <div class="add-form">
+        <button class="close"><span class="material-symbols-outlined">close</span></button>
+
+        <h2>{{action}} Patient</h2>
+
+        <form action="/patients" method="POST">
+            <div class="flex-center">
+                <label for="firstName">First Name: <span class="red">*</span></label>
+                <input type="text" name="firstName" id="firstName" value="{{ patient['firstName'] }}">
+            </div>
+
+            <div class="flex-center">
+                <label for="lastName">Last Name: <span class="red">*</span></label>
+                <input type="text" name="lastName" id="lastName" value="{{ patient['lastName'] }}">
+            </div>
+
+            <div class="flex-center">
+                <label for="phoneNumber">Phone Number: <span class="red">*</span></label>
+                <input type="number" name="phoneNumber" id="phoneNumber" value="{{ patient['phoneNumber'] }}">
+            </div>
+
+            <div class="flex-center">
+                <label for="email">Email: <span class="red">*</span></label>
+                <input type="email" name="email" id="email" value="{{ patient['email'] }}">
+            </div>
+
+            <div class="flex-center">
+                <label for="dateOfBirth">Date Of Birth: <span class="red">*</span></label>
+                <input type="date" name="dateOfBirth" id="dateOfBirth" value="{{ patient['dateOfBirth'] }}" required>
+            </div>
+
+            <div class="flex-center">
+                <label for="gender">Gender: <span class="red">*</span></label>
+                <select name="gender" id="gender" value="{{ patient['gender'] }}" required>
+                    {% if action == "Add" %}
+                        <option>Select a gender</option>
+                    {% endif %}
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+
+            <div class="flex-center">
+                <label for="clinic">Primary Clinic:</label>
+                <select name="clinic" id="clinic" value="{{ patient['clinicId'] }}">
+                    {% if action == "Add" %}
+                        <option>Select a clinic</option>
+                    {% endif %}
+                    {% for clinic in clinics %}
+                        <option value="{{ clinic['clinicId'] }}" {% if clinic['clinicId'] == patient['clinicId'] %} selected {% endif %}>Capital Family Clinic in {{ clinic.city }}, {{ clinic.state }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button class="submit">Submit</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

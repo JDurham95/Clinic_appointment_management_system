@@ -11,8 +11,18 @@ body {
     margin: 0 20px;
 }
 
+.red {
+    color: red;
+}
+
 h1 {
     text-align: center;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    grid-gap: 5px;
 }
 
 button {
@@ -122,10 +132,11 @@ th, td {
     display: inline-block;
 }
 
-.add-form input {
+.add-form input, .add-form select {
     border-radius: 8px;
     padding: 8px;
     border: 1px solid gray;
+    flex: auto;
 }
 
 .add-form button.submit {
