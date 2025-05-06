@@ -13,6 +13,7 @@
             <th>patientId</th>
             <th>firstName</th>
             <th>lastName</th>
+            <th>phoneNumber</th>
             <th>email</th>
             <th>dateOfBirth</th>
             <th>gender</th>
@@ -28,6 +29,7 @@
             <td>{{ patient.patientId }}</td>
             <td>{{ patient.firstName }}</td>
             <td>{{ patient.lastName }}</td>
+            <td>{{ patient.phoneNumber }}</td>
             <td>{{ patient.email }}</td>
             <td>{{ patient.dateOfBirth }}</td>
             <td>{{ patient.gender }}</td>
@@ -47,22 +49,22 @@
         <form action="/patients" method="POST">
             <div class="flex-center">
                 <label for="firstName">First Name: <span class="red">*</span></label>
-                <input type="text" name="firstName" id="firstName" value="{{ patient['firstName'] }}">
+                <input type="text" name="firstName" id="firstName" value="{{ patient['firstName'] }}" required>
             </div>
 
             <div class="flex-center">
                 <label for="lastName">Last Name: <span class="red">*</span></label>
-                <input type="text" name="lastName" id="lastName" value="{{ patient['lastName'] }}">
+                <input type="text" name="lastName" id="lastName" value="{{ patient['lastName'] }}" required>
             </div>
 
             <div class="flex-center">
                 <label for="phoneNumber">Phone Number: <span class="red">*</span></label>
-                <input type="number" name="phoneNumber" id="phoneNumber" value="{{ patient['phoneNumber'] }}">
+                <input type="number" name="phoneNumber" id="phoneNumber" value="{{ patient['phoneNumber'] }}" required>
             </div>
 
             <div class="flex-center">
                 <label for="email">Email: <span class="red">*</span></label>
-                <input type="email" name="email" id="email" value="{{ patient['email'] }}">
+                <input type="email" name="email" id="email" value="{{ patient['email'] }}" required>
             </div>
 
             <div class="flex-center">
@@ -78,6 +80,7 @@
                     {% endif %}
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
+                    <option value="Unknown">Unknown</option>
                 </select>
             </div>
 
