@@ -7,7 +7,7 @@
     <button class="add">Add</button>
 </div>
 
-<h2 id="appointmentsTestsHeader" > AppointmentsTests entries may be removed by deleting the asscociated Test </h2>
+<h3 id="appointmentsTestsHeader" > AppointmentsTests entries may be removed by deleting the asscociated Test </h3>
 
 <table>
     <thead>
@@ -37,31 +37,48 @@
     </tbody>
 </table>
 
-<div class="add-form-popup">
+<div class="add-form-popup {{"active" if action == "Update"}}">
     <div class="add-form">
         <button class="close"><span class="material-symbols-outlined">close</span></button>
 
-        <h2>Add AppointmentTest</h2>
+        <h2>{{action}} AppointmentTest</h2>
 
-        <form>
-            <div>
-                <label for="dateTime">dateTime:</label>
-                <input type="datetime-local" name="dateTime" id="dateTime">
+        <form action="/appointmentstests" method="POST">
+
+            <div class="flex-center">
+                <label for="appointmentId">Appointment ID: <span class="red">*</span></label>
+                <select name="appointmentId" id="appointmentId" value="{{ appointmenttest['appointmentId'] }}" required>
+                    {% if action == "Add" %}
+                        <option>Select a appointment</option>
+                    {% endif %}
+                    {% for appointment in appointments %}
+                        <option value="{{ appointment['appointmentId'] }}" {% if appointment['appointmentId'] == appointmenttest['appointmentId'] %} selected {% endif %}>{{ appointment.appointmentId }}</option>
+                    {% endfor %}
+                </select>
             </div>
 
-            <div>
-                <label for "clinicId">clinicId:</label>
-                <input type="text" name="clinicId">
+            <div class="flex-center">
+                <label for="testId">Test ID: <span class="red">*</span></label>
+                <select name="testId" id="testId" value="{{ appointmenttest['testId'] }}" required>
+                    {% if action == "Add" %}
+                        <option>Select a test</option>
+                    {% endif %}
+                    {% for test in tests %}
+                        <option value="{{ test['testId'] }}" {% if test['testId'] == appointmenttest['testId'] %} selected {% endif %}>{{ test.name }}</option>
+                    {% endfor %}
+                </select>
             </div>
 
-            <div>
-                <label for "patientId">patientId:</label>
-                <input type="text" name="patientId">
-            </div>
-
-            <div>
-                <label for "statusId">statusId:</label>
-                <input type="text" name="statusId">
+            <div class="flex-center">
+                <label for="testResultId">testResult ID: <span class="red">*</span></label>
+                <select name="testResultId" id="testResultId" value="{{ appointmenttest['testResultId'] }}" required>
+                    {% if action == "Add" %}
+                        <option>Select a result</option>
+                    {% endif %}
+                    {% for result in results %}
+                        <option value="{{ result['testResultId'] }}" {% if result['testResultId'] == appointmenttest['testResultId'] %} selected {% endif %}>{{ result.result }}</option>
+                    {% endfor %}
+                </select>
             </div>
 
             <button class="submit">Submit</button>

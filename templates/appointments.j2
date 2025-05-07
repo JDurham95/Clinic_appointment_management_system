@@ -35,36 +35,65 @@
     </tbody>
 </table>
 
-<div class="add-form-popup">
+
+<div class="add-form-popup {{"active" if action == "Update"}}">
     <div class="add-form">
         <button class="close"><span class="material-symbols-outlined">close</span></button>
 
-        <h2>Add Appointment</h2>
+        <h2>{{action}} Appointment</h2>
 
-        <form>
-            <div>
+        <form action="/appointments" method="POST">
+
+            <div class="flex_center">
                 <label for="dateTime">dateTime:</label>
                 <input type="datetime-local" name="dateTime" id="dateTime">
             </div>
 
-            <div>
-                <label for "clinicId">clinicId:</label>
-                <input type="text" name="clinicId">
+            <div class="flex-center">
+                <label for="clinicId">Clinic ID: <span class="red">*</span></label>
+                <select name="clinicId" id="clinicId" value="{{ appointment['clinicId'] }}" required>
+                    {% if action == "Add" %}
+                        <option>Select a clinic</option>
+                    {% endif %}
+                    {% for clinic in clinics %}
+                        <option value="{{ clinic['clinicId'] }}" {% if clinic['clinicId'] == appointment['clinicId'] %} selected {% endif %}>Capital Family Clinic in {{ clinic.city }}, {{ clinic.state }}</option>
+                    {% endfor %}
+                </select>
             </div>
 
-            <div>
-                <label for "patientId">patientId:</label>
-                <input type="text" name="patientId">
+            <div class="flex-center">
+                <label for="patientId">Patient ID: <span class="red">*</span></label>
+                <select name="patientId" id="patientId" value="{{ appointment['patientId'] }}" required>
+                    {% if action == "Add" %}
+                        <option>Select a patient</option>
+                    {% endif %}
+                    {% for patient in patients %}
+                        <option value="{{ patient['patientId'] }}" {% if patient['patientId'] == appointment['appointmentId'] %} selected {% endif %}>  {{ patient.firstName }}, {{ patient.lastName }} </option>
+                    {% endfor %}
+                </select>
             </div>
 
-            <div>
-                <label for "statusId">statusId:</label>
-                <input type="text" name="statusId">
+            <div class="flex-center">
+                <label for="statusId">Appointment Status: <span class="red">*</span></label>
+                <select name="statusId" id="statusId" value="{{ appointment['status'] }}" required>
+                    {% if action == "Add" %}
+                        <option>Select an appointment status</option>
+                    {% endif %}
+                    <option value="1">Scheduled</option>
+                    <option value="2">Walk In</option>
+                    <option value="3">No Show</option>
+                    <option value="4">Cancelled</option>
+                    <option value="5">Completed</option>
+                </select>
             </div>
+
+
+
 
             <button class="submit">Submit</button>
         </form>
     </div>
 </div>
+
 
 {% endblock %}
