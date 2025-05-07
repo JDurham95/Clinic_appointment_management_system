@@ -142,3 +142,8 @@ th, td {
 .add-form button.submit {
     margin: auto;
 }
+
+#appointmentsTestsHeader {
+    text-align: center;
+
+}
