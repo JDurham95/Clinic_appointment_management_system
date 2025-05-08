@@ -28,7 +28,7 @@
             <td>{{ appointment.firstName }}</td>
             <td>{{ appointment.lastName }}</td>
             <td>{{ appointment.status }}</td>
-            <td><button><span class="material-symbols-outlined">edit</span></button></td>
+            <td><a href="{{ url_for('appointments', id=appointment.appointmentId) }}"><span class="material-symbols-outlined">edit</span></a></td>
             <td><button><span class="material-symbols-outlined">delete</span></button></td>
         </tr>
         {% endfor %}
@@ -45,7 +45,7 @@
         <form action="/appointments" method="POST">
 
             <div class="flex_center">
-                <label for="dateTime">dateTime:</label>
+                <label for="dateTime">dateTime: <span class ="red">*</span></label>
                 <input type="datetime-local" name="dateTime" id="dateTime">
             </div>
 
