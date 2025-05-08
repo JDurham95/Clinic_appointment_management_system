@@ -60,7 +60,7 @@
             </div>
 
             <div class="flex-center">
-                <label for="testId">Test ID: <span class="red">*</span></label>
+                <label for="testId">Test: <span class="red">*</span></label>
                 <select name="testId" id="testId" value="{{ appointmenttest['testId'] }}" required>
                     {% if action == "Add" %}
                         <option>Select a test</option>
@@ -72,7 +72,7 @@
             </div>
 
             <div class="flex-center">
-                <label for="testResultId">testResult ID: <span class="red">*</span></label>
+                <label for="testResultId">Test Result: <span class="red">*</span></label>
                 <select name="testResultId" id="testResultId" value="{{ appointmenttest['testResultId'] }}" required>
                     {% if action == "Add" %}
                         <option>Select a result</option>

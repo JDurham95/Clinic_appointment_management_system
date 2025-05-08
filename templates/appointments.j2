@@ -45,12 +45,12 @@
         <form action="/appointments" method="POST">
 
             <div class="flex_center">
-                <label for="dateTime">dateTime: <span class ="red">*</span></label>
+                <label for="dateTime">Date Time: <span class ="red">*</span></label>
                 <input type="datetime-local" name="dateTime" id="dateTime">
             </div>
 
             <div class="flex-center">
-                <label for="clinicId">Clinic ID: <span class="red">*</span></label>
+                <label for="clinicId">Clinic: <span class="red">*</span></label>
                 <select name="clinicId" id="clinicId" value="{{ appointment['clinicId'] }}" required>
                     {% if action == "Add" %}
                         <option>Select a clinic</option>
@@ -62,7 +62,7 @@
             </div>
 
             <div class="flex-center">
-                <label for="patientId">Patient ID: <span class="red">*</span></label>
+                <label for="patientId">Patient: <span class="red">*</span></label>
                 <select name="patientId" id="patientId" value="{{ appointment['patientId'] }}" required>
                     {% if action == "Add" %}
                         <option>Select a patient</option>
