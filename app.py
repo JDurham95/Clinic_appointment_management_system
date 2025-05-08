@@ -200,7 +200,7 @@ def tests():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
-@app.route("/results", methods=["GET"])
+@app.route("/results", methods=["GET", "POST"])
 def results():
     try:
         dbConnection = db.connectDB()  # Open our database connection
@@ -209,9 +209,20 @@ def results():
         query1 = "SELECT Results.testResultId, Results.result FROM Results ORDER BY testResultId;"
         results = db.query(dbConnection, query1).fetchall()
 
+        result_id = request.args.get('id')
+        if result_id:
+            action = "Update"
+            select_result_query = f"SELECT testResultId, result \
+                FROM Results \
+                WHERE testResultId = {result_id};"
+            result = db.query(dbConnection, select_result_query).fetchall()[0]
+        else:
+            action = "Add"
+            result = ()
+
         # Render the results.j2 file, and also send the renderer result information
         return render_template(
-            "results.j2", results=results
+            "results.j2", results=results, result=result, action=action
         )
 
     except Exception as e:
@@ -223,20 +234,23 @@ def results():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
-@app.route("/appointmentstests", methods=["GET"])
+@app.route("/appointmentstests", methods=["GET", "POST"])
 def appointmentstests():
     try:
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
-        get_appointmentstests_info_query = "SELECT Patients.firstName, Patients.lastName, Appointments.clinicId, Appointments.dateTime, Tests.name, Results.result \
+        get_appointmentstests_info_query = "SELECT AppointmentsTests.appointmentTestId, Patients.firstName, Patients.lastName, Appointments.clinicId, Appointments.dateTime, Tests.name, Results.result \
                 FROM AppointmentsTests \
                 JOIN Appointments on AppointmentsTests.appointmentId = Appointments.appointmentId \
                 JOIN Patients on Appointments.patientId = Patients.patientId \
                 JOIN Tests on AppointmentsTests.testId = Tests.testID \
                 JOIN Results on AppointmentsTests.testResultId = Results.testResultId \
                 ORDER BY lastName, dateTime;"
-        appointmentstests = db.query(dbConnection, get_appointmentstests_info_query).fetchall()
+        appointmentstests_info = db.query(dbConnection, get_appointmentstests_info_query).fetchall()
+
+        get_appointmentstests_query ="SELECT appointmentTestId, appointmentId, testId, testResultId FROM AppointmentsTests ORDER BY appointmentTestId;"
+        appointmentstests = db.query(dbConnection,get_appointmentstests_query).fetchall()
 
         get_tests_query ="SELECT testId, name FROM Tests ORDER BY testId;"
         tests = db.query(dbConnection,get_tests_query).fetchall()
@@ -263,7 +277,7 @@ def appointmentstests():
 
         # Render the apppointmentstests.j2 file, and also send the renderer appointmentstests information
         return render_template(
-            "appointmentstests.j2", appointmentstests=appointmentstests,tests=tests, appointments=appointments, results=results, appointmenttest=appointmenttest, action=action
+            "appointmentstests.j2", appointmentstests=appointmentstests, appointmentstests_info=appointmentstests_info, tests=tests, appointments=appointments, results=results, appointmenttest=appointmenttest, action=action
         )
 
     except Exception as e:

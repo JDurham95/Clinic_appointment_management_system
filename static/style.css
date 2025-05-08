@@ -128,7 +128,7 @@ th, td {
 }
 
 .add-form label {
-    width: 120px;
+    width: 130px;
     display: inline-block;
 }
 
@@ -145,5 +145,4 @@ th, td {
 
 #appointmentsTestsHeader {
     text-align: center;
-
 }

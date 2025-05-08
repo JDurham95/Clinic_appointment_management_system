@@ -16,23 +16,25 @@
             {% for key in appointmentstests[0].keys() %}
             <th>{{ key }}</th>
             {% endfor %}
+            <th>Test Name</th>
+            <th>Test Result</th>
             <th></th>
         </tr>
     </thead>
 
     <tbody>
         {# For each row, print the firstName, lastName, clinicId, dateTime, test name, result #}
-        {% for appointmentstest in appointmentstests %}
+        {% for info in appointmentstests_info %}
         <tr>
-            <td>{{ appointmentstest.firstName }}</td>
-            <td>{{ appointmentstest.lastName }}</td>
-            <td>{{ appointmentstest.clinicId }}</td>
-            <td>{{ appointmentstest.dateTime }}</td>
-            <td>{{ appointmentstest.name }}</td>
-            <td>{{ appointmentstest.result }}</td>
-            <td><button><span class="material-symbols-outlined">edit</span></button></td>
-            
+            <td>{{ info.firstName }}</td>
+            <td>{{ info.lastName }}</td>
+            <td>{{ info.clinicId }}</td>
+            <td>{{ info.dateTime }}</td>
+            <td>{{ info.name }}</td>
+            <td>{{ info.result }}</td>
+            <td><a href="{{ url_for('appointmentstests', id=info.appointmentTestId) }}"><span class="material-symbols-outlined">edit</span></td>
         </tr>
+    
         {% endfor %}
     </tbody>
 </table>

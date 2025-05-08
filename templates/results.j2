@@ -19,10 +19,27 @@
         <tr>
             <td>{{ result.testResultId }}</td>
             <td>{{ result.result }}</td>
-            <td><button><span class="material-symbols-outlined">edit</span></button></td>
+            <td><a href="{{ url_for('results', id=result.testResultId) }}"><span class="material-symbols-outlined">edit</span></a></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<div class="add-form-popup {{"active" if action == "Update"}}">
+    <div class="add-form">
+        <button class="close"><span class="material-symbols-outlined">close</span></button>
+
+        <h2>{{action}} Result</h2>
+
+        <form action="/results" method="POST">
+            <div class="flex-center">
+                <label for="status">Result: <span class="red">*</span></label>
+                <input type="text" name="name" id="result" value="{{ result.result }}" required>
+            </div>
+
+            <button class="submit">Submit</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
