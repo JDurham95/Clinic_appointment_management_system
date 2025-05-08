@@ -10,9 +10,12 @@
     <thead>
         {# For the table header row, we print the DB attribute names #}
         <tr>
-            {% for key in clinics[0].keys() %}
-            <th>{{ key }}</th>
-            {% endfor %}
+            <th>Clinic ID</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Postal Code</th>
+            <th>Phone Number</th>
             <th></th>
             <th></th>
         </tr>

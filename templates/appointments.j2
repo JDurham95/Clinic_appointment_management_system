@@ -10,9 +10,12 @@
     <thead>
         {# For the table header row, we print the DB attribute names #}
         <tr>
-            {% for key in appointments[0].keys() %}
-            <th>{{ key }}</th>
-            {% endfor %}
+            <th>Appointment ID</th>
+            <th>Appointment Date Time</th>
+            <th>Clinic ID</th>
+            <th>Patient First Name</th>
+            <th>Patient Last Name</th>
+            <th>Appointment Status</th>
             <th></th>
             <th></th>
         </tr>
@@ -68,7 +71,7 @@
                         <option>Select a patient</option>
                     {% endif %}
                     {% for patient in patients %}
-                        <option value="{{ patient['patientId'] }}" {% if patient['patientId'] == appointment['appointmentId'] %} selected {% endif %}>  {{ patient.firstName }}, {{ patient.lastName }} </option>
+                        <option value="{{ patient['patientId'] }}" {% if patient['patientId'] == appointment['appointmentId'] %} selected {% endif %}>  {{ patient.firstName }} {{ patient.lastName }} </option>
                     {% endfor %}
                 </select>
             </div>
