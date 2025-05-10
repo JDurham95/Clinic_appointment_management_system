@@ -61,7 +61,7 @@ def appointments():
     try:
         dbConnection = db.connectDB()  # Open our database connection
 
-        get_appointments_query = "SELECT appointmentId, dateTime, Appointments.clinicId, Patients.firstName, Patients.lastName, Statuses.status \
+        get_appointments_query = "SELECT appointmentId, DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS dateTime, Appointments.clinicId, Patients.firstName, Patients.lastName, Statuses.status \
                             FROM Appointments \
                             JOIN Patients ON Appointments.patientId = Patients.patientId \
                             JOIN Statuses ON Appointments.statusId = Statuses.statusId \
