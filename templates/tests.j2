@@ -23,23 +23,23 @@
         <tr>
             <td>{{ test.testId }}</td>
             <td>{{ test.name }}</td>
-            <td><button><span class="material-symbols-outlined">edit</span></button></td>
+            <td><a href="{{ url_for('tests', id=test.testId) }}"><span class="material-symbols-outlined">edit</span></td>
             <td><button><span class="material-symbols-outlined">delete</span></button></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 
-<div class="add-form-popup">
+<div class="add-form-popup {{"active" if action == "Update"}}">
     <div class="add-form">
         <button class="close"><span class="material-symbols-outlined">close</span></button>
 
-        <h2>Add Test</h2>
+        <h2>{{action}} Test</h2>
 
-        <form>
+        <form action="/tests" method ="POST">
             <div>
-                <label for="name">Name:</label>
-                <input type="text" name="name">
+                <label for="name">Name: <span class = "red"></span></label>
+                <input type="text" name="name" id ="name" value= "{{test['name']}}" required>
             </div>
 
             <button class="submit">Submit</button>
