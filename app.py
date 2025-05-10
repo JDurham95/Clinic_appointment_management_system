@@ -61,10 +61,11 @@ def appointments():
     try:
         dbConnection = db.connectDB()  # Open our database connection
 
-        get_appointments_query = "SELECT appointmentId, DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS dateTime, Appointments.clinicId, Patients.firstName, Patients.lastName, Statuses.status \
+        get_appointments_query = "SELECT appointmentId, DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS dateTime, CONCAT('Capital Family Clinic in ', Clinics.city,' , ', Clinics.state  ) AS primaryClinic, Patients.firstName, Patients.lastName, Statuses.status \
                             FROM Appointments \
                             JOIN Patients ON Appointments.patientId = Patients.patientId \
                             JOIN Statuses ON Appointments.statusId = Statuses.statusId \
+                            JOIN Clinics ON Appointments.clinicId = Clinics.clinicId \
                             ORDER BY appointmentId;"
         appointments = db.query(dbConnection, get_appointments_query).fetchall()
 
@@ -177,18 +178,27 @@ def statuses():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
-@app.route("/tests", methods=["GET"])
+@app.route("/tests", methods=["GET", "POST"])
 def tests():
     try:
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
-        query1 = "SELECT testId, name FROM Tests ORDER BY testId;"
-        tests = db.query(dbConnection, query1).fetchall()
+        get_tests_query = "SELECT testId, name FROM Tests ORDER BY testId;"
+        tests = db.query(dbConnection, get_tests_query).fetchall()
+
+        test_Id = request.args.get('id')
+        if test_Id:
+            action = "Update"
+            select_test_query =f"SELECT testId, name FROM Tests WHERE testId = {test_Id};"
+            test= db.query(dbConnection,select_test_query).fetchall()[0]
+        else:
+            action= "Add"
+            test=()
 
         # Render the tests.j2 file, and also send the renderer test information
         return render_template(
-            "tests.j2", tests=tests
+            "tests.j2", tests=tests, test=test, action =action
         )
 
     except Exception as e:

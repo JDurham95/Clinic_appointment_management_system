@@ -12,7 +12,7 @@
         <tr>
             <th>Appointment ID</th>
             <th>Appointment Date Time</th>
-            <th>Clinic ID</th>
+            <th>Clinic</th>
             <th>Patient First Name</th>
             <th>Patient Last Name</th>
             <th>Appointment Status</th>
@@ -27,11 +27,11 @@
         <tr>
             <td>{{ appointment.appointmentId }}</td>
             <td>{{ appointment.dateTime }}</td>
-            <td>{{ appointment.clinicId }}</td>
+            <td>{{ appointment['primaryClinic'] }}</td>
             <td>{{ appointment.firstName }}</td>
             <td>{{ appointment.lastName }}</td>
             <td>{{ appointment.status }}</td>
-            <td><button><span class="material-symbols-outlined">edit</span></button></td>
+            <td><a href="{{ url_for('appointments', id=appointment.appointmentId) }}"><span class="material-symbols-outlined">edit</span></td>
             <td><button><span class="material-symbols-outlined">delete</span></button></td>
         </tr>
         {% endfor %}
@@ -71,22 +71,22 @@
                         <option>Select a patient</option>
                     {% endif %}
                     {% for patient in patients %}
-                        <option value="{{ patient['patientId'] }}" {% if patient['patientId'] == appointment['appointmentId'] %} selected {% endif %}>  {{ patient.firstName }} {{ patient.lastName }} </option>
+                        <option value="{{ patient['patientId'] }}" {% if patient['patientId'] == appointment['patientId'] %} selected {% endif %}>  {{ patient.firstName }} {{ patient.lastName }} </option>
                     {% endfor %}
                 </select>
             </div>
 
             <div class="flex-center">
                 <label for="statusId">Appointment Status: <span class="red">*</span></label>
-                <select name="statusId" id="statusId" value="{{ appointment['status'] }}" required>
+                <select name="statusId" id="statusId" required>
                     {% if action == "Add" %}
                         <option>Select an appointment status</option>
                     {% endif %}
-                    <option value="1">Scheduled</option>
-                    <option value="2">Walk In</option>
-                    <option value="3">No Show</option>
-                    <option value="4">Cancelled</option>
-                    <option value="5">Completed</option>
+                    <option value="1" {% if appointment['statusId'] == 1 %} selected {% endif %}>Scheduled</option>
+                    <option value="2" {% if appointment['statusId'] == 2 %} selected {% endif %}>Walk In</option>
+                    <option value="3" {% if appointment['statusId'] == 3 %} selected {% endif %} No Show</option>
+                    <option value="4" {% if appointment['statusId'] == 4 %} selected {% endif %}>Cancelled</option>
+                    <option value="5" {% if appointment['statusId'] == 5 %} selected {% endif %}>Completed</option>
                 </select>
             </div>
 
