@@ -5,10 +5,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Database credentials
-host = 'classmysql.engr.oregonstate.edu'
-user = 'cs340_' + os.environ.get("ONID")
-passwd = os.environ.get("PASSWORD")    
-db = 'cs340_' + os.environ.get("ONID")   
+host = 'localhost'
+user = 'root'
+passwd = 'fidella'    
+db = 'clinic'   
 
 def connectDB(host = host, user = user, passwd = passwd, db = db):
     '''
