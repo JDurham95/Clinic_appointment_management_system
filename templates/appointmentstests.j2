@@ -55,7 +55,7 @@
                         <option>Select a appointment</option>
                     {% endif %}
                     {% for appointment in appointments %}
-                        <option value="{{ appointment['appointmentId'] }}" {% if appointment['appointmentId'] == appointmenttest['appointmentId'] %} selected {% endif %}>{{ appointment.appointmentId }}</option>
+                        <option value="{{ appointment['appointmentId'] }}" {% if appointment['appointmentId'] == appointmenttest['appointmentId'] %} selected {% endif %}>{{ appointment['dropDownInfo'] }}</option>
                     {% endfor %}
                 </select>
             </div>
