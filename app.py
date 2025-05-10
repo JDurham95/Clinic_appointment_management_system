@@ -255,9 +255,14 @@ def appointmentstests():
         get_tests_query ="SELECT testId, name FROM Tests ORDER BY testId;"
         tests = db.query(dbConnection,get_tests_query).fetchall()
 
-        get_appointments_query = "SELECT appointmentId, dateTime, clinicId, patientId, statusId \
-                                FROM Appointments \
-                                ORDER BY appointmentId;"
+        get_appointments_query = "SELECT appointmentId, DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS dateTime, \
+                            Appointments.clinicId, Patients.firstName, Patients.lastName, Statuses.status, \
+                            CONCAT(Patients.firstName,' ', Patients.lastName,' at ', DATE_FORMAT(Appointments.dateTime, '%%m/%%d/%%Y %%h:%%i %%p'), ' in ', Clinics.city, ',', Clinics.state) AS `dropDownInfo` \
+                            FROM appointments \
+                            JOIN Patients ON Appointments.patientId = Patients.patientId \
+                            JOIN Statuses ON Appointments.statusId = Statuses.statusId \
+                            JOIN Clinics ON Appointments.clinicId = Clinics.clinicId \
+                            ORDER BY appointmentId;"
         appointments = db.query(dbConnection, get_appointments_query).fetchall()
 
         get_results_query = "SELECT testResultId, result FROM Results ORDER BY testResultId;"
