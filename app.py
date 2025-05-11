@@ -61,12 +61,20 @@ def appointments():
     try:
         dbConnection = db.connectDB()  # Open our database connection
 
-        get_appointments_query = "SELECT appointmentId, DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS dateTime, CONCAT('Capital Family Clinic in ', Clinics.city,' , ', Clinics.state  ) AS primaryClinic, Patients.firstName, Patients.lastName, Statuses.status \
-                            FROM Appointments \
-                            JOIN Patients ON Appointments.patientId = Patients.patientId \
-                            JOIN Statuses ON Appointments.statusId = Statuses.statusId \
-                            JOIN Clinics ON Appointments.clinicId = Clinics.clinicId \
-                            ORDER BY appointmentId;"
+        get_appointments_query = "SELECT appointmentId AS `Appointment ID`, \
+                                DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS `Appointment Date Time`, \
+                                CONCAT('Capital Family Clinic in ', Clinics.city,' , ', Clinics.state) AS primaryClinic, \
+                                Patients.firstName AS `Patient First Name`, \
+                                Patients.lastName AS `Patient Last Name`, \
+                                Statuses.status AS `Appointment Status`, \
+                                Appointments.clinicId AS `Clinic ID`, \
+                                Patients.patientId AS `Patient ID`, \
+                                Statuses.statusId AS `Status ID` \
+                                FROM Appointments \
+                                JOIN Patients ON Appointments.patientId = Patients.patientId \
+                                JOIN Statuses ON Appointments.statusId = Statuses.statusId \
+                                JOIN Clinics ON Appointments.clinicId = Clinics.clinicId \
+                                ORDER BY appointmentId;"
         appointments = db.query(dbConnection, get_appointments_query).fetchall()
 
         get_clinics_query = "SELECT clinicId, city, state FROM Clinics ORDER BY clinicId;"
@@ -184,7 +192,7 @@ def tests():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
-        get_tests_query = "SELECT testId, name FROM Tests ORDER BY testId;"
+        get_tests_query = "SELECT testId AS `Test ID`, name AS `Name` FROM Tests ORDER BY testId;"
         tests = db.query(dbConnection, get_tests_query).fetchall()
 
         test_Id = request.args.get('id')
@@ -216,15 +224,15 @@ def results():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
-        query1 = "SELECT Results.testResultId, Results.result FROM Results ORDER BY testResultId;"
-        results = db.query(dbConnection, query1).fetchall()
+        get_results_query = "SELECT Results.testResultId AS `Test Result ID`, Results.result AS `Result` FROM Results ORDER BY testResultId;"
+        results = db.query(dbConnection, get_results_query).fetchall()
 
         result_id = request.args.get('id')
         if result_id:
             action = "Update"
             select_result_query = f"SELECT testResultId, result \
-                FROM Results \
-                WHERE testResultId = {result_id};"
+                                FROM Results \
+                                WHERE testResultId = {result_id};"
             result = db.query(dbConnection, select_result_query).fetchall()[0]
         else:
             action = "Add"
@@ -250,13 +258,20 @@ def appointmentstests():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
-        get_appointmentstests_info_query = "SELECT AppointmentsTests.appointmentTestId, Patients.firstName, Patients.lastName, Appointments.clinicId, Appointments.dateTime, Tests.name, Results.result \
-                FROM AppointmentsTests \
-                JOIN Appointments on AppointmentsTests.appointmentId = Appointments.appointmentId \
-                JOIN Patients on Appointments.patientId = Patients.patientId \
-                JOIN Tests on AppointmentsTests.testId = Tests.testID \
-                JOIN Results on AppointmentsTests.testResultId = Results.testResultId \
-                ORDER BY lastName, dateTime;"
+        get_appointmentstests_info_query = "SELECT AppointmentsTests.appointmentTestId AS `Appointment Test ID`, \
+                                            Patients.firstName AS `Patient First Name`, \
+                                            Patients.lastName AS `Patient Last Name`, \
+                                            CONCAT(Clinics.address, ' ', clinics.city, ', ', clinics.state) AS `Clinic`,\
+                                            Appointments.dateTime AS `Appointment Date Time`, \
+                                            Tests.name AS `Test Name`, \
+                                            Results.result AS `Test Result` \
+                                            FROM AppointmentsTests \
+                                            JOIN Appointments on AppointmentsTests.appointmentId = Appointments.appointmentId \
+                                            JOIN Patients on Appointments.patientId = Patients.patientId \
+                                            JOIN Tests on AppointmentsTests.testId = Tests.testID \
+                                            JOIN Results on AppointmentsTests.testResultId = Results.testResultId \
+                                            JOIN Clinics ON Appointments.clinicId = Clinics.clinicId \
+                                            ORDER BY lastName, dateTime;"
         appointmentstests_info = db.query(dbConnection, get_appointmentstests_info_query).fetchall()
 
         get_appointmentstests_query ="SELECT appointmentTestId, appointmentId, testId, testResultId FROM AppointmentsTests ORDER BY appointmentTestId;"
@@ -266,13 +281,13 @@ def appointmentstests():
         tests = db.query(dbConnection,get_tests_query).fetchall()
 
         get_appointments_query = "SELECT appointmentId, DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS dateTime, \
-                            Appointments.clinicId, Patients.firstName, Patients.lastName, Statuses.status, \
-                            CONCAT(Patients.firstName,' ', Patients.lastName,' at ', DATE_FORMAT(Appointments.dateTime, '%%m/%%d/%%Y %%h:%%i %%p'), ' in ', Clinics.city, ',', Clinics.state) AS `dropDownInfo` \
-                            FROM appointments \
-                            JOIN Patients ON Appointments.patientId = Patients.patientId \
-                            JOIN Statuses ON Appointments.statusId = Statuses.statusId \
-                            JOIN Clinics ON Appointments.clinicId = Clinics.clinicId \
-                            ORDER BY appointmentId;"
+                                Appointments.clinicId, Patients.firstName, Patients.lastName, Statuses.status, \
+                                CONCAT(Patients.firstName,' ', Patients.lastName,' - ', DATE_FORMAT(Appointments.dateTime, '%%m/%%d/%%Y %%h:%%i %%p'), ' at ', Clinics.address,' ', Clinics.city, ', ', Clinics.state) AS `dropDownInfo` \
+                                FROM appointments \
+                                JOIN Patients ON Appointments.patientId = Patients.patientId \
+                                JOIN Statuses ON Appointments.statusId = Statuses.statusId \
+                                JOIN Clinics ON Appointments.clinicId = Clinics.clinicId \
+                                ORDER BY appointmentId;"
         appointments = db.query(dbConnection, get_appointments_query).fetchall()
 
         get_results_query = "SELECT testResultId, result FROM Results ORDER BY testResultId;"

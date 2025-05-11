@@ -21,9 +21,9 @@
         {# For each row, print the testId, name #}
         {% for test in tests %}
         <tr>
-            <td>{{ test.testId }}</td>
-            <td>{{ test.name }}</td>
-            <td><a href="{{ url_for('tests', id=test.testId) }}"><span class="material-symbols-outlined">edit</span></td>
+            <td>{{ test['Test ID'] }}</td>
+            <td>{{ test['Name'] }}</td>
+            <td><a href="{{ url_for('tests', id=test['Test ID']) }}"><span class="material-symbols-outlined">edit</span></td>
             <td><button><span class="material-symbols-outlined">delete</span></button></td>
         </tr>
         {% endfor %}
@@ -44,7 +44,7 @@
 
             <button class="submit">Submit</button>
         </form>
-    </div>
+    </div>app
 </div>
 
 {% endblock %}

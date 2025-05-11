@@ -25,13 +25,13 @@
         {# For each row, print the appointmentId,clinicId, dateTime, firstName, lastName, and status #}
         {% for appointment in appointments %}
         <tr>
-            <td>{{ appointment.appointmentId }}</td>
-            <td>{{ appointment.dateTime }}</td>
+            <td>{{ appointment['Appointment ID'] }}</td>
+            <td>{{ appointment['Appointment Date Time']}}</td>
             <td>{{ appointment['primaryClinic'] }}</td>
-            <td>{{ appointment.firstName }}</td>
-            <td>{{ appointment.lastName }}</td>
-            <td>{{ appointment.status }}</td>
-            <td><a href="{{ url_for('appointments', id=appointment.appointmentId) }}"><span class="material-symbols-outlined">edit</span></td>
+            <td>{{ appointment['Patient First Name'] }}</td>
+            <td>{{ appointment['Patient Last Name'] }}</td>
+            <td>{{ appointment['Appointment Status'] }}</td>
+            <td><a href="{{ url_for('appointments', id=appointment['Appointment ID']) }}"><span class="material-symbols-outlined">edit</span></td>
             <td><button><span class="material-symbols-outlined">delete</span></button></td>
         </tr>
         {% endfor %}
@@ -89,14 +89,5 @@
                     <option value="5" {% if appointment['statusId'] == 5 %} selected {% endif %}>Completed</option>
                 </select>
             </div>
-
-
-
-
-            <button class="submit">Submit</button>
-        </form>
-    </div>
-</div>
-
 
 {% endblock %}
