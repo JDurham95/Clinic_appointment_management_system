@@ -69,7 +69,7 @@ def appointments():
 
         get_appointments_query = "SELECT appointmentId AS `Appointment ID`, \
                                 DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS `Appointment Date Time`, \
-                                CONCAT('Capital Family Clinic in ', Clinics.city,' , ', Clinics.state) AS primaryClinic, \
+                                CONCAT('Capital Family Clinic in ', Clinics.city,' , ', Clinics.state) AS `Clinic`, \
                                 Patients.firstName AS `Patient First Name`, \
                                 Patients.lastName AS `Patient Last Name`, \
                                 Statuses.status AS `Appointment Status` \
@@ -286,7 +286,7 @@ def appointmentstests():
                                             JOIN Tests on AppointmentsTests.testId = Tests.testID \
                                             JOIN Results on AppointmentsTests.testResultId = Results.testResultId \
                                             JOIN Clinics ON Appointments.clinicId = Clinics.clinicId \
-                                            ORDER BY lastName, dateTime;"
+                                            ORDER BY appointmentTestId;"
         appointmentstests_info = db.query(dbConnection, get_appointmentstests_info_query).fetchall()
 
         get_appointmentstests_query ="SELECT appointmentTestId, appointmentId, testId, testResultId FROM AppointmentsTests ORDER BY appointmentTestId;"

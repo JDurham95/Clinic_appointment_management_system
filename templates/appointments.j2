@@ -10,12 +10,9 @@
     <thead>
         {# For the table header row, we print the DB attribute names #}
         <tr>
-            <th>Appointment ID</th>
-            <th>Appointment Date Time</th>
-            <th>Clinic</th>
-            <th>Patient First Name</th>
-            <th>Patient Last Name</th>
-            <th>Appointment Status</th>
+            {% for key in appointments[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
             <th></th>
             <th></th>
         </tr>
@@ -27,7 +24,7 @@
         <tr>
             <td>{{ appointment['Appointment ID'] }}</td>
             <td>{{ appointment['Appointment Date Time']}}</td>
-            <td>{{ appointment['primaryClinic'] }}</td>
+            <td>{{ appointment['Clinic'] }}</td>
             <td>{{ appointment['Patient First Name'] }}</td>
             <td>{{ appointment['Patient Last Name'] }}</td>
             <td>{{ appointment['Appointment Status'] }}</td>
