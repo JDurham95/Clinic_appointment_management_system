@@ -16,9 +16,9 @@
         {# For each row, print the testResultId, result #}
         {% for result in results %}
         <tr>
-            <td>{{ result.testResultId }}</td>
-            <td>{{ result.result }}</td>
-            <td><a href="{{ url_for('results', id=result.testResultId) }}"><span class="material-symbols-outlined">edit</span></a></td>
+            <td>{{ result['Test Result ID'] }}</td>
+            <td>{{ result['Result'] }}</td>
+            <td><a href="{{ url_for('results', id=result['Test Result ID']) }}"><span class="material-symbols-outlined">edit</span></a></td>
         </tr>
         {% endfor %}
     </tbody>
