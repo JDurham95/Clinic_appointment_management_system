@@ -66,10 +66,7 @@ def appointments():
                                 CONCAT('Capital Family Clinic in ', Clinics.city,' , ', Clinics.state) AS primaryClinic, \
                                 Patients.firstName AS `Patient First Name`, \
                                 Patients.lastName AS `Patient Last Name`, \
-                                Statuses.status AS `Appointment Status`, \
-                                Appointments.clinicId AS `Clinic ID`, \
-                                Patients.patientId AS `Patient ID`, \
-                                Statuses.statusId AS `Status ID` \
+                                Statuses.status AS `Appointment Status` \
                                 FROM Appointments \
                                 JOIN Patients ON Appointments.patientId = Patients.patientId \
                                 JOIN Statuses ON Appointments.statusId = Statuses.statusId \
