@@ -170,7 +170,10 @@ def statuses():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
-        get_status_query = "SELECT statusId, status FROM Statuses ORDER BY statusId;"
+        get_status_query = "SELECT statusId AS `Status ID`, \
+                        status AS `Status` \
+                        FROM Statuses \
+                        ORDER BY statusId;"
         statuses = db.query(dbConnection, get_status_query).fetchall()
 
         status_id = request.args.get('id')

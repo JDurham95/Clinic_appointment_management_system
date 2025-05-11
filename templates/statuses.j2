@@ -6,8 +6,9 @@
     <thead>
         {# For the table header row, we print the DB attribute names #}
         <tr>
-            <th>Status ID</th>
-            <th>Status</th>
+            {% for key in statuses[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
             <th></th>
         </tr>
     </thead>
@@ -16,9 +17,9 @@
         {# For each row, print the statusId, status #}
         {% for status in statuses %}
         <tr>
-            <td>{{ status.statusId }}</td>
-            <td>{{ status.status }}</td>
-            <td><a href="{{ url_for('statuses', id=status.statusId) }}"><span class="material-symbols-outlined">edit</span></a></td>
+            <td>{{ status['Status ID'] }}</td>
+            <td>{{ status['Status'] }}</td>
+            <td><a href="{{ url_for('statuses', id=status['Status ID']) }}"><span class="material-symbols-outlined">edit</span></a></td>
         </tr>
         {% endfor %}
     </tbody>
