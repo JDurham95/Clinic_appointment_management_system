@@ -28,7 +28,13 @@ def clinics():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
-        get_clinics_query = "SELECT clinicId, address, city, state, postalCode, phoneNumber FROM Clinics;"
+        get_clinics_query = "SELECT clinicId AS 'Clinic ID', \
+                            address AS 'Address', \
+                            city AS `City`, \
+                            state AS `State`, \
+                            postalCode AS `Postal Code`, \
+                            phoneNumber AS `Phone Number` \
+                            FROM Clinics;"
         clinics = db.query(dbConnection, get_clinics_query).fetchall()
 
         clinic_id = request.args.get('id')
@@ -116,12 +122,21 @@ def patients():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
-        get_patients_query = "SELECT patientId, firstName, lastName, Patients.phoneNumber, email, dateOfBirth, gender, CONCAT('Capital Family Clinic in ', Clinics.city, ', ', Clinics.state) AS primaryClinic \
-                FROM Patients \
-                JOIN Clinics ON Patients.clinicId = Clinics.clinicId;"
+        get_patients_query = "SELECT patientId AS `Patient ID`, \
+                            firstName AS `First Name`, \
+                            lastName AS `Last Name`, \
+                            Patients.phoneNumber AS `Phone Number`, \
+                            email AS `Email`, \
+                            dateOfBirth AS `Date Of Birth`, \
+                            gender AS `Gender`, \
+                            CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS `Primary Clinic` \
+                            FROM Patients \
+                            JOIN Clinics ON Patients.clinicId = Clinics.clinicId;"
         patients = db.query(dbConnection, get_patients_query).fetchall()
 
-        get_clinics_query = "SELECT clinicId, city, state FROM Clinics ORDER BY clinicId;"
+        get_clinics_query = "SELECT clinicId, \
+                            CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS primaryClinic \
+                            FROM Clinics;"
         clinics = db.query(dbConnection, get_clinics_query).fetchall()
         
         patient_id = request.args.get('id')
