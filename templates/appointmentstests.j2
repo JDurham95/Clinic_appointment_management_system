@@ -13,12 +13,9 @@
     <thead>
         {# For the table header row, we print the DB attribute names #}
         <tr>
-            <th>Patient First Name</th>
-            <th>Patient Last Name</th>
-            <th>Clinic</th>
-            <th>Appointment Date Time </th>
-            <th>Test Name</th>
-            <th>Test Result</th>
+            {% for key in appointmentstests_info[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
             <th></th>
         </tr>
     </thead>
@@ -27,6 +24,7 @@
         {# For each row, print the firstName, lastName, clinicId, dateTime, test name, result #}
         {% for info in appointmentstests_info %}
         <tr>
+            <td>{{ info['Appointment Test ID'] }}</td>
             <td>{{ info['Patient First Name'] }}</td>
             <td>{{ info['Patient Last Name'] }}</td>
             <td>{{ info['Clinic'] }}</td>

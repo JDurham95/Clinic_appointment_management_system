@@ -6,8 +6,9 @@
     <thead>
         {# For the table header row, we print the DB attribute names #}
         <tr>
-            <th>Test Result ID</th>
-            <th>Result</th>
+            {% for key in results[0].keys() %}
+            <th>{{ key }} </th>
+            {% endfor %}
             <th></th>
         </tr>
     </thead>

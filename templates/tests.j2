@@ -10,8 +10,9 @@
     <thead>
         {# For the table header row, we print the DB attribute names #}
         <tr>
-            <th>Test ID</th>
-            <th>Name</th>
+            {% for key in tests[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
             <th></th>
             <th></th>
         </tr>
