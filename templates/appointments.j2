@@ -56,7 +56,7 @@
                         <option>Select a clinic</option>
                     {% endif %}
                     {% for clinic in clinics %}
-                        <option value="{{ clinic['clinicId'] }}" {% if clinic['clinicId'] == appointment['clinicId'] %} selected {% endif %}>Capital Family Clinic in {{ clinic.city }}, {{ clinic.state }}</option>
+                        <option value="{{ clinic['clinicId'] }}" {% if clinic['clinicId'] == appointment['clinicId'] %} selected {% endif %}>Capital Family Clinic at {{ clinic.address }}, {{ clinic.city }}, {{ clinic.state }}</option>
                     {% endfor %}
                 </select>
             </div>
