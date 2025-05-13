@@ -59,12 +59,12 @@
 
             <div class="flex-center">
                 <label for="postalCode">Postal Code: <span class="red">*</span></label>
-                <input type="number" name="postalCode" id="postalCode" value="{{ clinic['postalCode'] }}" required>
+                <input type="text" name="postalCode" id="postalCode" value="{{ clinic['postalCode'] }}" required>
             </div>
 
             <div class="flex-center">
                 <label for="phoneNumber">Phone Number: <span class="red">*</span></label>
-                <input type="number" name="phoneNumber" id="phoneNumber" value="{{ clinic['phoneNumber'] }}">
+                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" name="phoneNumber" id="phoneNumber" value="{{ clinic['phoneNumber'] }}" required>
             </div>
 
             <button class="submit">Submit</button>
