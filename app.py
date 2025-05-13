@@ -80,7 +80,7 @@ def appointments():
                                 ORDER BY appointmentId;"
         appointments = db.query(dbConnection, get_appointments_query).fetchall()
 
-        get_clinics_query = "SELECT clinicId, city, state FROM Clinics ORDER BY clinicId;"
+        get_clinics_query = "SELECT address, clinicId, city, state FROM Clinics ORDER BY clinicId;"
         clinics = db.query(dbConnection, get_clinics_query).fetchall()
 
         get_patients_query ="SELECT patientId, firstName, lastName, phoneNumber, email, dateOfBirth, gender, clinicId \
