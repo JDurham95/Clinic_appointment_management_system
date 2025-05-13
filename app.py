@@ -127,7 +127,7 @@ def patients():
                             lastName AS `Last Name`, \
                             Patients.phoneNumber AS `Phone Number`, \
                             email AS `Email`, \
-                            dateOfBirth AS `Date Of Birth`, \
+                            DATE_FORMAT(dateOfBirth, '%%m/%%d/%%Y') AS `Date Of Birth`, \
                             gender AS `Gender`, \
                             CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS `Primary Clinic` \
                             FROM Patients \

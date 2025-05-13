@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = window.location.href.split("?").slice(0, -1).toString()
     });
 
-    document.querySelector("button.submit").addEventListener("click", (event) =>{
-        event.preventDefault();
-        document.querySelector(".add-form-popup form").submit();
-    });
+    // document.querySelector("button.submit").addEventListener("click", (event) =>{
+    //     event.preventDefault();
+    //     document.querySelector(".add-form-popup form").submit();
+    // });
 });
