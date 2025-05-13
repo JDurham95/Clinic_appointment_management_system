@@ -276,8 +276,8 @@ def appointmentstests():
         get_appointmentstests_info_query = "SELECT AppointmentsTests.appointmentTestId AS `Appointment Test ID`, \
                                             Patients.firstName AS `Patient First Name`, \
                                             Patients.lastName AS `Patient Last Name`, \
-                                            CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS h`Clinic`,\
-                                            Appointments.dateTime AS `Appointment Date Time`, \
+                                            CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS `Clinic`,\
+                                            DATE_FORMAT(Appointments.dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS `Appointment Date Time`, \
                                             Tests.name AS `Test Name`, \
                                             Results.result AS `Test Result` \
                                             FROM AppointmentsTests \
