@@ -283,7 +283,7 @@ def appointmentstests():
                                             FROM AppointmentsTests \
                                             JOIN Appointments on AppointmentsTests.appointmentId = Appointments.appointmentId \
                                             JOIN Patients on Appointments.patientId = Patients.patientId \
-                                            JOIN Tests on AppointmentsTests.testId = Tests.testID \
+                                            JOIN Tests on AppointmentsTests.testId = Tests.testId \
                                             JOIN Results on AppointmentsTests.testResultId = Results.testResultId \
                                             JOIN Clinics ON Appointments.clinicId = Clinics.clinicId \
                                             ORDER BY appointmentTestId;"
@@ -298,7 +298,7 @@ def appointmentstests():
         get_appointments_query = "SELECT appointmentId, DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS dateTime, \
                                 Appointments.clinicId, Patients.firstName, Patients.lastName, Statuses.status, \
                                 CONCAT(Patients.firstName,' ', Patients.lastName,' - ', DATE_FORMAT(Appointments.dateTime, '%%m/%%d/%%Y %%h:%%i %%p'), ' at ', Clinics.address,' ', Clinics.city, ', ', Clinics.state) AS `dropDownInfo` \
-                                FROM appointments \
+                                FROM Appointments \
                                 JOIN Patients ON Appointments.patientId = Patients.patientId \
                                 JOIN Statuses ON Appointments.statusId = Statuses.statusId \
                                 JOIN Clinics ON Appointments.clinicId = Clinics.clinicId \
