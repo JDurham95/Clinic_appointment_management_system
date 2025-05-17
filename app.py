@@ -21,6 +21,26 @@ def home():
         print(f"Error rendering page: {e}")
         return "An error occurred while rendering the page.", 500
 
+@app.route("/reset")
+def reset():
+    try:
+        dbConnection = db.connectDB()  # Open our database connection
+        cursor = dbConnection.cursor()
+
+        # Create and execute our queries
+        reset_query = "CALL sp_load_clinicdb();"
+        cursor.execute(reset_query)
+
+        return redirect(request.referrer)
+
+    except Exception as e:
+        print(f"Error executing queries: {e}")
+        return "An error occurred while executing the database queries.", 500
+
+    finally:
+        # Close the DB connection, if it exists
+        if "dbConnection" in locals() and dbConnection:
+            dbConnection.close()
 
 @app.route("/clinics", methods=["GET", "POST"])
 def clinics():
