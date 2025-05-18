@@ -41,7 +41,7 @@
 
         <h2>{{action}} Clinic</h2>
 
-        <form action="/clinics" method="POST">
+        <form action="/clinics/{{ "create" if action == "Add" else "update" }}" method="POST">
             <div class="flex-center">
                 <label for="address">Address: <span class="red">*</span></label>
                 <input type="text" name="address" id="address" value="{{ clinic.address }}" required>
@@ -54,17 +54,17 @@
 
             <div class="flex-center">
                 <label for="state">State: <span class="red">*</span></label>
-                <input type="text" name="state" id="state" value="{{ clinic['state'] }}" required>
+                <input type="text" pattern="[a-zA-Z]{2}" maxlength="2" name="state" placeholder="State abbreviation" id="state" value="{{ clinic['state'] }}" required>
             </div>
 
             <div class="flex-center">
                 <label for="postalCode">Postal Code: <span class="red">*</span></label>
-                <input type="text" name="postalCode" id="postalCode" value="{{ clinic['postalCode'] }}" required>
+                <input type="text" pattern="[0-9]{5}" maxlength="5" name="postalCode" id="postalCode" value="{{ clinic['postalCode'] }}" required>
             </div>
 
             <div class="flex-center">
-                <label for="phoneNumber">Phone Number: <span class="red">*</span></label>
-                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" name="phoneNumber" id="phoneNumber" value="{{ clinic['phoneNumber'] }}" required>
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" name="phoneNumber" id="phoneNumber" value="{{ clinic['phoneNumber'] }}">
             </div>
 
             <button class="submit">Submit</button>
