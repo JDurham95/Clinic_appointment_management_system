@@ -93,13 +93,13 @@ def create_clinic():
         address = request.form["address"]
         city = request.form["city"]
         state = request.form["state"].upper()
-        postalCode = request.form["postalCode"]
-        phoneNumber = request.form["phoneNumber"]
+        postal_code = request.form["postalCode"]
+        phone_number = request.form["phoneNumber"]
 
         # Create and execute our queries
         # Using parameterized queries (Prevents SQL injection attacks)
-        query1 = "CALL sp_insert_clinic(%s, %s, %s, %s, %s, @new_id);"
-        cursor.execute(query1, (address, city, state, postalCode, phoneNumber))
+        insert_clinic_query = "CALL sp_insert_clinic(%s, %s, %s, %s, %s, @new_id);"
+        cursor.execute(insert_clinic_query, (address, city, state, postal_code, phone_number))
 
         # Store ID of last inserted row
         new_id = cursor.fetchone()[0]
@@ -225,15 +225,15 @@ def create_appointment():
         cursor = dbConnection.cursor()
 
         # Get form data
-        dateTime = request.form["dateTime"]
-        clinicId = request.form["clinicId"]
-        patientId = request.form["patientId"]
-        statusId = request.form["statusId"]
+        date_time = request.form["dateTime"]
+        clinic_id = request.form["clinicId"]
+        patient_id = request.form["patientId"]
+        status_id = request.form["statusId"]
 
         # Create and execute our queries
         # Using parameterized queries (Prevents SQL injection attacks)
-        query1 = "CALL sp_insert_appointment(%s, %s, %s, %s, @new_id);"
-        cursor.execute(query1, (dateTime, clinicId, patientId, statusId))
+        insert_appointment_query = "CALL sp_insert_appointment(%s, %s, %s, %s, @new_id);"
+        cursor.execute(insert_appointment_query, (date_time, clinic_id, patient_id, status_id))
 
         # Store ID of last inserted row
         new_id = cursor.fetchone()[0]
@@ -353,22 +353,22 @@ def create_patient():
         cursor = dbConnection.cursor()
 
         # Get form data
-        firstName = request.form["firstName"]
-        lastName = request.form["lastName"]
-        phoneNumber = request.form["phoneNumber"]
+        first_name = request.form["firstName"]
+        last_name = request.form["lastName"]
+        phone_number = request.form["phoneNumber"]
         email = request.form["email"]
-        dateOfBirth = request.form["dateOfBirth"]
+        date_of_birth = request.form["dateOfBirth"]
         gender = request.form["gender"]
 
         try:
-            clinicId = int(request.form["clinic"])
+            clinic_id = int(request.form["clinic"])
         except ValueError:
-            clinicId = None
+            clinic_id = None
 
         # Create and execute our queries
         # Using parameterized queries (Prevents SQL injection attacks)
-        query1 = "CALL sp_insert_patient(%s, %s, %s, %s, %s, %s, %s, @new_id);"
-        cursor.execute(query1, (firstName, lastName, phoneNumber, email, dateOfBirth, gender, clinicId))
+        insert_patient_query = "CALL sp_insert_patient(%s, %s, %s, %s, %s, %s, %s, @new_id);"
+        cursor.execute(insert_patient_query, (first_name, last_name, phone_number, email, date_of_birth, gender, clinic_id))
 
         # Store ID of last inserted row
         new_id = cursor.fetchone()[0]
@@ -458,6 +458,46 @@ def tests():
     except Exception as e:
         print(f"Error executing queries: {e}")
         return "An error occurred while executing the database queries.", 500
+
+    finally:
+        # Close the DB connection, if it exists
+        if "dbConnection" in locals() and dbConnection:
+            dbConnection.close()
+
+# Create test
+@app.route("/tests/create", methods=["POST"])
+def create_test():
+    try:
+        dbConnection = db.connectDB()  # Open our database connection
+        cursor = dbConnection.cursor()
+
+        # Get form data
+        name = request.form["name"]
+
+        # Create and execute our queries
+        # Using parameterized queries (Prevents SQL injection attacks)
+        insert_test_query = "CALL sp_insert_test(%s, @new_id);"
+        cursor.execute(insert_test_query, (name,))
+
+        # Store ID of last inserted row
+        new_id = cursor.fetchone()[0]
+
+        # Consume the result set (if any) before running the next query
+        cursor.nextset()  # Move to the next result set (for CALL statements)
+
+        dbConnection.commit()  # commit the transaction
+
+        print(f"CREATE test. ID: {new_id}")
+
+        # Redirect the user to the updated webpage
+        return redirect("/tests")
+
+    except Exception as e:
+        print(f"Error executing queries: {e}")
+        return (
+            "An error occurred while executing the database queries.",
+            500,
+        )
 
     finally:
         # Close the DB connection, if it exists
@@ -601,6 +641,49 @@ def appointmentstests():
         # Close the DB connection, if it exists
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
+
+# Create appointmentstests
+@app.route("/appointmentstests/create", methods=["POST"])
+def create_appointmentstests():
+    try:
+        dbConnection = db.connectDB()  # Open our database connection
+        cursor = dbConnection.cursor()
+
+        # Get form data
+        appointment_id = request.form["appointmentId"]
+        test_id = request.form["testId"]
+        test_result_id = request.form["testResultId"]
+
+        # Create and execute our queries
+        # Using parameterized queries (Prevents SQL injection attacks)
+        insert_appointmenttest_query = "CALL sp_insert_appointmenttest(%s, %s, %s, @new_id);"
+        cursor.execute(insert_appointmenttest_query, (appointment_id, test_id, test_result_id))
+
+        # Store ID of last inserted row
+        new_id = cursor.fetchone()[0]
+
+        # Consume the result set (if any) before running the next query
+        cursor.nextset()  # Move to the next result set (for CALL statements)
+
+        dbConnection.commit()  # commit the transaction
+
+        print(f"CREATE appointmenttest. ID: {new_id}")
+
+        # Redirect the user to the updated webpage
+        return redirect("/appointmentstests")
+
+    except Exception as e:
+        print(f"Error executing queries: {e}")
+        return (
+            "An error occurred while executing the database queries.",
+            500,
+        )
+
+    finally:
+        # Close the DB connection, if it exists
+        if "dbConnection" in locals() and dbConnection:
+            dbConnection.close()
+            
 # ########################################
 # ########## LISTENER
 

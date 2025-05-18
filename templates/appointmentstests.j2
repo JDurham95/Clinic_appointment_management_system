@@ -44,7 +44,7 @@
 
         <h2>{{action}} AppointmentTest</h2>
 
-        <form action="/appointmentstests" method="POST">
+        <form action="/appointmentstests/{{ "create" if action == "Add" else "update" }}" method="POST">
 
             <div class="flex-center">
                 <label for="appointmentId">Appointment ID: <span class="red">*</span></label>
