@@ -549,11 +549,11 @@ def appointmentstests():
                                             Tests.name AS `Test Name`, \
                                             Results.result AS `Test Result` \
                                             FROM AppointmentsTests \
-                                            JOIN Appointments on AppointmentsTests.appointmentId = Appointments.appointmentId \
-                                            JOIN Patients on Appointments.patientId = Patients.patientId \
+                                            LEFT JOIN Appointments on AppointmentsTests.appointmentId = Appointments.appointmentId \
+                                            LEFT JOIN Patients on Appointments.patientId = Patients.patientId \
                                             JOIN Tests on AppointmentsTests.testId = Tests.testId \
                                             JOIN Results on AppointmentsTests.testResultId = Results.testResultId \
-                                            JOIN Clinics ON Appointments.clinicId = Clinics.clinicId \
+                                            LEFT JOIN Clinics ON Appointments.clinicId = Clinics.clinicId \
                                             ORDER BY appointmentTestId;"
         appointmentstests_info = db.query(dbConnection, get_appointmentstests_info_query).fetchall()
 
