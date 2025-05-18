@@ -42,18 +42,18 @@
 
         <h2>{{action}} Appointment</h2>
 
-        <form action="/appointments" method="POST">
+        <form action="/appointments/{{ "create" if action == "Add" else "update" }}" method="POST">
 
             <div class="flex-center">
                 <label for="dateTime">Date Time: <span class ="red">*</span></label>
-                <input type="datetime-local" name="dateTime" id="dateTime">
+                <input type="datetime-local" name="dateTime" id="dateTime" required>
             </div>
 
             <div class="flex-center">
                 <label for="clinicId">Clinic: <span class="red">*</span></label>
                 <select name="clinicId" id="clinicId" value="{{ appointment['clinicId'] }}" required>
                     {% if action == "Add" %}
-                        <option>Select a clinic</option>
+                        <option value="">Select a clinic</option>
                     {% endif %}
                     {% for clinic in clinics %}
                         <option value="{{ clinic['clinicId'] }}" {% if clinic['clinicId'] == appointment['clinicId'] %} selected {% endif %}>Capital Family Clinic at {{ clinic.address }}, {{ clinic.city }}, {{ clinic.state }}</option>
@@ -65,7 +65,7 @@
                 <label for="patientId">Patient: <span class="red">*</span></label>
                 <select name="patientId" id="patientId" value="{{ appointment['patientId'] }}" required>
                     {% if action == "Add" %}
-                        <option>Select a patient</option>
+                        <option value="">Select a patient</option>
                     {% endif %}
                     {% for patient in patients %}
                         <option value="{{ patient['patientId'] }}" {% if patient['patientId'] == appointment['patientId'] %} selected {% endif %}>  {{ patient.firstName }} {{ patient.lastName }} </option>
@@ -77,7 +77,7 @@
                 <label for="statusId">Appointment Status: <span class="red">*</span></label>
                 <select name="statusId" id="statusId" required>
                     {% if action == "Add" %}
-                        <option>Select an appointment status</option>
+                        <option value="">Select an appointment status</option>
                     {% endif %}
                     <option value="1" {% if appointment['statusId'] == 1 %} selected {% endif %}>Scheduled</option>
                     <option value="2" {% if appointment['statusId'] == 2 %} selected {% endif %}>Walk In</option>

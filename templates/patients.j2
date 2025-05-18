@@ -28,7 +28,7 @@
             <td>{{ patient['Email'] }}</td>
             <td>{{ patient['Date Of Birth'] }}</td>
             <td>{{ patient['Gender'] }}</td>
-            <td>{{ patient['Primary Clinic'] }}</td>
+            <td>{{ patient['Primary Clinic'] | default('', true) }}</td>
             <td><a href="{{ url_for('patients', id=patient['Patient ID']) }}"><span class="material-symbols-outlined">edit</span></a></td>
         </tr>
         {% endfor %}
@@ -41,7 +41,7 @@
 
         <h2>{{action}} Patient</h2>
 
-        <form action="/patients" method="POST">
+        <form action="/patients/{{ "create" if action == "Add" else "update" }}" method="POST">
             <div class="flex-center">
                 <label for="firstName">First Name: <span class="red">*</span></label>
                 <input type="text" name="firstName" id="firstName" value="{{ patient['firstName'] }}" required>
@@ -82,9 +82,7 @@
             <div class="flex-center">
                 <label for="clinic">Primary Clinic:</label>
                 <select name="clinic" id="clinic" value="{{ patient['clinicId'] }}">
-                    {% if action == "Add" %}
-                        <option>Select a clinic</option>
-                    {% endif %}
+                    <option value="">Select a clinic</option>
                     {% for clinic in clinics %}
                         <option value="{{ clinic['clinicId'] }}" {% if clinic['clinicId'] == patient['clinicId'] %} selected {% endif %}>{{ clinic['primaryClinic'] }}</option>
                     {% endfor %}
