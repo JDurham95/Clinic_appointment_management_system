@@ -398,7 +398,8 @@ def delete_test():
             cursor = dbConnection.cursor()
 
             # Get form data
-            test_id = request.form["id"]
+            test_id = request.form["testId"]
+
 
 
             # Create and execute our queries
