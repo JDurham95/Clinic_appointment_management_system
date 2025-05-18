@@ -43,15 +43,15 @@
 
         <h2>{{action}} Test</h2>
 
-        <form action="/tests" method ="POST">
+        <form action="/tests/{{ "create" if action == "Add" else "update" }}" method ="POST">
             <div>
-                <label for="name">Name: <span class = "red"></span></label>
+                <label for="name">Name: <span class = "red">*</span></label>
                 <input type="text" name="name" id ="name" value= "{{test['name']}}" required>
             </div>
 
             <button class="submit">Submit</button>
         </form>
-    </div>app
+    </div>
 </div>
 
 <div class="delete-form-popup">
