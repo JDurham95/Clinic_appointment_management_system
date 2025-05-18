@@ -390,6 +390,43 @@ def tests():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
+#DELETE FROM Tests Route
+@app.route("/tests/delete", methods=["POST"])
+def delete_test():
+        try:
+            dbConnection = db.connectDB()  # Open our database connection
+            cursor = dbConnection.cursor()
+
+            # Get form data
+            test_id = request.form["testId"]
+
+
+
+            # Create and execute our queries
+            # Using parameterized queries (Prevents SQL injection attacks)
+            delete_test_query = "CALL sp_delete_test(%s);"
+            cursor.execute(delete_test_query, (test_id,))
+
+            dbConnection.commit()  # commit the transaction
+
+            print(f"DELETE test. ID: {test_id}")
+
+            # Redirect the user to the updated webpage
+            return redirect("/tests")
+
+        except Exception as e:
+            print(f"Error executing queries: {e}")
+            return (
+                "An error occurred while executing the database queries.",
+                500,
+            )
+
+        finally:
+            # Close the DB connection, if it exists
+            if "dbConnection" in locals() and dbConnection:
+                dbConnection.close()
+
+
 @app.route("/results", methods=["GET", "POST"])
 def results():
     try:
