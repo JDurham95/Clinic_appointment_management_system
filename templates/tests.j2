@@ -26,9 +26,9 @@
             <td>{{ test['Name'] }}</td>
             <td><a href="{{ url_for('tests', id=test['Test ID']) }}"><span class="material-symbols-outlined">edit</span></td>
             <td>
-                <form id='delete_form' method='POST' action='/tests/delete'>
-                    <input type='hidden' name='testId' value="{{ test['Test ID'] }}">
-                    <button type='submit' id='deletebutton'><span class="material-symbols-outlined">delete</span>
+                <form class="delete-trigger" data-id="{{ test['Test ID'] }}">
+                    <button type="button">
+                        <span class="material-symbols-outlined">delete</span>
                     </button>
                 </form>
             </td>
@@ -52,6 +52,19 @@
             <button class="submit">Submit</button>
         </form>
     </div>app
+</div>
+
+<div class="delete-form-popup">
+    <div class="delete-form">
+        <h2>Confirm Delete</h2>
+        <p>Are you sure you want to delete this test?</p>
+
+        <form id="confirmDeleteForm" method="POST" action="/tests/delete">
+            <input type="hidden" name="testId" id="deleteTestId">  
+            <button class="submit" type="submit">Confirm</button>
+            <button class="cancel" type="button" id="cancel">Cancel</button>
+        </form>
+    </div>
 </div>
 
 {% endblock %}

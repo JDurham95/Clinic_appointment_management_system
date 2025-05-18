@@ -52,7 +52,7 @@ nav a {
     color: #000;
 }
 
-nav a.active, button.add, button.submit {
+nav a.active, button.add, button.submit, button.cancel {
     background-color: #92C1FF;
     border-radius: 10px;
     text-decoration: none;
@@ -141,6 +141,67 @@ th, td {
 
 .add-form button.submit {
     margin: auto;
+}
+
+.delete-form-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.delete-form-popup.active {
+    display: block;
+}
+
+.delete-form {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 35px;
+    border: 1px solid #434343;
+}
+
+.delete-form .cancel {
+    margin: auto;
+}
+
+.delete-form h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.delete-form form {
+    display: flex;
+    flex-direction: row;
+    grid-gap: 15px;
+    margin: auto;
+}
+
+.delete-form label {
+    width: 130px;
+    display: inline-block;
+}
+
+
+.delete-form button.submit {
+    margin: auto;
+}
+
+.delete-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 #appointmentsTestsHeader {
