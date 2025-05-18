@@ -202,12 +202,13 @@ th, td {
     justify-content: center;
     gap: 15px;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 #appointmentsTestsHeader {
     text-align: center;
 }
 
-#deletebutton {
+.deletebutton {
     cursor: pointer;
 }
