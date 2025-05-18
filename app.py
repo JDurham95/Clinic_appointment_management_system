@@ -126,6 +126,43 @@ def create_clinic():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
+#DELETE FROM Clinics Route
+@app.route("/clinics/delete", methods=["POST"])
+def delete_clinic():
+        try:
+            dbConnection = db.connectDB()  # Open our database connection
+            cursor = dbConnection.cursor()
+
+            # Get form data
+            clinic_id = request.form["id_to_delete"]
+
+
+
+            # Create and execute our queries
+            # Using parameterized queries (Prevents SQL injection attacks)
+            delete_clinic_query = "CALL sp_delete_clinic(%s);"
+            cursor.execute(delete_clinic_query, (clinic_id,))
+
+            dbConnection.commit()  # commit the transaction
+
+            print(f"DELETE clinic. ID: {clinic_id}")
+
+            # Redirect the user to the updated webpage
+            return redirect("/clinics")
+
+        except Exception as e:
+            print(f"Error executing queries: {e}")
+            return (
+                "An error occurred while executing the database queries.",
+                500,
+            )
+
+        finally:
+            # Close the DB connection, if it exists
+            if "dbConnection" in locals() and dbConnection:
+                dbConnection.close()
+
+
 @app.route("/appointments", methods=["GET", "POST"])
 def appointments():
     try:
@@ -222,6 +259,43 @@ def create_appointment():
         # Close the DB connection, if it exists
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
+
+#DELETE FROM Appointments Route
+@app.route("/appointments/delete", methods=["POST"])
+def delete_appointment():
+        try:
+            dbConnection = db.connectDB()  # Open our database connection
+            cursor = dbConnection.cursor()
+
+            # Get form data
+            appointment_id = request.form["id_to_delete"]
+
+
+
+            # Create and execute our queries
+            # Using parameterized queries (Prevents SQL injection attacks)
+            delete_appointment_query = "CALL sp_delete_appointment(%s);"
+            cursor.execute(delete_appointment_query, (appointment_id,))
+
+            dbConnection.commit()  # commit the transaction
+
+            print(f"DELETE appointment. ID: {appointment_id}")
+
+            # Redirect the user to the updated webpage
+            return redirect("/appointments")
+
+        except Exception as e:
+            print(f"Error executing queries: {e}")
+            return (
+                "An error occurred while executing the database queries.",
+                500,
+            )
+
+        finally:
+            # Close the DB connection, if it exists
+            if "dbConnection" in locals() and dbConnection:
+                dbConnection.close()
+
 
 @app.route("/patients", methods=["GET", "POST"])
 def patients():
@@ -398,7 +472,7 @@ def delete_test():
             cursor = dbConnection.cursor()
 
             # Get form data
-            test_id = request.form["testId"]
+            test_id = request.form["id_to_delete"]
 
 
 

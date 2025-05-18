@@ -29,7 +29,13 @@
             <td>{{ clinic['Postal Code'] }}</td>
             <td>{{ clinic['Phone Number'] }}</td>
             <td><a href="{{ url_for('clinics', id=clinic['Clinic ID']) }}"><span class="material-symbols-outlined">edit</span></a></td>
-            <td><button><span class="material-symbols-outlined">delete</span></button></td>
+            <td>
+                <form class="delete-trigger" data-id="{{ clinic['Clinic ID'] }}">
+                    <button type="button" class="deletebutton">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
@@ -68,6 +74,19 @@
             </div>
 
             <button class="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<div class="delete-form-popup">
+    <div class="delete-form">
+        <h2>Confirm Delete</h2>
+        <p>Are you sure you want to delete this clinic?</p>
+
+        <form id="confirmDeleteForm" method="POST" action="/clinics/delete">
+            <input type="hidden" name="id_to_delete" id="deleteId">  
+            <button class="submit" type="submit">Confirm</button>
+            <button class="cancel" type="button" id="cancel">Cancel</button>
         </form>
     </div>
 </div>

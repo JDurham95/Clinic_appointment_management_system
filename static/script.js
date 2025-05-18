@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll('.delete-trigger').forEach(button => {
     button.addEventListener('click', function(e) {
         const testId = this.getAttribute('data-id');
-        document.getElementById('deleteTestId').value = testId;
+        document.getElementById('deleteId').value = testId;
         document.querySelector('.delete-form-popup').classList.add('active');
     });
 });
