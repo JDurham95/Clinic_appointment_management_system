@@ -44,6 +44,10 @@
         <h2>{{action}} Test</h2>
 
         <form action="/tests/{{ "create" if action == "Add" else "update" }}" method ="POST">
+            {% if action == "Update" %}
+                <input type="hidden" name ="testId" id ="testId" value= "{{ test['Test ID'] }}">
+                
+            {% endif %}
             <div>
                 <label for="name">Name: <span class = "red">*</span></label>
                 <input type="text" name="name" id ="name" value= "{{test['name']}}" required>

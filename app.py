@@ -1,3 +1,4 @@
+import traceback
 # ########################################
 # ########## SETUP
 
@@ -503,6 +504,53 @@ def create_test():
         # Close the DB connection, if it exists
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
+
+#Update test
+@app.route("/tests/update", methods=["POST"])
+def update_test():
+        try:
+            dbConnection = db.connectDB()
+            cursor = dbConnection.cursor()
+        
+            #get form data
+            test_id = request.form["testId"]
+            print(f"testId: {test_id}")
+
+
+            #cleanse data 
+            try:
+                test_name = str(request.form["name"])
+            except ValueError:
+                test_name = None
+            
+
+            # Create and execute our queries
+            # Using parameterized queries (Prevents SQL injection attacks)
+            update_test_query = "CALL sp_update_test(%s, %s);"
+            cursor.execute(update_test_query, (test_id, test_name))
+
+            
+            # Consume the result set (if any) before running the next quer
+            cursor.nextset()
+
+            dbConnection.commit()
+    
+            print(f"Updated test. testId: {test_id} name: {test_name}")
+
+            #redirect back to the updated page
+            return redirect("/tests")
+        
+        except Exception as e:
+            print(f"Error executing queries: {e}")
+            traceback.print_exc()
+            return(
+                "An error occurred while executing the database queries.", 500
+            )
+        
+        finally:
+            # Close the db connection, if it exists
+            if "dbConnection" in locals() and dbConnection:
+                dbConnection.close()
 
 #DELETE FROM Tests Route
 @app.route("/tests/delete", methods=["POST"])

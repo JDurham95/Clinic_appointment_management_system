@@ -24,11 +24,11 @@
         {# For each row, print the firstName, lastName, clinicId, dateTime, test name, result #}
         {% for info in appointmentstests_info %}
         <tr>
-            <td>{{ info['Appointment Test ID'] }}</td>
-            <td>{{ info['Patient First Name'] }}</td>
-            <td>{{ info['Patient Last Name'] }}</td>
-            <td>{{ info['Clinic'] }}</td>
-            <td>{{ info['Appointment Date Time'] }}</td>
+            <td>{{ info['Appointment Test ID'] or 'N/A' }}</td>
+            <td>{{ info['Patient First Name'] or 'N/A' }}</td>
+            <td>{{ info['Patient Last Name'] or 'N/A' }}</td>
+            <td>{{ info['Clinic'] or 'N/A' }}</td>
+            <td>{{ info['Appointment Date Time'] or 'N/A' }}</td>
             <td>{{ info['Test Name'] }}</td>
             <td>{{ info['Test Result'] }}</td>
             <td><a href="{{ url_for('appointmentstests', id=info['Appointment Test ID']) }}"><span class="material-symbols-outlined">edit</span></td>
