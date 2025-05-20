@@ -42,6 +42,9 @@
         <h2>{{action}} Patient</h2>
 
         <form action="/patients/{{ "create" if action == "Add" else "update" }}" method="POST">
+            {% if action == "Update" %}
+                <input type="hidden" name="patientId" id="patientId" value= "{{ patient['patientId'] }}">
+            {% endif %}
             <div class="flex-center">
                 <label for="firstName">First Name: <span class="red">*</span></label>
                 <input type="text" name="firstName" id="firstName" value="{{ patient['firstName'] }}" required>
