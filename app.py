@@ -1,3 +1,22 @@
+# Clinic Appointment Management System App.py 
+# Fidella Wu, Jacob Durham
+# CS340 - Introduction to Databases Spring 2025
+
+# Citations: 
+
+# Citation for initilizing/ creating the base app.py
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
+# Date: 5/2/2025
+
+# Citation for Flask CUD routes
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
+
+# Citation for traceback.print_exc()
+# Source URL: https://www.geeksforgeeks.org/traceback-in-python/
+# Date: 5/20/2025
+
+
 import traceback
 # ########################################
 # ########## SETUP
