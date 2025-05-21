@@ -22,8 +22,20 @@
         <a href="/results" class="{{ 'active' if request.path == '/results' }}">Results</a>
         <a href="/tests" class="{{ 'active' if request.path == '/tests' }}">Tests</a>
         <a href="/appointmentstests" class="{{ 'active' if request.path == '/appointmentstests' }}">AppointmentsTests</a>
-        <a href="/reset">Reset</a>
+        <button class="reset-trigger">Reset</button>
     </nav>
+
+    <div class="reset-popup">
+        <div class="confirm-reset">
+            <h2>Confirm Reset</h2>
+            <p>Are you sure you want to reset the database?</p>
+
+            <div id="confirmReset">
+                <a href="/reset" class="button submit">Confirm</a>
+                <button class="cancel" type="button">Cancel</button>
+            </div>
+        </div>
+    </div>
 
     {% block content %}{% endblock %}
 

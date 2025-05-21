@@ -27,7 +27,7 @@
             <td>{{ clinic['City'] }}</td>
             <td>{{ clinic['State'] }}</td>
             <td>{{ clinic['Postal Code'] }}</td>
-            <td>{{ clinic['Phone Number'] }}</td>
+            <td>{{ clinic['Phone Number'] | default('N/A', true) }}</td>
             <td><a href="{{ url_for('clinics', id=clinic['Clinic ID']) }}"><span class="material-symbols-outlined">edit</span></a></td>
             <td>
                 <form class="delete-trigger" data-id="{{ clinic['Clinic ID'] }}">
