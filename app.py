@@ -17,6 +17,11 @@
 # Date: 5/20/2025
 
 
+# Citation for upper function
+# Source URL: https://www.w3schools.com/python/ref_string_upper.asp
+# Date: 5/21/2025
+
+
 import traceback
 # ########################################
 # ########## SETUP
@@ -146,7 +151,7 @@ def create_clinic():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
-#DELETE FROM Clinics Route
+# Delete clinic
 @app.route("/clinics/delete", methods=["POST"])
 def delete_clinic():
         try:
@@ -181,6 +186,90 @@ def delete_clinic():
             # Close the DB connection, if it exists
             if "dbConnection" in locals() and dbConnection:
                 dbConnection.close()
+
+# Update clinic
+@app.route("/clinics/update", methods=["POST"])
+def update_clinic():
+        try:
+            dbConnection = db.connectDB()
+            cursor = dbConnection.cursor()
+        
+            #get form data
+            clinic_id = request.form["clinicId"]
+            print(f"clinicId: {clinic_id}")
+
+
+            #cleanse data 
+            try:
+                clinic_address = str(request.form["address"])
+            except ValueError:
+                clinic_address = None
+            
+            print(f"address: {clinic_address}")
+
+            try:
+                clinic_city = str(request.form["city"])
+            except ValueError:
+                clinic_city = None
+
+            print(f"city: {clinic_city}")
+            
+            try:
+                clinic_state = str(request.form["state"])
+                clinic_state = clinic_state.upper()
+            except ValueError:
+                clinic_state = None
+            
+            print(f"state: {clinic_state}")
+
+            try:
+                clinic_postal_code = str(request.form["postalCode"])
+            except ValueError:
+                clinic_postal_code = None
+
+            print(f"postalCode: {clinic_postal_code}")
+             
+            try:
+                clinic_phone_number = str(request.form["phoneNumber"])
+            except ValueError:
+                clinic_phone_number = None
+
+            print(f"phoneNumber {clinic_phone_number}")
+            
+            # Create and execute our queries
+            # Using parameterized queries (Prevents SQL injection attacks)
+            update_clinic_query = "CALL sp_update_clinic(%s, %s, %s, %s, %s, %s);"
+            cursor.execute(update_clinic_query, (clinic_id, 
+                                                  clinic_address, 
+                                                  clinic_city, 
+                                                  clinic_state,
+                                                  clinic_postal_code,
+                                                  clinic_phone_number
+                                                  ))
+
+            
+            # Consume the result set (if any) before running the next quer
+            cursor.nextset()
+
+            dbConnection.commit()
+    
+            print(f"Updated clinic. clinicid: {clinic_id} Address: {clinic_address}, {clinic_city}, {clinic_state}")
+
+            #redirect back to the updated page
+            return redirect("/clinics")
+        
+        except Exception as e:
+            print(f"Error executing queries: {e}")
+            traceback.print_exc()
+            return(
+                "An error occurred while executing the database queries.", 500
+            )
+        
+        finally:
+            # Close the db connection, if it exists
+            if "dbConnection" in locals() and dbConnection:
+                dbConnection.close()
+
 
 
 @app.route("/appointments", methods=["GET", "POST"])
@@ -280,7 +369,7 @@ def create_appointment():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
-#DELETE FROM Appointments Route
+# Delete appointment
 @app.route("/appointments/delete", methods=["POST"])
 def delete_appointment():
         try:
@@ -313,6 +402,79 @@ def delete_appointment():
 
         finally:
             # Close the DB connection, if it exists
+            if "dbConnection" in locals() and dbConnection:
+                dbConnection.close()
+
+# Update appointment
+@app.route("/appointments/update", methods=["POST"])
+def update_appointments():
+        try:
+            dbConnection = db.connectDB()
+            cursor = dbConnection.cursor()
+        
+            #get form data
+            appointment_Id = request.form["appointmentId"]
+            print(f"appointmentId: {appointment_Id}")
+
+
+            #cleanse data 
+            appointment_date_time = request.form["dateTime"]
+            if not appointment_date_time:
+                appointment_date_time = None
+
+            print(f"dateTime: {appointment_date_time}")
+
+            try:
+                clinic_id = int(request.form["clinicId"])
+            except ValueError:
+                clinic_id = None
+
+            print(f"clinicId: {clinic_id}")
+            
+            try:
+                patient_id = int(request.form["patientId"])
+            except ValueError:
+                patient_id = None
+            
+            print(f"patientId: {patient_id}")
+
+            try:
+                status_id = int(request.form["statusId"])
+            except ValueError:
+                status_id = None
+
+            print(f"statusId: {status_id}")
+            
+            # Create and execute our queries
+            # Using parameterized queries (Prevents SQL injection attacks)
+            update_appointment_query = "CALL sp_update_appointment(%s, %s, %s, %s, %s);"
+            cursor.execute(update_appointment_query, (appointment_Id, 
+                                                  appointment_date_time, 
+                                                  clinic_id, 
+                                                  patient_id,
+                                                  status_id
+                                                  ))
+
+            
+            # Consume the result set (if any) before running the next quer
+            cursor.nextset()
+
+            dbConnection.commit()
+    
+            print(f"Updated appointment. appointmentId: {appointment_Id} dateTime: {appointment_date_time}")
+
+            #redirect back to the updated page
+            return redirect("/appointments")
+        
+        except Exception as e:
+            print(f"Error executing queries: {e}")
+            traceback.print_exc()
+            return(
+                "An error occurred while executing the database queries.", 500
+            )
+        
+        finally:
+            # Close the db connection, if it exists
             if "dbConnection" in locals() and dbConnection:
                 dbConnection.close()
 
@@ -415,7 +577,7 @@ def create_patient():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
-#Update patient
+# Update patient
 @app.route("/patients/update", methods=["POST"])
 def update_patient():
         try:
@@ -547,6 +709,53 @@ def statuses():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
+# Update status
+@app.route("/statuses/update", methods=["POST"])
+def update_status():
+        try:
+            dbConnection = db.connectDB()
+            cursor = dbConnection.cursor()
+        
+            #get form data
+            status_id = request.form["statusId"]
+            print(f"statusId: {status_id}")
+
+
+            #cleanse data 
+            try:
+                status = str(request.form["status"])
+            except ValueError:
+                status = None
+            
+
+            # Create and execute our queries
+            # Using parameterized queries (Prevents SQL injection attacks)
+            update_status_query = "CALL sp_update_status(%s, %s);"
+            cursor.execute(update_status_query, (status_id, status))
+
+            
+            # Consume the result set (if any) before running the next quer
+            cursor.nextset()
+
+            dbConnection.commit()
+    
+            print(f"Updated status statusId: {status_id} status: {status}")
+
+            #redirect back to the updated page
+            return redirect("/statuses")
+        
+        except Exception as e:
+            print(f"Error executing queries: {e}")
+            traceback.print_exc()
+            return(
+                "An error occurred while executing the database queries.", 500
+            )
+        
+        finally:
+            # Close the db connection, if it exists
+            if "dbConnection" in locals() and dbConnection:
+                dbConnection.close()
+
 @app.route("/tests", methods=["GET", "POST"])
 def tests():
     try:
@@ -619,7 +828,7 @@ def create_test():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
-#Update test
+# Update test
 @app.route("/tests/update", methods=["POST"])
 def update_test():
         try:
@@ -666,7 +875,7 @@ def update_test():
             if "dbConnection" in locals() and dbConnection:
                 dbConnection.close()
 
-#DELETE FROM Tests Route
+# Delete test
 @app.route("/tests/delete", methods=["POST"])
 def delete_test():
         try:
@@ -736,6 +945,53 @@ def results():
         # Close the DB connection, if it exists
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
+
+# Update result
+@app.route("/results/update", methods=["POST"])
+def update_result():
+        try:
+            dbConnection = db.connectDB()
+            cursor = dbConnection.cursor()
+        
+            #get form data
+            test_result_id = request.form["testResultId"]
+            print(f"test result Id: {test_result_id}")
+
+
+            #cleanse data 
+            try:
+                result = str(request.form["result"])
+            except ValueError:
+                result = None
+            
+
+            # Create and execute our queries
+            # Using parameterized queries (Prevents SQL injection attacks)
+            update_result_query = "CALL sp_update_result(%s, %s);"
+            cursor.execute(update_result_query, (test_result_id, result))
+
+            
+            # Consume the result set (if any) before running the next quer
+            cursor.nextset()
+
+            dbConnection.commit()
+    
+            print(f"Updated result testResultId: {test_result_id} result: {result}")
+
+            #redirect back to the updated page
+            return redirect("/results")
+        
+        except Exception as e:
+            print(f"Error executing queries: {e}")
+            traceback.print_exc()
+            return(
+                "An error occurred while executing the database queries.", 500
+            )
+        
+        finally:
+            # Close the db connection, if it exists
+            if "dbConnection" in locals() and dbConnection:
+                dbConnection.close()
 
 @app.route("/appointmentstests", methods=["GET", "POST"])
 def appointmentstests():
@@ -845,6 +1101,73 @@ def create_appointmentstests():
         # Close the DB connection, if it exists
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
+
+# Update appointmentstests
+@app.route("/appointmentstests/update", methods=["POST"])
+def update_appointmentstests():
+        try:
+            dbConnection = db.connectDB()
+            cursor = dbConnection.cursor()
+        
+            #get form data
+            appointmenttest_id = request.form["appointmentTestId"]
+            print(f"appointmenttestId: {appointmenttest_id}")
+
+
+            #cleanse data 
+            try:
+                appointment_id = int(request.form["appointmentId"])
+            except ValueError:
+                appointment_id = None
+
+            print(f"appointmentId: {appointment_id}")
+            
+            try:
+                test_id = int(request.form["testId"])
+            except ValueError:
+                test_id = None
+            
+            print(f"testId: {test_id}")
+
+            try:
+                test_result_id = int(request.form["testResultId"])
+            except ValueError:
+                test_result_id = None
+
+            print(f"testResultId: {test_result_id}")
+            
+            # Create and execute our queries
+            # Using parameterized queries (Prevents SQL injection attacks)
+            update_appointmenttest_query = "CALL sp_update_appointmenttest(%s, %s, %s, %s);"
+            cursor.execute(update_appointmenttest_query, (appointmenttest_id, 
+                                                  appointment_id, 
+                                                  test_id, 
+                                                  test_result_id
+                                                  ))
+
+            
+            # Consume the result set (if any) before running the next quer
+            cursor.nextset()
+
+            dbConnection.commit()
+    
+            print(f"Updated appointmenttest. appointmentTestId: {appointmenttest_id} appointmentId: {appointment_id}")
+
+            #redirect back to the updated page
+            return redirect("/appointmentstests")
+        
+        except Exception as e:
+            print(f"Error executing queries: {e}")
+            traceback.print_exc()
+            return(
+                "An error occurred while executing the database queries.", 500
+            )
+        
+        finally:
+            # Close the db connection, if it exists
+            if "dbConnection" in locals() and dbConnection:
+                dbConnection.close()
+
             
 # ########################################
 # ########## LISTENER

@@ -43,10 +43,13 @@ Date: 5/20/2025
 
         <h2>{{action}} Result</h2>
 
-        <form action="/results" method="POST">
-            <div class="flex-center">
+        <form action="/results/{{ "create" if action == "Add" else "update" }}" method="POST">
+            {% if action == "Update" %}
+                <input type="hidden" name="testResultId" id="testResultId" value= "{{ result['testResultId'] }}">
+            {% endif %}
+            <div>
                 <label for="status">Result: <span class="red">*</span></label>
-                <input type="text" name="name" id="result" value="{{ result.result }}" required>
+                <input type="text" name="result" id="result" value="{{ result.result }}" required>
             </div>
 
             <button class="submit">Submit</button>

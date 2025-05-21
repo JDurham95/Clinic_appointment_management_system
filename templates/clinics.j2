@@ -60,6 +60,9 @@ Date: 5/20/2025
         <h2>{{action}} Clinic</h2>
 
         <form action="/clinics/{{ "create" if action == "Add" else "update" }}" method="POST">
+            {% if action == "Update" %}
+                <input type="hidden" name="clinicId" id="clinicId" value= "{{ clinic['clinicId'] }}">
+            {% endif %}
             <div class="flex-center">
                 <label for="address">Address: <span class="red">*</span></label>
                 <input type="text" name="address" id="address" value="{{ clinic.address }}" required>
