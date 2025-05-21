@@ -1,3 +1,4 @@
+import traceback
 # ########################################
 # ########## SETUP
 
@@ -395,6 +396,101 @@ def create_patient():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
+#Update patient
+@app.route("/patients/update", methods=["POST"])
+def update_patient():
+        try:
+            dbConnection = db.connectDB()
+            cursor = dbConnection.cursor()
+        
+            #get form data
+            patient_id = request.form["patientId"]
+            print(f"patientId: {patient_id}")
+
+
+            #cleanse data 
+            try:
+                patient_first_name = str(request.form["firstName"])
+            except ValueError:
+                patient_first_name = None
+            
+            print(f"patient fname: {patient_first_name}")
+
+            try:
+                patient_last_name = str(request.form["lastName"])
+            except ValueError:
+                patient_last_name = None
+
+            print(f"patient lname: {patient_last_name}")
+            
+            try:
+                patient_phone_number = str(request.form["phoneNumber"])
+            except ValueError:
+                patient_phone_number = None
+            
+            print(f"patient pn: {patient_phone_number}")
+
+            try:
+                patient_email = str(request.form["email"])
+            except ValueError:
+                patient_email = None
+
+            print(f"patient email: {patient_email}")
+             
+            patient_date_of_birth = request.form["dateOfBirth"]
+            if not patient_date_of_birth:
+                patient_date_of_birth = None
+            
+            print(f"patient DOB: {patient_date_of_birth}")
+
+            try:
+                patient_gender = str(request.form["gender"])
+            except ValueError:
+                patient_gender = None
+
+            print(f"patient gender: {patient_gender}")
+
+            try:
+                clinic_id = int(request.form["clinic"])
+            except ValueError:
+                clinic_id = None
+            
+            print(f"clinicId: {clinic_id}")
+            # Create and execute our queries
+            # Using parameterized queries (Prevents SQL injection attacks)
+            update_patient_query = "CALL sp_update_patient(%s, %s, %s, %s, %s, %s, %s,%s);"
+            cursor.execute(update_patient_query, (patient_id, 
+                                                  patient_first_name, 
+                                                  patient_last_name, 
+                                                  patient_phone_number,
+                                                  patient_email,
+                                                  patient_date_of_birth,
+                                                  patient_gender,
+                                                  clinic_id))
+
+            
+            # Consume the result set (if any) before running the next quer
+            cursor.nextset()
+
+            dbConnection.commit()
+    
+            print(f"Updated patient. testId: {patient_id} name: {patient_first_name} {patient_last_name}")
+
+            #redirect back to the updated page
+            return redirect("/patients")
+        
+        except Exception as e:
+            print(f"Error executing queries: {e}")
+            traceback.print_exc()
+            return(
+                "An error occurred while executing the database queries.", 500
+            )
+        
+        finally:
+            # Close the db connection, if it exists
+            if "dbConnection" in locals() and dbConnection:
+                dbConnection.close()
+
 @app.route("/statuses", methods=["GET", "POST"])
 def statuses():
     try:
@@ -503,6 +599,53 @@ def create_test():
         # Close the DB connection, if it exists
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
+
+#Update test
+@app.route("/tests/update", methods=["POST"])
+def update_test():
+        try:
+            dbConnection = db.connectDB()
+            cursor = dbConnection.cursor()
+        
+            #get form data
+            test_id = request.form["testId"]
+            print(f"testId: {test_id}")
+
+
+            #cleanse data 
+            try:
+                test_name = str(request.form["name"])
+            except ValueError:
+                test_name = None
+            
+
+            # Create and execute our queries
+            # Using parameterized queries (Prevents SQL injection attacks)
+            update_test_query = "CALL sp_update_test(%s, %s);"
+            cursor.execute(update_test_query, (test_id, test_name))
+
+            
+            # Consume the result set (if any) before running the next quer
+            cursor.nextset()
+
+            dbConnection.commit()
+    
+            print(f"Updated test. testId: {test_id} name: {test_name}")
+
+            #redirect back to the updated page
+            return redirect("/tests")
+        
+        except Exception as e:
+            print(f"Error executing queries: {e}")
+            traceback.print_exc()
+            return(
+                "An error occurred while executing the database queries.", 500
+            )
+        
+        finally:
+            # Close the db connection, if it exists
+            if "dbConnection" in locals() and dbConnection:
+                dbConnection.close()
 
 #DELETE FROM Tests Route
 @app.route("/tests/delete", methods=["POST"])
