@@ -43,7 +43,10 @@ Date: 5/20/2025
 
         <h2>{{action}} Status</h2>
 
-        <form action="/statuses" method="POST">
+        <form action="/statuses/{{ "create" if action == "Add" else "update" }}" method="POST">
+            {% if action == "Update" %}
+                <input type="hidden" name="statusId" id="statusId" value= "{{ status['statusId'] }}">
+            {% endif %}
             <div class="flex-center">
                 <label for="status">Status: <span class="red">*</span></label>
                 <input type="text" name="status" id="status" value="{{ status.status }}" required>

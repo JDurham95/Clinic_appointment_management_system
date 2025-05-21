@@ -37,7 +37,7 @@ Date: 5/20/2025
     </thead>
 
     <tbody>
-        {# For each row, print the firstName, lastName, clinicId, dateTime, test name, result #}
+        {# For each row, print the appointmentTestId, firstName, lastName, clinicId, dateTime, test name, result #}
         {% for info in appointmentstests_info %}
         <tr>
             <td>{{ info['Appointment Test ID'] or 'N/A' }}</td>
@@ -61,7 +61,9 @@ Date: 5/20/2025
         <h2>{{action}} AppointmentTest</h2>
 
         <form action="/appointmentstests/{{ "create" if action == "Add" else "update" }}" method="POST">
-
+            {% if action == "Update" %}
+                <input type="hidden" name="appointmentTestId" id="appointmentTestId" value= "{{ appointmenttest['appointmentTestId'] }}">
+            {% endif %}
             <div class="flex-center">
                 <label for="appointmentId">Appointment ID: <span class="red">*</span></label>
                 <select name="appointmentId" id="appointmentId" value="{{ appointmenttest['appointmentId'] }}" required>
