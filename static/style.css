@@ -48,11 +48,16 @@ nav {
     margin-bottom: 25px;
 }
 
-nav a {
+nav a, .reset-trigger {
     color: #000;
+    font-family: 'Lato';
+    text-decoration: underline;
+    font-size: 16px;
+    padding: 0;
+    cursor: pointer;
 }
 
-nav a.active, button.add, button.submit, button.cancel {
+nav a.active, button.add, button.submit, button.cancel, .button {
     background-color: #92C1FF;
     border-radius: 10px;
     text-decoration: none;
@@ -60,6 +65,7 @@ nav a.active, button.add, button.submit, button.cancel {
     width: fit-content;
     font-size: 16px;
     cursor: pointer;
+    color: #000;
 }
 
 table {
@@ -143,7 +149,7 @@ th, td {
     margin: auto;
 }
 
-.delete-form-popup {
+.delete-form-popup, .reset-popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -153,11 +159,11 @@ th, td {
     display: none;
 }
 
-.delete-form-popup.active {
+.delete-form-popup.active, .reset-popup.active {
     display: block;
 }
 
-.delete-form {
+.delete-form, .confirm-reset {
     position: absolute;
     justify-content: center;
     align-items: center;
@@ -171,16 +177,16 @@ th, td {
     border: 1px solid #434343;
 }
 
-.delete-form .cancel {
+.delete-form .cancel, .confirm-reset .cancel {
     margin: auto;
 }
 
-.delete-form h2 {
+.delete-form h2, .confirm-reset h2 {
     text-align: center;
     margin-top: 0;
 }
 
-.delete-form form {
+.delete-form form, .confirm-reset #confirmReset {
     display: flex;
     flex-direction: row;
     grid-gap: 15px;
@@ -193,7 +199,7 @@ th, td {
 }
 
 
-.delete-form button.submit {
+.delete-form button.submit, .confirm-reset .submit {
     margin: auto;
 }
 

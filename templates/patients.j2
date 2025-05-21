@@ -28,7 +28,7 @@
             <td>{{ patient['Email'] }}</td>
             <td>{{ patient['Date Of Birth'] }}</td>
             <td>{{ patient['Gender'] }}</td>
-            <td>{{ patient['Primary Clinic'] | default('', true) }}</td>
+            <td>{{ patient['Primary Clinic'] | default('N/A', true) }}</td>
             <td><a href="{{ url_for('patients', id=patient['Patient ID']) }}"><span class="material-symbols-outlined">edit</span></a></td>
         </tr>
         {% endfor %}
