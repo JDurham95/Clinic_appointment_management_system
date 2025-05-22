@@ -8,6 +8,14 @@
 # Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
 # Date: 5/2/2025
 
+# Citation for environment variables
+# Source URL: https://www.geeksforgeeks.org/using-python-environment-variables-with-python-dotenv/
+# Date: 5/2/2025
+
+# Citation for query parameters
+# Source URL: https://www.geeksforgeeks.org/get-request-query-parameters-with-flask/
+# Date: 5/4/2025
+
 # Citation for Flask CUD routes
 # Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
 # Date: 5/20/2025
@@ -15,7 +23,6 @@
 # Citation for traceback.print_exc()
 # Source URL: https://www.geeksforgeeks.org/traceback-in-python/
 # Date: 5/20/2025
-
 
 # Citation for upper function
 # Source URL: https://www.w3schools.com/python/ref_string_upper.asp
