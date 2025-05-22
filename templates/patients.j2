@@ -88,9 +88,9 @@ Date: 5/20/2025
                     {% if action == "Add" %}
                         <option>Select a gender</option>
                     {% endif %}
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Unknown">Unknown</option>
+                    <option value="Male" {% if patient['gender'] == "Male" %} selected {% endif %}>Male</option>
+                    <option value="Female" {% if patient['gender'] == "Female" %} selected {% endif %}>Female</option>
+                    <option value="Unknown" {% if patient['gender'] == "Unknown" %} selected {% endif %}>Unknown</option>
                 </select>
             </div>
 
