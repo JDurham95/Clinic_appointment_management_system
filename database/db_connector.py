@@ -1,3 +1,17 @@
+# Clinic Appointment Management System db_connector.py
+# Fidella Wu, Jacob Durham
+# CS340 - Introduction to Databases Spring 2025
+
+# Citations: 
+
+# Citation for creating db_connector.py
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
+# Date: 5/2/2025
+
+# Citation for environment variables
+# Source URL: https://www.geeksforgeeks.org/using-python-environment-variables-with-python-dotenv/
+# Date: 5/2/2025
+
 import MySQLdb
 import os
 from dotenv import load_dotenv
