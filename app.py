@@ -8,10 +8,6 @@
 # Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
 # Date: 5/2/2025
 
-# Citation for environment variables
-# Source URL: https://www.geeksforgeeks.org/using-python-environment-variables-with-python-dotenv/
-# Date: 5/2/2025
-
 # Citation for query parameters
 # Source URL: https://www.geeksforgeeks.org/get-request-query-parameters-with-flask/
 # Date: 5/4/2025
