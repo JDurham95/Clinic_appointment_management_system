@@ -12,6 +12,14 @@ Date: 5/20/2025
 citation for html tooltips, used in our edit and delete buttons
 source URL: https://www.geeksforgeeks.org/what-is-a-tooltip-in-html/
 Date: 5/28/2025
+
+citation for restrict the Result input in the edit form to only accept letters
+Source URL: https://www.sololearn.com/en/Discuss/1479898/only-allow-letters-in-a-text-field
+Date: 5/28/2025
+
+citation for creating a custom message that appears when invalid characters are used for Result in the Results edit form
+Source URL: https://stackoverflow.com/questions/19122886/how-can-i-create-a-custom-message-when-an-html5-required-input-pattern-does-not
+Date: 5/28/2025
 #}
 
 {% extends "main.j2" %}
@@ -53,7 +61,7 @@ Date: 5/28/2025
             {% endif %}
             <div>
                 <label for="status">Result: <span class="red">*</span></label>
-                <input type="text" name="result" id="result" value="{{ result.result }}" required>
+                <input type="text" pattern="[A-Za-z]*" autofocus required title="Only letters A-Z and a-z are allowed" name="result" id="result" value="{{ result.result }}" required>
             </div>
 
             <button class="submit">Submit</button>
