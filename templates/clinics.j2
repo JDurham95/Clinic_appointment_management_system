@@ -8,6 +8,10 @@ Date: 5/2/2025
 citation for  creating, updating, and deleting from clinics
 Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
 Date: 5/20/2025
+
+citation for html tooltips, used in our edit and delete buttons
+source URL: https://www.geeksforgeeks.org/what-is-a-tooltip-in-html/
+Date: 5/28/2025
 #}
 
 {% extends "main.j2" %}
@@ -40,10 +44,10 @@ Date: 5/20/2025
             <td>{{ clinic['State'] }}</td>
             <td>{{ clinic['Postal Code'] }}</td>
             <td>{{ clinic['Phone Number'] | default('N/A', true) }}</td>
-            <td><a href="{{ url_for('clinics', id=clinic['Clinic ID']) }}"><span class="material-symbols-outlined">edit</span></a></td>
+            <td><a href="{{ url_for('clinics', id=clinic['Clinic ID']) }}"><span class="material-symbols-outlined" title ="edit">edit</span></a></td>
             <td>
                 <form class="delete-trigger" data-id="{{ clinic['Clinic ID'] }}">
-                    <button type="button" class="deletebutton">
+                    <button type="button" class="deletebutton" title="delete">
                         <span class="material-symbols-outlined">delete</span>
                     </button>
                 </form>
