@@ -93,8 +93,8 @@ Date: 5/28/2025
             </div>
 
             <div class="flex-center">
-                <label for="testResultId">Test Result: <span class="red">*</span></label>
-                <select name="testResultId" id="testResultId" value="{{ appointmenttest['testResultId'] }}" required>
+                <label for="testResultId">Test Result: </label>
+                <select name="testResultId" id="testResultId" value="{{ appointmenttest['testResultId'] }}" >
                     {% if action == "Add" %}
                         <option>Select a result</option>
                     {% endif %}
