@@ -1013,7 +1013,7 @@ def appointmentstests():
                                             LEFT JOIN Appointments on AppointmentsTests.appointmentId = Appointments.appointmentId \
                                             LEFT JOIN Patients on Appointments.patientId = Patients.patientId \
                                             JOIN Tests on AppointmentsTests.testId = Tests.testId \
-                                            JOIN Results on AppointmentsTests.testResultId = Results.testResultId \
+                                            LEFT JOIN Results on AppointmentsTests.testResultId = Results.testResultId \
                                             LEFT JOIN Clinics ON Appointments.clinicId = Clinics.clinicId \
                                             ORDER BY appointmentTestId;"
         appointmentstests_info = db.query(dbConnection, get_appointmentstests_info_query).fetchall()
@@ -1074,6 +1074,9 @@ def create_appointmentstests():
         appointment_id = request.form["appointmentId"]
         test_id = request.form["testId"]
         test_result_id = request.form["testResultId"]
+        print(f"test result id: {test_result_id}")
+        if test_result_id == "Select a result":
+            test_result_id = None
 
         # Create and execute our queries
         # Using parameterized queries (Prevents SQL injection attacks)

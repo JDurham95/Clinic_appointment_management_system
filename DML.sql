@@ -174,7 +174,7 @@ FROM AppointmentsTests
 LEFT JOIN Appointments on AppointmentsTests.appointmentId = Appointments.appointmentId
 LEFT JOIN Patients on Appointments.patientId = Patients.patientId
 JOIN Tests on AppointmentsTests.testId = Tests.testID
-JOIN Results on AppointmentsTests.testResultId = Results.testResultId
+LEFT JOIN Results on AppointmentsTests.testResultId = Results.testResultId
 LEFT JOIN Clinics ON Appointments.clinicId = Clinics.clinicId
 ORDER BY appointmentTestId;
 

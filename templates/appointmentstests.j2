@@ -49,8 +49,8 @@ Date: 5/28/2025
             <td>{{ info['Patient Last Name'] or 'N/A' }}</td>
             <td>{{ info['Clinic'] or 'N/A' }}</td>
             <td>{{ info['Appointment Date Time'] or 'N/A' }}</td>
-            <td>{{ info['Test Name'] }}</td>
-            <td>{{ info['Test Result'] }}</td>
+            <td>{{ info['Test Name'] or 'N/A' }}</td>
+            <td>{{ info['Test Result'] or 'N/A' }}</td>
             <td><a href="{{ url_for('appointmentstests', id=info['Appointment Test ID']) }}"><span class="material-symbols-outlined" title ="edit">edit</span></td>
         </tr>
     
