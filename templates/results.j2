@@ -26,28 +26,34 @@ Date: 5/28/2025
 {% block content %}
 
 {# READ table #}
-<table>
-    <thead>
-        {# For the table header row, we print the DB attribute names #}
-        <tr>
-            {% for key in results[0].keys() %}
-            <th>{{ key }} </th>
-            {% endfor %}
-            <th></th>
-        </tr>
-    </thead>
+{% if results %}
+    <table>
+        <thead>
+            {# For the table header row, we print the DB attribute names #}
+            <tr>
+                {% for key in results[0].keys() %}
+                <th>{{ key }} </th>
+                {% endfor %}
+                <th></th>
+            </tr>
+        </thead>
 
-    <tbody>
-        {# For each row, print the testResultId, result #}
-        {% for result in results %}
-        <tr>
-            <td>{{ result['Test Result ID'] }}</td>
-            <td>{{ result['Result'] }}</td>
-            <td><a href="{{ url_for('results', id=result['Test Result ID']) }}"><span class="material-symbols-outlined" title ="edit">edit</span></a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        <tbody>
+            {# For each row, print the testResultId, result #}
+            {% for result in results %}
+            <tr>
+                <td>{{ result['Test Result ID'] }}</td>
+                <td>{{ result['Result'] }}</td>
+                <td><a href="{{ url_for('results', id=result['Test Result ID']) }}"><span class="material-symbols-outlined" title ="edit">edit</span></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+{% if not results %}
+    <h2 style="text-align:center">No Results to show</h2>
+{% endif %}
 
 <div class="add-form-popup {{"active" if action == "Update"}}">
     <div class="add-form">

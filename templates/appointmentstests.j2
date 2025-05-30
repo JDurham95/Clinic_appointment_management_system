@@ -27,36 +27,42 @@ Date: 5/28/2025
     <button class="add">Add</button>
 </div>
 
-<h3 id="appointmentsTestsHeader" > AppointmentsTests entries may be removed by deleting the asscociated Test </h3>
+{% if appointmentstests %}
+    <h3 id="appointmentsTestsHeader" > AppointmentsTests entries may be removed by deleting the asscociated Test </h3>
+    <table>
+        <thead>
+            {# For the table header row, we print the DB attribute names #}
+            <tr>
+                {% for key in appointmentstests_info[0].keys() %}
+                <th>{{ key }}</th>
+                {% endfor %}
+                <th></th>
+            </tr>
+        </thead>
 
-<table>
-    <thead>
-        {# For the table header row, we print the DB attribute names #}
-        <tr>
-            {% for key in appointmentstests_info[0].keys() %}
-            <th>{{ key }}</th>
+        <tbody>
+            {# For each row, print the appointmentTestId, firstName, lastName, clinicId, dateTime, test name, result #}
+            {% for info in appointmentstests_info %}
+            <tr>
+                <td>{{ info['Appointment Test ID'] or 'N/A' }}</td>
+                <td>{{ info['Patient First Name'] or 'N/A' }}</td>
+                <td>{{ info['Patient Last Name'] or 'N/A' }}</td>
+                <td>{{ info['Clinic'] or 'N/A' }}</td>
+                <td>{{ info['Appointment Date Time'] or 'N/A' }}</td>
+                <td>{{ info['Test Name'] or 'N/A' }}</td>
+                <td>{{ info['Test Result'] or 'N/A' }}</td>
+                <td><a href="{{ url_for('appointmentstests', id=info['Appointment Test ID']) }}"><span class="material-symbols-outlined" title ="edit">edit</span></td>
+            </tr>
+        
             {% endfor %}
-            <th></th>
-        </tr>
-    </thead>
+        </tbody>
+    </table>
+{% endif %}
 
-    <tbody>
-        {# For each row, print the appointmentTestId, firstName, lastName, clinicId, dateTime, test name, result #}
-        {% for info in appointmentstests_info %}
-        <tr>
-            <td>{{ info['Appointment Test ID'] or 'N/A' }}</td>
-            <td>{{ info['Patient First Name'] or 'N/A' }}</td>
-            <td>{{ info['Patient Last Name'] or 'N/A' }}</td>
-            <td>{{ info['Clinic'] or 'N/A' }}</td>
-            <td>{{ info['Appointment Date Time'] or 'N/A' }}</td>
-            <td>{{ info['Test Name'] or 'N/A' }}</td>
-            <td>{{ info['Test Result'] or 'N/A' }}</td>
-            <td><a href="{{ url_for('appointmentstests', id=info['Appointment Test ID']) }}"><span class="material-symbols-outlined" title ="edit">edit</span></td>
-        </tr>
-    
-        {% endfor %}
-    </tbody>
-</table>
+{% if not appointmentstests %}
+    <h2 style="text-align:center">No AppointmentsTests to show</h2>
+{% endif %}
+
 
 <div class="add-form-popup {{"active" if action == "Update"}}">
     <div class="add-form">

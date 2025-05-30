@@ -22,34 +22,40 @@ Date: 5/28/2025
 </div>
 
 {# READ table #}
-<table>
-    <thead>
-        {# For the table header row, we print the DB attribute names #}
-        <tr>
-            {% for key in patients[0].keys() %}
-            <th>{{ key }}</th>
-            {% endfor %}
-            <th></th>
-        </tr>
-    </thead>
+{% if patients %}
+    <table>
+        <thead>
+            {# For the table header row, we print the DB attribute names #}
+            <tr>
+                {% for key in patients[0].keys() %}
+                <th>{{ key }}</th>
+                {% endfor %}
+                <th></th>
+            </tr>
+        </thead>
 
-    <tbody>
-        {# For each row, print the patientId, firstName, lastName, email, dateOfBirth, gender, clinicName #}
-        {% for patient in patients %}
-        <tr>
-            <td>{{ patient['Patient ID'] }}</td>
-            <td>{{ patient['First Name'] }}</td>
-            <td>{{ patient['Last Name'] }}</td>
-            <td>{{ patient['Phone Number'] }}</td>
-            <td>{{ patient['Email'] }}</td>
-            <td>{{ patient['Date Of Birth'] }}</td>
-            <td>{{ patient['Gender'] }}</td>
-            <td>{{ patient['Primary Clinic'] | default('N/A', true) }}</td>
-            <td><a href="{{ url_for('patients', id=patient['Patient ID']) }}"><span class="material-symbols-outlined" title ="edit">edit</span></a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        <tbody>
+            {# For each row, print the patientId, firstName, lastName, email, dateOfBirth, gender, clinicName #}
+            {% for patient in patients %}
+            <tr>
+                <td>{{ patient['Patient ID'] }}</td>
+                <td>{{ patient['First Name'] }}</td>
+                <td>{{ patient['Last Name'] }}</td>
+                <td>{{ patient['Phone Number'] }}</td>
+                <td>{{ patient['Email'] }}</td>
+                <td>{{ patient['Date Of Birth'] }}</td>
+                <td>{{ patient['Gender'] }}</td>
+                <td>{{ patient['Primary Clinic'] | default('N/A', true) }}</td>
+                <td><a href="{{ url_for('patients', id=patient['Patient ID']) }}"><span class="material-symbols-outlined" title ="edit">edit</span></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+{% if not patients %}
+    <h2 style="text-align:center">No Patients to show</h2>
+{% endif%}
 
 <div class="add-form-popup {{"active" if action == "Update"}}">
     <div class="add-form">
