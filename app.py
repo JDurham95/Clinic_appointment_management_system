@@ -86,6 +86,7 @@ def clinics():
         clinics = db.query(dbConnection, get_clinics_query).fetchall()
 
         clinic_id = request.args.get('id')
+
         if clinic_id:
             action = "Update"
             select_clinic_query = f"SELECT clinicId, address, city, state, postalCode, phoneNumber \
@@ -96,11 +97,12 @@ def clinics():
             action = "Add"
             clinic = ()
 
-        # Render the clinics.j2 file, and also send the renderer clinics information
-        return render_template(
-            "clinics.j2", clinics=clinics, clinic=clinic, action=action
-        )
+            # Render the clinics.j2 file, and also send the renderer clinics information
+            return render_template(
+                "clinics.j2", clinics=clinics, clinic=clinic, action=action
+            )
 
+        
     except Exception as e:
         print(f"Error executing queries: {e}")
         return "An error occurred while executing the database queries.", 500
@@ -116,6 +118,7 @@ def create_clinic():
     try:
         dbConnection = db.connectDB()  # Open our database connection
         cursor = dbConnection.cursor()
+        print(cursor)
 
         # Get form data
         address = request.form["address"]

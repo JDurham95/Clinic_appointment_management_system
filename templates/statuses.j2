@@ -18,28 +18,34 @@ Date: 5/28/2025
 {% block content %}
 
 {# READ table #}
-<table>
-    <thead>
-        {# For the table header row, we print the DB attribute names #}
-        <tr>
-            {% for key in statuses[0].keys() %}
-            <th>{{ key }}</th>
-            {% endfor %}
-            <th></th>
-        </tr>
-    </thead>
+{% if statuses %}
+    <table>
+        <thead>
+            {# For the table header row, we print the DB attribute names #}
+            <tr>
+                {% for key in statuses[0].keys() %}
+                <th>{{ key }}</th>
+                {% endfor %}
+                <th></th>
+            </tr>
+        </thead>
 
-    <tbody>
-        {# For each row, print the statusId, status #}
-        {% for status in statuses %}
-        <tr>
-            <td>{{ status['Status ID'] }}</td>
-            <td>{{ status['Status'] }}</td>
-            <td><a href="{{ url_for('statuses', id=status['Status ID']) }}"><span class="material-symbols-outlined" title ="edit">edit</span></a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        <tbody>
+            {# For each row, print the statusId, status #}
+            {% for status in statuses %}
+            <tr>
+                <td>{{ status['Status ID'] }}</td>
+                <td>{{ status['Status'] }}</td>
+                <td><a href="{{ url_for('statuses', id=status['Status ID']) }}"><span class="material-symbols-outlined" title ="edit">edit</span></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+{% if not statuses %}
+    <h2 style="text-align:center">No Statuses to show</h2>
+{% endif %}
 
 <div class="add-form-popup {{"active" if action == "Update"}}">
     <div class="add-form">

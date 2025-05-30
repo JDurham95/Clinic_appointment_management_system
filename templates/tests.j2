@@ -22,36 +22,42 @@ Date: 5/28/2025
 </div>
 
 {# READ table #}
-<table>
-    <thead>
-        {# For the table header row, we print the DB attribute names #}
-        <tr>
-            {% for key in tests[0].keys() %}
-            <th>{{ key }}</th>
-            {% endfor %}
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
+{% if tests %}
+    <table>
+        <thead>
+            {# For the table header row, we print the DB attribute names #}
+            <tr>
+                {% for key in tests[0].keys() %}
+                <th>{{ key }}</th>
+                {% endfor %}
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
 
-    <tbody>
-        {# For each row, print the testId, name #}
-        {% for test in tests %}
-        <tr>
-            <td>{{ test['Test ID'] }}</td>
-            <td>{{ test['Name'] }}</td>
-            <td><a href="{{ url_for('tests', id=test['Test ID']) }}"><span class="material-symbols-outlined" title ="edit">edit</span></td>
-            <td>
-                <form class="delete-trigger" data-id="{{ test['Test ID'] }}">
-                    <button type="button" class="deletebutton" title ="delete">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        <tbody>
+            {# For each row, print the testId, name #}
+            {% for test in tests %}
+            <tr>
+                <td>{{ test['Test ID'] }}</td>
+                <td>{{ test['Name'] }}</td>
+                <td><a href="{{ url_for('tests', id=test['Test ID']) }}"><span class="material-symbols-outlined" title ="edit">edit</span></td>
+                <td>
+                    <form class="delete-trigger" data-id="{{ test['Test ID'] }}">
+                        <button type="button" class="deletebutton" title ="delete">
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+{% if not tests %}
+    <h2 style="text-align:center">No Tests to show</h2>
+{% endif %}
 
 <div class="add-form-popup {{"active" if action == "Update"}}">
     <div class="add-form">
