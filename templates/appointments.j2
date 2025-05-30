@@ -43,8 +43,7 @@ Date: 5/28/2025
                 <td>{{ appointment['Appointment ID'] }}</td>
                 <td>{{ appointment['Appointment Date Time']}}</td>
                 <td>{{ appointment['Clinic'] }}</td>
-                <td>{{ appointment['Patient First Name'] }}</td>
-                <td>{{ appointment['Patient Last Name'] }}</td>
+                <td>{{ appointment['Patient Name'] }}</td>
                 <td>{{ appointment['Appointment Status'] }}</td>
                 <td><a href="{{ url_for('appointments', id=appointment['Appointment ID']) }}"><span class="material-symbols-outlined" title ="edit">edit</span></td>
                 <td>

@@ -97,10 +97,10 @@ def clinics():
             action = "Add"
             clinic = ()
 
-            # Render the clinics.j2 file, and also send the renderer clinics information
-            return render_template(
-                "clinics.j2", clinics=clinics, clinic=clinic, action=action
-            )
+        # Render the clinics.j2 file, and also send the renderer clinics information
+        return render_template(
+            "clinics.j2", clinics=clinics, clinic=clinic, action=action
+        )
 
         
     except Exception as e:
@@ -286,8 +286,7 @@ def appointments():
         get_appointments_query = "SELECT appointmentId AS `Appointment ID`, \
                                 DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS `Appointment Date Time`, \
                                 CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS `Clinic`, \
-                                Patients.firstName AS `Patient First Name`, \
-                                Patients.lastName AS `Patient Last Name`, \
+                                CONCAT(Patients.firstName, ' ', Patients.lastName) AS `Patient Name`, \
                                 Statuses.status AS `Appointment Status` \
                                 FROM Appointments \
                                 JOIN Patients ON Appointments.patientId = Patients.patientId \
@@ -1006,8 +1005,7 @@ def appointmentstests():
 
         # Create and execute our queries
         get_appointmentstests_info_query = "SELECT AppointmentsTests.appointmentTestId AS `Appointment Test ID`, \
-                                            Patients.firstName AS `Patient First Name`, \
-                                            Patients.lastName AS `Patient Last Name`, \
+                                            CONCAT(Patients.firstName, ' ', Patients.lastName) AS `Patient Name`, \
                                             CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS `Clinic`,\
                                             DATE_FORMAT(Appointments.dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS `Appointment Date Time`, \
                                             Tests.name AS `Test Name`, \
