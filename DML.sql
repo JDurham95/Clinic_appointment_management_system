@@ -130,8 +130,7 @@ WHERE resultId = @resultId_to_rename;
 SELECT appointmentId AS `Appointment ID`,
 DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS `Appointment Date Time`,
 CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS `Clinic`,
-Patients.firstName AS `Patient First Name`,
-Patients.lastName AS `Patient Last Name`,
+CONCAT(Patients.firstName, ' ', Patients.lastName) AS `Patient Name`,
 Statuses.status AS `Appointment Status`
 FROM Appointments
 JOIN Patients ON Appointments.patientId = Patients.patientId
@@ -164,8 +163,7 @@ WHERE appointmentId=@appointmentId;
 
 /** Get AppointmentsTests information **/
 SELECT AppointmentsTests.appointmentTestId AS `Appointment Test ID`,
-Patients.firstName AS `Patient First Name`,
-Patients.lastName AS `Patient Last Name`,
+CONCAT(Patients.firstName, ' ', Patients.lastName) AS `Patient Name`,
 CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS `Clinic`,
 DATE_FORMAT(Appointments.dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS `Appointment Date Time`,
 Tests.name AS `Test Name`,

@@ -45,8 +45,7 @@ Date: 5/28/2025
             {% for info in appointmentstests_info %}
             <tr>
                 <td>{{ info['Appointment Test ID'] or 'N/A' }}</td>
-                <td>{{ info['Patient First Name'] or 'N/A' }}</td>
-                <td>{{ info['Patient Last Name'] or 'N/A' }}</td>
+                <td>{{ info['Patient Name'] or 'N/A' }}</td>
                 <td>{{ info['Clinic'] or 'N/A' }}</td>
                 <td>{{ info['Appointment Date Time'] or 'N/A' }}</td>
                 <td>{{ info['Test Name'] or 'N/A' }}</td>
