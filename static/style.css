@@ -15,7 +15,7 @@ body {
     color: red;
 }
 
-h1 {
+h1, h2 {
     text-align: center;
 }
 
@@ -23,6 +23,8 @@ h1 {
     display: flex;
     align-items: center;
     grid-gap: 5px;
+    justify-content: center;
+    position: relative;
 }
 
 button {
@@ -32,12 +34,8 @@ button {
 }
 
 .add-container {
-    display: flex;
-    justify-content: flex-end;
-}
-
-button.add {
-    margin-bottom: 15px;
+    position: absolute;
+    right: 0;
 }
 
 nav {
