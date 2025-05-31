@@ -8,11 +8,13 @@ Citations:
 
 
 Citation for CONCAT:
+    Originality: Adapted
     Date: 5/3/2025
     Source URL: https://www.mysqltutorial.org/mysql-string-functions/mysql-concat/ 
 
 
 Citation for DATE_FORMAT
+    Originality: Adapted
     Date: 5/10/2025
     Source URL: https://www.mysqltutorial.org/mysql-date-functions/mysql-date_format/ 
 **/
