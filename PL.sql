@@ -6,6 +6,7 @@ CS340 Introduction to Databases
 
 Citations:
 Citation for Stored Procedures
+    Originality: Adapted
     Date: 5/17/2025
     Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-pl-slash-sql-part-2-stored-procedures-for-cud?module_item_id=25352959
     Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968

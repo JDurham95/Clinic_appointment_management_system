@@ -4,23 +4,28 @@
 
 # Citations: 
 
-# Citation for initilizing/ creating the base app.py
+# Citation for initilizing/creating the base app.py
+# Originality: Adapted
 # Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
 # Date: 5/2/2025
 
 # Citation for query parameters
+# Originality: Adapted
 # Source URL: https://www.geeksforgeeks.org/get-request-query-parameters-with-flask/
 # Date: 5/4/2025
 
 # Citation for Flask CUD routes
+# Originality: Adapted
 # Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
 # Date: 5/20/2025
 
 # Citation for traceback.print_exc()
+# Originality: Adapted
 # Source URL: https://www.geeksforgeeks.org/traceback-in-python/
 # Date: 5/20/2025
 
 # Citation for upper function
+# Originality: Adapted
 # Source URL: https://www.w3schools.com/python/ref_string_upper.asp
 # Date: 5/21/2025
 
@@ -49,6 +54,7 @@ def home():
         print(f"Error rendering page: {e}")
         return "An error occurred while rendering the page.", 500
 
+# Reset database
 @app.route("/reset")
 def reset():
     try:
@@ -70,6 +76,7 @@ def reset():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
+# Display clinics
 @app.route("/clinics", methods=["GET", "POST"])
 def clinics():
     try:
@@ -276,8 +283,7 @@ def update_clinic():
             if "dbConnection" in locals() and dbConnection:
                 dbConnection.close()
 
-
-
+# Display appointments
 @app.route("/appointments", methods=["GET", "POST"])
 def appointments():
     try:
@@ -483,7 +489,7 @@ def update_appointments():
             if "dbConnection" in locals() and dbConnection:
                 dbConnection.close()
 
-
+# Display patients
 @app.route("/patients", methods=["GET", "POST"])
 def patients():
     try:
@@ -677,6 +683,7 @@ def update_patient():
             if "dbConnection" in locals() and dbConnection:
                 dbConnection.close()
 
+# Display statuses
 @app.route("/statuses", methods=["GET", "POST"])
 def statuses():
     try:
@@ -761,6 +768,7 @@ def update_status():
             if "dbConnection" in locals() and dbConnection:
                 dbConnection.close()
 
+# Display tests
 @app.route("/tests", methods=["GET", "POST"])
 def tests():
     try:
@@ -916,7 +924,7 @@ def delete_test():
             if "dbConnection" in locals() and dbConnection:
                 dbConnection.close()
 
-
+# Display results
 @app.route("/results", methods=["GET", "POST"])
 def results():
     try:
@@ -998,6 +1006,7 @@ def update_result():
             if "dbConnection" in locals() and dbConnection:
                 dbConnection.close()
 
+# Display appointmentstests
 @app.route("/appointmentstests", methods=["GET", "POST"])
 def appointmentstests():
     try:

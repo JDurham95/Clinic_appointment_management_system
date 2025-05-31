@@ -6,16 +6,19 @@ CS340 Introduction to Databases
 
 Citations:
 Citation for CASCADE operations:
+    Originality: Adapted
     Date: 4/25/2025
     Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-mysql-cascade
 
 
 Citation for START TRANSACTION and COMMIT
+    Originality: Adapted
     Date: 4/25/2025
     Source URL: https://www.geeksforgeeks.org/mysql-transaction/
 
 
 Citation for stored procedures
+    Originality: Adapted
     Date: 5/17/2025
     Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-pl-slash-sql-part-2-stored-procedures-for-cud?module_item_id=25352959
 **/

@@ -27,9 +27,4 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector('.cancel').addEventListener('click', function() {
         document.querySelector('.reset-popup').classList.remove('active');
     });
-
-    // document.querySelector("button.submit").addEventListener("click", (event) =>{
-    //     event.preventDefault();
-    //     document.querySelector(".add-form-popup form").submit();
-    // });
 });

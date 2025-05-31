@@ -5,10 +5,12 @@
 # Citations: 
 
 # Citation for creating db_connector.py
+# Originality: Adapted
 # Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
 # Date: 5/2/2025
 
 # Citation for environment variables
+# Originality: Adapted
 # Source URL: https://www.geeksforgeeks.org/using-python-environment-variables-with-python-dotenv/
 # Date: 5/2/2025
 
@@ -18,7 +20,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Database credentials
+# Database credentials stored in environment variables
 host = 'classmysql.engr.oregonstate.edu'
 user = 'cs340_' + os.environ.get("ONID")
 passwd = os.environ.get("PASSWORD")    
