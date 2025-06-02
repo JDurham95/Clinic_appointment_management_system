@@ -150,6 +150,7 @@ th, td {
     padding: 8px;
     border: 1px solid gray;
     flex: auto;
+    background: #fff;
 }
 
 .add-form button.submit {

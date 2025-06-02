@@ -82,7 +82,7 @@ Date: 5/28/2025
                 <input type="hidden" name="appointmentTestId" id="appointmentTestId" value= "{{ appointmenttest['appointmentTestId'] }}">
             {% endif %}
             <div class="flex-center">
-                <label for="appointmentId">Appointment ID: <span class="red">*</span></label>
+                <label for="appointmentId">Appointment: <span class="red">*</span></label>
                 <select name="appointmentId" id="appointmentId" value="{{ appointmenttest['appointmentId'] }}" required>
                     {% if action == "Add" %}
                         <option>Select a appointment</option>
