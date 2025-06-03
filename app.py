@@ -715,6 +715,9 @@ def statuses():
                 FROM Statuses \
                 WHERE statusId = {status_id};"
             status = db.query(dbConnection, select_status_query).fetchall()[0]
+        else:
+            action = ""
+            status = ()
 
         # Render the statuses.j2 file, and also send the renderer statuses information
         return render_template(
@@ -952,6 +955,9 @@ def results():
                                 FROM Results \
                                 WHERE testResultId = {result_id};"
             result = db.query(dbConnection, select_result_query).fetchall()[0]
+        else:
+            action = ""
+            result = ()
 
         # Render the results.j2 file, and also send the renderer result information
         return render_template(
