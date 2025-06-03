@@ -14,6 +14,12 @@
 # Source URL: https://www.geeksforgeeks.org/get-request-query-parameters-with-flask/
 # Date: 5/4/2025
 
+# Citation for url_for and request.referrer from Flask documentation
+# Originality: Adapted
+# Source URL: https://flask.palletsprojects.com/en/stable/api/#flask.url_for
+# Source URL: https://flask.palletsprojects.com/en/stable/api/#flask.Request.referrer
+# Date: 5/20/2025
+
 # Citation for Flask CUD routes
 # Originality: Adapted
 # Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
@@ -34,7 +40,7 @@ import traceback
 # ########################################
 # ########## SETUP
 
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 import database.db_connector as db
 
 PORT = 2000
@@ -65,7 +71,8 @@ def reset():
         reset_query = "CALL sp_load_clinicdb();"
         cursor.execute(reset_query)
 
-        return redirect(request.referrer)
+        # Redirect user to same page they were on or to the home page
+        return redirect(request.referrer or url_for('home'))
 
     except Exception as e:
         print(f"Error executing queries: {e}")
@@ -92,6 +99,7 @@ def clinics():
                             FROM Clinics;"
         clinics = db.query(dbConnection, get_clinics_query).fetchall()
 
+        # Use id query parameter to determine if user is updating or adding a clinic
         clinic_id = request.args.get('id')
 
         if clinic_id:
@@ -312,6 +320,7 @@ def appointments():
         get_statuses_query = "SELECT statusId, status FROM Statuses ORDER BY statusId;"
         statuses = db.query(dbConnection, get_statuses_query).fetchall()
 
+        # Use id query parameter to determine if user is updating or adding an appointment
         appointment_id = request.args.get('id')
         if appointment_id:
             action = "Update"
@@ -512,7 +521,8 @@ def patients():
                             CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS primaryClinic \
                             FROM Clinics;"
         clinics = db.query(dbConnection, get_clinics_query).fetchall()
-        
+
+        # Use id query parameter to determine if user is updating or adding a patient
         patient_id = request.args.get('id')
         if patient_id:
             action = "Update"
@@ -553,6 +563,7 @@ def create_patient():
         date_of_birth = request.form["dateOfBirth"]
         gender = request.form["gender"]
 
+        # Handle case when no primary clinic is selected
         try:
             clinic_id = int(request.form["clinic"])
         except ValueError:
@@ -696,6 +707,7 @@ def statuses():
                         ORDER BY statusId;"
         statuses = db.query(dbConnection, get_status_query).fetchall()
 
+        # Use id query parameter to determine if user is updating a status
         status_id = request.args.get('id')
         if status_id:
             action = "Update"
@@ -703,9 +715,6 @@ def statuses():
                 FROM Statuses \
                 WHERE statusId = {status_id};"
             status = db.query(dbConnection, select_status_query).fetchall()[0]
-        else:
-            action = "Add"
-            status = ()
 
         # Render the statuses.j2 file, and also send the renderer statuses information
         return render_template(
@@ -778,6 +787,7 @@ def tests():
         get_tests_query = "SELECT testId AS `Test ID`, name AS `Name` FROM Tests ORDER BY testId;"
         tests = db.query(dbConnection, get_tests_query).fetchall()
 
+        # Use id query parameter to determine if user is updating or adding a test
         test_Id = request.args.get('id')
         if test_Id:
             action = "Update"
@@ -934,6 +944,7 @@ def results():
         get_results_query = "SELECT Results.testResultId AS `Test Result ID`, Results.result AS `Result` FROM Results ORDER BY testResultId;"
         results = db.query(dbConnection, get_results_query).fetchall()
 
+        # Use id query parameter to determine if user is updating a result
         result_id = request.args.get('id')
         if result_id:
             action = "Update"
@@ -941,9 +952,6 @@ def results():
                                 FROM Results \
                                 WHERE testResultId = {result_id};"
             result = db.query(dbConnection, select_result_query).fetchall()[0]
-        else:
-            action = "Add"
-            result = ()
 
         # Render the results.j2 file, and also send the renderer result information
         return render_template(
@@ -1047,7 +1055,7 @@ def appointmentstests():
         get_results_query = "SELECT testResultId, result FROM Results ORDER BY testResultId;"
         results = db.query(dbConnection, get_results_query).fetchall()
     
-
+        # Use id query parameter to determine if user is updating or adding an appointmenttest
         appointmenttest_id = request.args.get('id')
         if appointmenttest_id:
             action = "Update"
@@ -1084,7 +1092,8 @@ def create_appointmentstests():
         appointment_id = request.form["appointmentId"]
         test_id = request.form["testId"]
         test_result_id = request.form["testResultId"]
-        print(f"test result id: {test_result_id}")
+
+        # Handle case when no test result is selected
         if test_result_id == "Select a result":
             test_result_id = None
 
