@@ -20,6 +20,10 @@ body {
     margin: 0 20px;
 }
 
+p, ul {
+    line-height: 25px;
+}
+
 .red {
     color: red;
 }
