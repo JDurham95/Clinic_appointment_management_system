@@ -141,6 +141,8 @@ def create_clinic():
         state = request.form["state"].upper()
         postal_code = request.form["postalCode"]
         phone_number = request.form["phoneNumber"]
+        if len(phone_number) == 10:
+            phone_number = phone_number[:3] +"-"+ phone_number[3:6] +"-" + phone_number[6:]
 
         # Create and execute our queries
         # Using parameterized queries (Prevents SQL injection attacks)
@@ -252,8 +254,11 @@ def update_clinic():
              
             try:
                 clinic_phone_number = str(request.form["phoneNumber"])
+                if len(clinic_phone_number) == 10:
+                    clinic_phone_number = clinic_phone_number[:3] +"-"+ clinic_phone_number[3:6] +"-" + clinic_phone_number[6:]
             except ValueError:
                 clinic_phone_number = None
+            
 
             print(f"phoneNumber {clinic_phone_number}")
             
@@ -559,6 +564,9 @@ def create_patient():
         first_name = request.form["firstName"]
         last_name = request.form["lastName"]
         phone_number = request.form["phoneNumber"]
+        if len(phone_number) == 10:
+            phone_number = phone_number[:3] +"-"+ phone_number[3:6] +"-" + phone_number[6:]
+
         email = request.form["email"]
         date_of_birth = request.form["dateOfBirth"]
         gender = request.form["gender"]
@@ -628,6 +636,9 @@ def update_patient():
             
             try:
                 patient_phone_number = str(request.form["phoneNumber"])
+                if len(patient_phone_number) == 10:
+                    patient_phone_number = patient_phone_number[:3] +"-"+ patient_phone_number[3:6] +"-" + patient_phone_number[6:]
+
             except ValueError:
                 patient_phone_number = None
             
