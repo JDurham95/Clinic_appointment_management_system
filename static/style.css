@@ -150,6 +150,7 @@ th, td {
 }
 
 .add-form input, .add-form select {
+    width: 100%;
     border-radius: 8px;
     padding: 8px;
     border: 1px solid gray;
@@ -231,3 +232,4 @@ th, td {
 .deletebutton {
     cursor: pointer;
 }
+
