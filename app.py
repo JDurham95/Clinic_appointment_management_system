@@ -51,6 +51,7 @@ app = Flask(__name__)
 # ########## ROUTE HANDLERS
 
 # READ ROUTES
+# Display home page
 @app.route("/", methods=["GET"])
 def home():
     try:
@@ -67,7 +68,7 @@ def reset():
         dbConnection = db.connectDB()  # Open our database connection
         cursor = dbConnection.cursor()
 
-        # Create and execute our queries
+        # Create and execute our reset query to reset the database
         reset_query = "CALL sp_load_clinicdb();"
         cursor.execute(reset_query)
 
@@ -90,6 +91,7 @@ def clinics():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
+        # Query to display all clinics
         get_clinics_query = "SELECT clinicId AS 'Clinic ID', \
                             address AS 'Address', \
                             city AS `City`, \
@@ -104,6 +106,7 @@ def clinics():
 
         if clinic_id:
             action = "Update"
+            # Use clinic id to get that clinic's information to populate form
             select_clinic_query = f"SELECT clinicId, address, city, state, postalCode, phoneNumber \
                 FROM Clinics \
                 WHERE clinicId = {clinic_id};"
@@ -184,8 +187,6 @@ def delete_clinic():
             # Get form data
             clinic_id = request.form["id_to_delete"]
 
-
-
             # Create and execute our queries
             # Using parameterized queries (Prevents SQL injection attacks)
             delete_clinic_query = "CALL sp_delete_clinic(%s);"
@@ -228,14 +229,10 @@ def update_clinic():
             except ValueError:
                 clinic_address = None
             
-            print(f"address: {clinic_address}")
-
             try:
                 clinic_city = str(request.form["city"])
             except ValueError:
                 clinic_city = None
-
-            print(f"city: {clinic_city}")
             
             try:
                 clinic_state = str(request.form["state"])
@@ -243,25 +240,18 @@ def update_clinic():
             except ValueError:
                 clinic_state = None
             
-            print(f"state: {clinic_state}")
-
             try:
                 clinic_postal_code = str(request.form["postalCode"])
             except ValueError:
                 clinic_postal_code = None
-
-            print(f"postalCode: {clinic_postal_code}")
-             
+                         
             try:
                 clinic_phone_number = str(request.form["phoneNumber"])
                 if len(clinic_phone_number) == 10:
                     clinic_phone_number = clinic_phone_number[:3] +"-"+ clinic_phone_number[3:6] +"-" + clinic_phone_number[6:]
             except ValueError:
                 clinic_phone_number = None
-            
-
-            print(f"phoneNumber {clinic_phone_number}")
-            
+                        
             # Create and execute our queries
             # Using parameterized queries (Prevents SQL injection attacks)
             update_clinic_query = "CALL sp_update_clinic(%s, %s, %s, %s, %s, %s);"
@@ -302,6 +292,7 @@ def appointments():
     try:
         dbConnection = db.connectDB()  # Open our database connection
 
+        # Query to display all appointments
         get_appointments_query = "SELECT appointmentId AS `Appointment ID`, \
                                 DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS `Appointment Date Time`, \
                                 CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS `Clinic`, \
@@ -314,14 +305,17 @@ def appointments():
                                 ORDER BY appointmentId;"
         appointments = db.query(dbConnection, get_appointments_query).fetchall()
 
+        # Query to get clinics for the dropdown
         get_clinics_query = "SELECT address, clinicId, city, state FROM Clinics ORDER BY clinicId;"
         clinics = db.query(dbConnection, get_clinics_query).fetchall()
 
+        # Query to get patients for the dropdown
         get_patients_query ="SELECT patientId, firstName, lastName, phoneNumber, email, dateOfBirth, gender, clinicId \
              FROM Patients \
              ORDER BY patientId;"
         patients = db.query(dbConnection, get_patients_query).fetchall()
 
+        # Query to get statuses for the dropdown
         get_statuses_query = "SELECT statusId, status FROM Statuses ORDER BY statusId;"
         statuses = db.query(dbConnection, get_statuses_query).fetchall()
 
@@ -329,6 +323,8 @@ def appointments():
         appointment_id = request.args.get('id')
         if appointment_id:
             action = "Update"
+
+            # Use appointment id to get that appointment's information to populate form
             select_appointment_query = f"SELECT appointmentId, dateTime, clinicId, patientId, statusId \
                 FROM Appointments \
                 WHERE appointmentId = {appointment_id};"
@@ -404,8 +400,6 @@ def delete_appointment():
             # Get form data
             appointment_id = request.form["id_to_delete"]
 
-
-
             # Create and execute our queries
             # Using parameterized queries (Prevents SQL injection attacks)
             delete_appointment_query = "CALL sp_delete_appointment(%s);"
@@ -439,36 +433,26 @@ def update_appointments():
         
             #get form data
             appointment_Id = request.form["appointmentId"]
-            print(f"appointmentId: {appointment_Id}")
-
 
             #cleanse data 
             appointment_date_time = request.form["dateTime"]
             if not appointment_date_time:
                 appointment_date_time = None
 
-            print(f"dateTime: {appointment_date_time}")
-
             try:
                 clinic_id = int(request.form["clinicId"])
             except ValueError:
                 clinic_id = None
-
-            print(f"clinicId: {clinic_id}")
             
             try:
                 patient_id = int(request.form["patientId"])
             except ValueError:
                 patient_id = None
             
-            print(f"patientId: {patient_id}")
-
             try:
                 status_id = int(request.form["statusId"])
             except ValueError:
                 status_id = None
-
-            print(f"statusId: {status_id}")
             
             # Create and execute our queries
             # Using parameterized queries (Prevents SQL injection attacks)
@@ -510,6 +494,7 @@ def patients():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
+        # Query to get all patients
         get_patients_query = "SELECT patientId AS `Patient ID`, \
                             firstName AS `First Name`, \
                             lastName AS `Last Name`, \
@@ -522,6 +507,7 @@ def patients():
                             LEFT JOIN Clinics ON Patients.clinicId = Clinics.clinicId;"
         patients = db.query(dbConnection, get_patients_query).fetchall()
 
+        # Query to get clinics for the dropdown
         get_clinics_query = "SELECT clinicId, \
                             CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS primaryClinic \
                             FROM Clinics;"
@@ -531,6 +517,8 @@ def patients():
         patient_id = request.args.get('id')
         if patient_id:
             action = "Update"
+
+            # Use patient id to get that patient's information to populate form
             select_patient_query = f"SELECT patientId, firstName, lastName, phoneNumber, email, dateOfBirth, gender, clinicId \
                 FROM Patients \
                 WHERE patientId = {patient_id};"
@@ -616,8 +604,6 @@ def update_patient():
         
             #get form data
             patient_id = request.form["patientId"]
-            print(f"patientId: {patient_id}")
-
 
             #cleanse data 
             try:
@@ -625,14 +611,10 @@ def update_patient():
             except ValueError:
                 patient_first_name = None
             
-            print(f"patient fname: {patient_first_name}")
-
             try:
                 patient_last_name = str(request.form["lastName"])
             except ValueError:
                 patient_last_name = None
-
-            print(f"patient lname: {patient_last_name}")
             
             try:
                 patient_phone_number = str(request.form["phoneNumber"])
@@ -642,34 +624,25 @@ def update_patient():
             except ValueError:
                 patient_phone_number = None
             
-            print(f"patient pn: {patient_phone_number}")
-
             try:
                 patient_email = str(request.form["email"])
             except ValueError:
                 patient_email = None
-
-            print(f"patient email: {patient_email}")
              
             patient_date_of_birth = request.form["dateOfBirth"]
             if not patient_date_of_birth:
                 patient_date_of_birth = None
             
-            print(f"patient DOB: {patient_date_of_birth}")
-
             try:
                 patient_gender = str(request.form["gender"])
             except ValueError:
                 patient_gender = None
-
-            print(f"patient gender: {patient_gender}")
 
             try:
                 clinic_id = int(request.form["clinic"])
             except ValueError:
                 clinic_id = None
             
-            print(f"clinicId: {clinic_id}")
             # Create and execute our queries
             # Using parameterized queries (Prevents SQL injection attacks)
             update_patient_query = "CALL sp_update_patient(%s, %s, %s, %s, %s, %s, %s,%s);"
@@ -712,6 +685,7 @@ def statuses():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
+        # Query to get all statuses
         get_status_query = "SELECT statusId AS `Status ID`, \
                         status AS `Status` \
                         FROM Statuses \
@@ -722,6 +696,8 @@ def statuses():
         status_id = request.args.get('id')
         if status_id:
             action = "Update"
+
+            # Use status id to get the status information to populate form
             select_status_query = f"SELECT statusId, status \
                 FROM Statuses \
                 WHERE statusId = {status_id};"
@@ -753,8 +729,6 @@ def update_status():
         
             #get form data
             status_id = request.form["statusId"]
-            print(f"statusId: {status_id}")
-
 
             #cleanse data 
             try:
@@ -798,14 +772,17 @@ def tests():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
+        # Query to get all tests
         get_tests_query = "SELECT testId AS `Test ID`, name AS `Name` FROM Tests ORDER BY testId;"
         tests = db.query(dbConnection, get_tests_query).fetchall()
 
         # Use id query parameter to determine if user is updating or adding a test
-        test_Id = request.args.get('id')
-        if test_Id:
+        test_id = request.args.get('id')
+        if test_id:
             action = "Update"
-            select_test_query =f"SELECT testId, name FROM Tests WHERE testId = {test_Id};"
+
+            # Use test id to get the test information to populate form
+            select_test_query =f"SELECT testId, name FROM Tests WHERE testId = {test_id};"
             test= db.query(dbConnection,select_test_query).fetchall()[0]
         else:
             action= "Add"
@@ -874,16 +851,14 @@ def update_test():
         
             #get form data
             test_id = request.form["testId"]
-            print(f"testId: {test_id}")
-
 
             #cleanse data 
             try:
                 test_name = str(request.form["name"])
             except ValueError:
                 test_name = None
-            
 
+            
             # Create and execute our queries
             # Using parameterized queries (Prevents SQL injection attacks)
             update_test_query = "CALL sp_update_test(%s, %s);"
@@ -955,6 +930,7 @@ def results():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
+        # Query to get all results
         get_results_query = "SELECT Results.testResultId AS `Test Result ID`, Results.result AS `Result` FROM Results ORDER BY testResultId;"
         results = db.query(dbConnection, get_results_query).fetchall()
 
@@ -962,6 +938,8 @@ def results():
         result_id = request.args.get('id')
         if result_id:
             action = "Update"
+
+            # Use result id to get the result information to populate form
             select_result_query = f"SELECT testResultId, result \
                                 FROM Results \
                                 WHERE testResultId = {result_id};"
@@ -993,8 +971,6 @@ def update_result():
         
             #get form data
             test_result_id = request.form["testResultId"]
-            print(f"test result Id: {test_result_id}")
-
 
             #cleanse data 
             try:
@@ -1038,6 +1014,7 @@ def scheduledtests():
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
+        # Query to get all appointmentstests
         get_appointmentstests_info_query = "SELECT AppointmentsTests.appointmentTestId AS `Scheduled Test ID`, \
                                             CONCAT(Patients.firstName, ' ', Patients.lastName) AS `Patient Name`, \
                                             CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS `Clinic`,\
@@ -1056,9 +1033,11 @@ def scheduledtests():
         get_appointmentstests_query ="SELECT appointmentTestId, appointmentId, testId, testResultId FROM AppointmentsTests ORDER BY appointmentTestId;"
         appointmentstests = db.query(dbConnection,get_appointmentstests_query).fetchall()
 
+        # Query to get tests for dropdown
         get_tests_query ="SELECT testId, name FROM Tests ORDER BY testId;"
         tests = db.query(dbConnection,get_tests_query).fetchall()
 
+        # Query to get appointments for dropdown
         get_appointments_query = "SELECT appointmentId, DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS dateTime, \
                                 Appointments.clinicId, Patients.firstName, Patients.lastName, Statuses.status, \
                                 CONCAT(Patients.firstName,' ', Patients.lastName,' - ', DATE_FORMAT(Appointments.dateTime, '%%m/%%d/%%Y %%h:%%i %%p'), ' at ', Clinics.address,' ', Clinics.city, ', ', Clinics.state) AS `dropDownInfo` \
@@ -1069,6 +1048,7 @@ def scheduledtests():
                                 ORDER BY appointmentId;"
         appointments = db.query(dbConnection, get_appointments_query).fetchall()
 
+        # Query to get results for dropdown
         get_results_query = "SELECT testResultId, result FROM Results ORDER BY testResultId;"
         results = db.query(dbConnection, get_results_query).fetchall()
     
@@ -1076,6 +1056,8 @@ def scheduledtests():
         appointmenttest_id = request.args.get('id')
         if appointmenttest_id:
             action = "Update"
+
+            # Use appointmenttest id to get the appointmenttest information to populate form
             select_appointmenttest_query = f"SELECT appointmentTestId, appointmentId, testId, testResultId \
                 FROM AppointmentsTests \
                 WHERE appointmentTestId = {appointmenttest_id};"
@@ -1084,7 +1066,7 @@ def scheduledtests():
             action = "Add"
             appointmenttest = ()
 
-        # Render the apppointmentstests.j2 file, and also send the renderer appointmentstests information
+        # Render the scheduledtests.j2 file, and also send the renderer appointmentstests information
         return render_template(
             "scheduledtests.j2", appointmentstests=appointmentstests, appointmentstests_info=appointmentstests_info, tests=tests, appointments=appointments, results=results, appointmenttest=appointmenttest, action=action
         )
