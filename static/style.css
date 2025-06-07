@@ -4,9 +4,26 @@ Fidella Wu, Jacob Durham
 CS340 - Introduction to Databases Spring 2025 
 
 Citations: 
-All CSS styling is original
+Background linear-gradient CSS from Figma (designed a quick mock-up on Figma before starting)
+Originality: Copied
+Scope: line
+Source URL: https://www.figma.com/design/WTIOoszjA8Vfy5YqaH8thE/Clinic-Appointment-Management-System?node-id=0-1&t=PDZH46iJw7UdrU8R-1
+Date: 5/1/2025
+
+citation for creating the popups for create, update, delete, and reset
+Originality: Adapted
+Source URL: https://www.w3schools.com/howto/howto_css_modals.asp
+Date: 5/2/2025
+
+citation for base table styling
+Originality: Adapted
+Source URL: https://www.w3schools.com/css/css_table.asp
+Date: 5/2/2025
+
+All other CSS styling and design is original. 
 */
 
+/* General Base Styling */
 body, html {
     font-family: 'Lato';
 }
@@ -51,6 +68,7 @@ button {
     right: 0;
 }
 
+/* Styling for navigation */
 nav {
     display: flex;
     align-items: center;
@@ -79,6 +97,7 @@ nav a.active, button.add, button.submit, button.cancel, .button {
     color: #000;
 }
 
+/* Styling for table */
 table {
     border-collapse: collapse;
     width: 100%;
@@ -99,6 +118,7 @@ th, td {
     color: #000;
 }
 
+/* Styling for add and update form/popup */
 .add-form-popup {
     position: fixed;
     top: 0;
@@ -163,6 +183,7 @@ th, td {
     margin: auto;
 }
 
+/* Styling for delete and reset form/popup */
 .delete-form-popup, .reset-popup {
     position: fixed;
     top: 0;
