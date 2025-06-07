@@ -72,7 +72,7 @@ Date: 5/28/2025
 {% endif %}
 
 {% if not appointmentstests %}
-    <h2 style="text-align:center">No AppointmentsTests to show</h2>
+    <h2 style="text-align:center">No Scheduled Tests to show</h2>
 {% endif %}
 
 {# Form to add and update an appointmenttest #}
@@ -80,9 +80,9 @@ Date: 5/28/2025
     <div class="add-form">
         <button class="close"><span class="material-symbols-outlined">close</span></button>
 
-        <h2>{{action}} AppointmentTest</h2>
+        <h2>{{action}} Scheduled Test</h2>
 
-        <form action="/appointmentstests/{{ "create" if action == "Add" else "update" }}" method="POST">
+        <form action="/scheduledtests/{{ "create" if action == "Add" else "update" }}" method="POST">
             {% if action == "Update" %}
                 <input type="hidden" name="appointmentTestId" id="appointmentTestId" value= "{{ appointmenttest['appointmentTestId'] }}">
             {% endif %}
