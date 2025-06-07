@@ -260,6 +260,6 @@ BEGIN
 /** end the transaction **/
 END //
 
-
+/** Set the delimeter back to ; **/
 DELIMITER ;
 
