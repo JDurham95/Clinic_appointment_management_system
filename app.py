@@ -1053,8 +1053,6 @@ def scheduledtests():
                                             ORDER BY appointmentTestId;"
         appointmentstests_info = db.query(dbConnection, get_appointmentstests_info_query).fetchall()
 
-        get_appointmentstests_query ="SELECT appointmentTestId, appointmentId, testId, testResultId FROM AppointmentsTests ORDER BY appointmentTestId;"
-        appointmentstests = db.query(dbConnection,get_appointmentstests_query).fetchall()
 
         get_tests_query ="SELECT testId, name FROM Tests ORDER BY testId;"
         tests = db.query(dbConnection,get_tests_query).fetchall()
@@ -1086,7 +1084,7 @@ def scheduledtests():
 
         # Render the apppointmentstests.j2 file, and also send the renderer appointmentstests information
         return render_template(
-            "scheduledtests.j2", appointmentstests=appointmentstests, appointmentstests_info=appointmentstests_info, tests=tests, appointments=appointments, results=results, appointmenttest=appointmenttest, action=action
+            "scheduledtests.j2", appointmentstests_info=appointmentstests_info, tests=tests, appointments=appointments, results=results, appointmenttest=appointmenttest, action=action
         )
 
     except Exception as e:

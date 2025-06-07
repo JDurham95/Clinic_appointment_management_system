@@ -40,7 +40,7 @@ Date: 5/28/2025
     </div>
 </div>
 
-{% if appointmentstests %}
+{% if appointmentstests_info %}
     <h3 id="scheduledTestsHeader" > Scheduled Tests entries may be removed by deleting the asscociated Test </h3>
     <table>
         <thead>
@@ -71,7 +71,7 @@ Date: 5/28/2025
     </table>
 {% endif %}
 
-{% if not appointmentstests %}
+{% if not appointmentstests_info %}
     <h2 style="text-align:center">No Scheduled Tests to show</h2>
 {% endif %}
 
