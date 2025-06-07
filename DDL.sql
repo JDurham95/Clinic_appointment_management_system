@@ -5,6 +5,15 @@ CS340 Introduction to Databases
 
 
 Citations:
+
+Citation for general query formats:
+    Multiple weeks in CS340 were spent teaching us how to write SQL queries. All DDL queries were written based on that education. 
+    Date: Learning was done over the course of the spring quarter, from 3/25 to 6/25
+    Notable Explorations pages include:
+    Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-sql-joins?module_item_id=25352923
+    Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-intro-to-sql?module_item_id=25352908
+    Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-design-patterns-part-2?module_item_id=25352922
+
 Citation for CASCADE operations:
     Originality: Adapted
     Date: 4/25/2025
@@ -23,13 +32,16 @@ Citation for stored procedures
     Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-pl-slash-sql-part-2-stored-procedures-for-cud?module_item_id=25352959
 **/
 
-
+/** Drop the load database sp, if it already exits **/
 DROP PROCEDURE  IF EXISTS sp_load_clinicdb;
+
+/** Change the delimiter to // **/
 DELIMITER //
+/** Create the sp **/
 CREATE PROCEDURE sp_load_clinicdb()
 BEGIN
 
-
+    /**Set foreign key checks to zero, so that existing tables can be deleted without foreign key conflicts **/
     SET FOREIGN_KEY_CHECKS = 0;
 
 
@@ -42,10 +54,10 @@ BEGIN
     DROP TABLE IF EXISTS `Results`;
     DROP TABLE IF EXISTS `Tests`;
 
-
+    /** Disable autocommiting so that all transactions are completed at once, or rolled back if there is an error **/
     SET AUTOCOMMIT = 0;
 
-
+    /** Start the transaction, to allow rollback if needed **/
     START TRANSACTION;
 
 
@@ -241,11 +253,11 @@ BEGIN
 
 
 
-
+    /** change foreign key checks back to 1, so database integrity is maintained. Commit the changes **/
     SET FOREIGN_KEY_CHECKS = 1;
     COMMIT;
 
-
+/** end the transaction **/
 END //
 
 

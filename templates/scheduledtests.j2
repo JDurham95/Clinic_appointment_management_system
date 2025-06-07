@@ -102,7 +102,7 @@ Date: 5/28/2025
                 <label for="testId">Test: <span class="red">*</span></label>
                 <select name="testId" id="testId" value="{{ appointmenttest['testId'] }}" required>
                     {% if action == "Add" %}
-                        <option>Select a test</option>
+                        <option value="">Select a test</option>
                     {% endif %}
                     {% for test in tests %}
                         <option value="{{ test['testId'] }}" {% if test['testId'] == appointmenttest['testId'] %} selected {% endif %}>{{ test.name }}</option>

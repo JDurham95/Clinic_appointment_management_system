@@ -6,6 +6,16 @@ CS340 Introduction to Databases
 
 Citations:
 
+Citation for general query formats:
+    Multiple weeks in CS340 were spent teaching us how to write SQL queries. All DML queries were written based on that education. 
+    Date: Learning was done over the course of the spring quarter, from 3/25 to 6/25
+    Notable Explorations pages include:
+    Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-sql-joins?module_item_id=25352923
+    Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-intro-to-sql?module_item_id=25352908
+    Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-design-patterns-part-2?module_item_id=25352922
+
+
+
 
 Citation for CONCAT:
     Originality: Adapted
@@ -163,8 +173,8 @@ UPDATE `Appointments`
 SET statusId= 5
 WHERE appointmentId=@appointmentId;
 
-/** Get AppointmentsTests information **/
-SELECT AppointmentsTests.appointmentTestId AS `Appointment Test ID`,
+/** Get AppointmentsTests information, Represented in the UI as Scheduled Tests **/
+SELECT AppointmentsTests.appointmentTestId AS `Scheduled Test ID`,
 CONCAT(Patients.firstName, ' ', Patients.lastName) AS `Patient Name`,
 CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS `Clinic`,
 DATE_FORMAT(Appointments.dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS `Appointment Date Time`,
