@@ -4,7 +4,7 @@
 
 # Citations: 
 
-# Citation for initilizing/creating the base app.py
+# Citation for initilizing/creating the base app.py. The routes for home, clinics, appointments, patients, statuses, tests, results, and patients were adapted from this starter code.  
 # Originality: Adapted
 # Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
 # Date: 5/2/2025
@@ -20,12 +20,12 @@
 # Source URL: https://flask.palletsprojects.com/en/stable/api/#flask.Request.referrer
 # Date: 5/20/2025
 
-# Citation for Flask CUD routes
+# Citation for Flask CUD routes. All CUD routes for all entities were adapted from this starter code.  
 # Originality: Adapted
 # Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
 # Date: 5/20/2025
 
-# Citation for traceback.print_exc()
+# Citation for traceback.print_exc() and traceback, used for debugging in cud routes
 # Originality: Adapted
 # Source URL: https://www.geeksforgeeks.org/traceback-in-python/
 # Date: 5/20/2025
