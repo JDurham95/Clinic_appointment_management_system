@@ -89,7 +89,7 @@ WHERE patientId = @patientId_to_update;
 /** Note: cannot delete patient **/
 
 /** Get all statuses **/
-SELECT statusId AS “Status ID”, status AS “Status” 
+SELECT statusId AS `Status ID`, status AS `Status` 
 FROM Statuses 
 ORDER BY statusId;
 
@@ -104,7 +104,7 @@ UPDATE `Statuses`
 SET status = @statusInput
 WHERE statusId = @statusId_to_update;
 
-/** Note: cannot delete status **/
+/** Note: cannot add or delete a status **/
 
 /** Get all tests **/
 SELECT testId AS `Test ID`, name AS `Name` 
@@ -130,7 +130,7 @@ Results.result AS `Result`
 FROM Results 
 ORDER BY testResultId;
 
-/** Note: Cannot delete a result **/
+/** Note: Cannot add or delete a result **/
 
 /** Update result result **/
 UPDATE `Results`

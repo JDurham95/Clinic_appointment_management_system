@@ -1037,7 +1037,7 @@ def scheduledtests():
         # Query to get appointments for dropdown
         get_appointments_query = "SELECT appointmentId, DATE_FORMAT(dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS dateTime, \
                                 Appointments.clinicId, Patients.firstName, Patients.lastName, Statuses.status, \
-                                CONCAT(Patients.firstName,' ', Patients.lastName,' - ', DATE_FORMAT(Appointments.dateTime, '%%m/%%d/%%Y %%h:%%i %%p'), ' at ', Clinics.address,' ', Clinics.city, ', ', Clinics.state) AS `dropDownInfo` \
+                                CONCAT(Patients.firstName,' ', Patients.lastName,' - ', DATE_FORMAT(Appointments.dateTime, '%%m/%%d/%%Y %%h:%%i %%p'), ' at ', Clinics.address,', ', Clinics.city, ', ', Clinics.state) AS `dropDownInfo` \
                                 FROM Appointments \
                                 JOIN Patients ON Appointments.patientId = Patients.patientId \
                                 JOIN Statuses ON Appointments.statusId = Statuses.statusId \
