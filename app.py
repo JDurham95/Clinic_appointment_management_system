@@ -1033,12 +1033,12 @@ def update_result():
 
 # Display scheduled tests (data from AppointmentsTests)
 @app.route("/scheduledtests", methods=["GET", "POST"])
-def appointmentstests():
+def scheduledtests():
     try:
         dbConnection = db.connectDB()  # Open our database connection
 
         # Create and execute our queries
-        get_appointmentstests_info_query = "SELECT AppointmentsTests.appointmentTestId AS `Appointment Test ID`, \
+        get_appointmentstests_info_query = "SELECT AppointmentsTests.appointmentTestId AS `Scheduled Test ID`, \
                                             CONCAT(Patients.firstName, ' ', Patients.lastName) AS `Patient Name`, \
                                             CONCAT('Capital Family Clinic at ', Clinics.address, ', ', Clinics.city, ', ', Clinics.state) AS `Clinic`,\
                                             DATE_FORMAT(Appointments.dateTime, '%%m/%%d/%%Y %%h:%%i %%p') AS `Appointment Date Time`, \
@@ -1086,7 +1086,7 @@ def appointmentstests():
 
         # Render the apppointmentstests.j2 file, and also send the renderer appointmentstests information
         return render_template(
-            "appointmentstests.j2", appointmentstests=appointmentstests, appointmentstests_info=appointmentstests_info, tests=tests, appointments=appointments, results=results, appointmenttest=appointmenttest, action=action
+            "scheduledtests.j2", appointmentstests=appointmentstests, appointmentstests_info=appointmentstests_info, tests=tests, appointments=appointments, results=results, appointmenttest=appointmenttest, action=action
         )
 
     except Exception as e:
@@ -1100,7 +1100,7 @@ def appointmentstests():
 
 # Create scheduled test / appointmentstests
 @app.route("/scheduledtests/create", methods=["POST"])
-def create_appointmenttest():
+def create_scheduledtest():
     try:
         dbConnection = db.connectDB()  # Open our database connection
         cursor = dbConnection.cursor()
@@ -1146,7 +1146,7 @@ def create_appointmenttest():
 
 # Update scheduled test / appointmentstests
 @app.route("/scheduledtests/update", methods=["POST"])
-def update_appointmenttest():
+def update_scheduledtest():
         try:
             dbConnection = db.connectDB()
             cursor = dbConnection.cursor()
