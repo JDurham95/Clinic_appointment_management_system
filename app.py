@@ -1032,7 +1032,7 @@ def update_result():
                 dbConnection.close()
 
 # Display appointmentstests
-@app.route("/appointmentstests", methods=["GET", "POST"])
+@app.route("/scheduledtests", methods=["GET", "POST"])
 def appointmentstests():
     try:
         dbConnection = db.connectDB()  # Open our database connection
@@ -1099,7 +1099,7 @@ def appointmentstests():
             dbConnection.close()
 
 # Create appointmentstests
-@app.route("/appointmentstests/create", methods=["POST"])
+@app.route("/scheduledtests/create", methods=["POST"])
 def create_appointmentstests():
     try:
         dbConnection = db.connectDB()  # Open our database connection
@@ -1130,7 +1130,7 @@ def create_appointmentstests():
         print(f"CREATE appointmenttest. ID: {new_id}")
 
         # Redirect the user to the updated webpage
-        return redirect("/appointmentstests")
+        return redirect("/scheduledtests")
 
     except Exception as e:
         print(f"Error executing queries: {e}")
@@ -1145,7 +1145,7 @@ def create_appointmentstests():
             dbConnection.close()
 
 # Update appointmentstests
-@app.route("/appointmentstests/update", methods=["POST"])
+@app.route("/scheduledtests/update", methods=["POST"])
 def update_appointmentstests():
         try:
             dbConnection = db.connectDB()
@@ -1196,7 +1196,7 @@ def update_appointmentstests():
             print(f"Updated appointmenttest. appointmentTestId: {appointmenttest_id} appointmentId: {appointment_id}")
 
             #redirect back to the updated page
-            return redirect("/appointmentstests")
+            return redirect("/scheduledtests")
         
         except Exception as e:
             print(f"Error executing queries: {e}")

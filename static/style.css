@@ -145,7 +145,8 @@ th, td {
 }
 
 .add-form label {
-    width: 130px;
+    flex-basis: 125px;
+    flex-shrink: 0;
     display: inline-block;
 }
 

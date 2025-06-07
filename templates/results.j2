@@ -78,7 +78,7 @@ Date: 5/28/2025
             {% if action == "Update" %}
                 <input type="hidden" name="testResultId" id="testResultId" value= "{{ result['testResultId'] }}">
             {% endif %}
-            <div>
+            <div class="flex-center">
                 <label for="status">Result: <span class="red">*</span></label>
                 <input type="text" pattern="[A-Za-z]*" required title="Only letters A-Z and a-z are allowed" name="result" id="result" value="{{ result.result }}" required>
             </div>

@@ -20,6 +20,11 @@ citation for html tooltips, used in our edit and delete buttons
 Originality: Adapted
 source URL: https://www.geeksforgeeks.org/what-is-a-tooltip-in-html/
 Date: 5/28/2025
+
+citation for html input size used on phone number input
+Originality: Adapted
+Source URL: https://www.w3schools.com/tags/att_input_size.asp
+Date: 6/6/2025
 #}
 
 {% extends "main.j2" %}
@@ -108,7 +113,7 @@ Date: 5/28/2025
 
             <div class="flex-center">
                 <label for="phoneNumber">Phone Number:</label>
-                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}|[0-9]{10}" placeholder="123-456-7890 or 1234567890" name="phoneNumber" id="phoneNumber" value="{{ clinic['phoneNumber'] }}">
+                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}|[0-9]{10}" placeholder="123-456-7890 or 1234567890" name="phoneNumber" id="phoneNumber" value="{{ clinic['phoneNumber'] }}" size="23">
             </div>
 
             <button class="submit">Submit</button>

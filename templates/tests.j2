@@ -82,7 +82,7 @@ Date: 5/28/2025
             {% if action == "Update" %}
                 <input type="hidden" name ="testId" id ="testId" value= "{{ test['testId'] }}">
             {% endif %}
-            <div>
+            <div class="flex-center">
                 <label for="name">Name: <span class = "red">*</span></label>
                 <input type="text" name="name" id ="name" value= "{{test['name']}}" required>
             </div>
