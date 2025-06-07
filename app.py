@@ -1031,7 +1031,7 @@ def update_result():
             if "dbConnection" in locals() and dbConnection:
                 dbConnection.close()
 
-# Display appointmentstests
+# Display scheduled tests (data from AppointmentsTests)
 @app.route("/scheduledtests", methods=["GET", "POST"])
 def appointmentstests():
     try:
@@ -1098,9 +1098,9 @@ def appointmentstests():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
-# Create appointmentstests
+# Create scheduled test / appointmentstests
 @app.route("/scheduledtests/create", methods=["POST"])
-def create_appointmentstests():
+def create_appointmenttest():
     try:
         dbConnection = db.connectDB()  # Open our database connection
         cursor = dbConnection.cursor()
@@ -1144,39 +1144,31 @@ def create_appointmentstests():
         if "dbConnection" in locals() and dbConnection:
             dbConnection.close()
 
-# Update appointmentstests
+# Update scheduled test / appointmentstests
 @app.route("/scheduledtests/update", methods=["POST"])
-def update_appointmentstests():
+def update_appointmenttest():
         try:
             dbConnection = db.connectDB()
             cursor = dbConnection.cursor()
         
             #get form data
             appointmenttest_id = request.form["appointmentTestId"]
-            print(f"appointmenttestId: {appointmenttest_id}")
-
 
             #cleanse data 
             try:
                 appointment_id = int(request.form["appointmentId"])
             except ValueError:
                 appointment_id = None
-
-            print(f"appointmentId: {appointment_id}")
             
             try:
                 test_id = int(request.form["testId"])
             except ValueError:
                 test_id = None
             
-            print(f"testId: {test_id}")
-
             try:
                 test_result_id = int(request.form["testResultId"])
             except ValueError:
                 test_result_id = None
-
-            print(f"testResultId: {test_result_id}")
             
             # Create and execute our queries
             # Using parameterized queries (Prevents SQL injection attacks)
