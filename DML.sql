@@ -15,8 +15,6 @@ Citation for general query formats:
     Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-design-patterns-part-2?module_item_id=25352922
 
 
-
-
 Citation for CONCAT:
     Originality: Adapted
     Date: 5/3/2025
