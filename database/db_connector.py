@@ -4,12 +4,13 @@
 
 # Citations: 
 
-# Citation for creating db_connector.py
+# Citation for creating db_connector.py, this code was adapted from this starter code 
+# Scope: Module
 # Originality: Adapted
 # Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
 # Date: 5/2/2025
 
-# Citation for environment variables
+# Citation for environment variables. We used personal .env files so each partner was able to use their own SQL database and no password sharing was necessary.  
 # Originality: Adapted
 # Source URL: https://www.geeksforgeeks.org/using-python-environment-variables-with-python-dotenv/
 # Date: 5/2/2025
