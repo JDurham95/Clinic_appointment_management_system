@@ -5,32 +5,38 @@
 # Citations: 
 
 # Citation for initilizing/creating the base app.py. The routes for home, clinics, appointments, patients, statuses, tests, results, and patients were adapted from this starter code.  
+# Scope: Module
 # Originality: Adapted
 # Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
 # Date: 5/2/2025
 
 # Citation for query parameters
+# Scope: Line
 # Originality: Adapted
 # Source URL: https://www.geeksforgeeks.org/get-request-query-parameters-with-flask/
 # Date: 5/4/2025
 
 # Citation for url_for and request.referrer from Flask documentation
+# Scope: Line
 # Originality: Adapted
 # Source URL: https://flask.palletsprojects.com/en/stable/api/#flask.url_for
 # Source URL: https://flask.palletsprojects.com/en/stable/api/#flask.Request.referrer
 # Date: 5/20/2025
 
-# Citation for Flask CUD routes. All CUD routes for all entities were adapted from this starter code.  
+# Citation for Flask CUD routes. All CUD routes for all entities were adapted from this starter code.
+# Scope: Module
 # Originality: Adapted
 # Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
 # Date: 5/20/2025
 
 # Citation for traceback.print_exc() and traceback, used for debugging in cud routes
+# Scope: Line
 # Originality: Adapted
 # Source URL: https://www.geeksforgeeks.org/traceback-in-python/
 # Date: 5/20/2025
 
 # Citation for upper function
+# Scope: Line
 # Originality: Adapted
 # Source URL: https://www.w3schools.com/python/ref_string_upper.asp
 # Date: 5/21/2025
@@ -52,6 +58,12 @@ app = Flask(__name__)
 
 # READ ROUTES
 # Display home page
+# Citation for displaying the home page.   
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
+# Date: 5/2/2025
+
 @app.route("/", methods=["GET"])
 def home():
     try:
@@ -62,6 +74,18 @@ def home():
         return "An error occurred while rendering the page.", 500
 
 # Reset database
+# Citation for the database reset function  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
+# Date: 5/2/2025
+#
+# Citation for url_for and request.referrer from Flask documentation
+# Scope: Line, 100
+# Originality: Adapted
+# Source URL: https://flask.palletsprojects.com/en/stable/api/#flask.url_for
+# Source URL: https://flask.palletsprojects.com/en/stable/api/#flask.Request.referrer
+# Date: 5/20/2025
 @app.route("/reset")
 def reset():
     try:
@@ -85,6 +109,17 @@ def reset():
             dbConnection.close()
 
 # Display clinics
+# Citation for displaying the clinics page. This code was adapted from this module.
+# Scope: Module  
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
+# Date: 5/2/2025
+# 
+# Citation for query parameters
+# Scope: Line, 140
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/get-request-query-parameters-with-flask/
+# Date: 5/4/2025
 @app.route("/clinics", methods=["GET", "POST"])
 def clinics():
     try:
@@ -131,6 +166,17 @@ def clinics():
             dbConnection.close()
 
 # Create clinic
+# Citation for create clinics page, this code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
+
+# Citation for upper function
+# Scope: Line,  190
+# Originality: Adapted
+# Source URL: https://www.w3schools.com/python/ref_string_upper.asp
+# Date: 5/21/2025
 @app.route("/clinics/create", methods=["POST"])
 def create_clinic():
     try:
@@ -178,6 +224,11 @@ def create_clinic():
             dbConnection.close()
 
 # Delete clinic
+# Citation for the delete clinics page, this code was adapted from this module.  
+# Scope: Module 
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
 @app.route("/clinics/delete", methods=["POST"])
 def delete_clinic():
         try:
@@ -212,6 +263,24 @@ def delete_clinic():
                 dbConnection.close()
 
 # Update clinic
+# Citation for update clinics page, this code was adapted from this module.
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
+
+# Citation for traceback.print_exc() and traceback, used for debugging in cud routes
+# Scope: Line, 348
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/traceback-in-python/
+# Date: 5/20/2025
+
+# Citation for upper function
+# Scope: Line, 308
+# Originality: Adapted
+# Source URL: https://www.w3schools.com/python/ref_string_upper.asp
+# Date: 5/21/2025
+
 @app.route("/clinics/update", methods=["POST"])
 def update_clinic():
         try:
@@ -287,6 +356,17 @@ def update_clinic():
                 dbConnection.close()
 
 # Display appointments
+# Citation for displaying appointments page. 
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
+# Date: 5/2/2025
+
+# Citation for query parameters
+# Scope: Line, 403
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/get-request-query-parameters-with-flask/
+# Date: 5/4/2025
 @app.route("/appointments", methods=["GET", "POST"])
 def appointments():
     try:
@@ -348,6 +428,11 @@ def appointments():
             dbConnection.close()
 
 # Create appointment
+# Citation for create appointments page, this code was adapted from this module.  
+# Scope: Module 
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
 @app.route("/appointments/create", methods=["POST"])
 def create_appointment():
     try:
@@ -391,6 +476,11 @@ def create_appointment():
             dbConnection.close()
 
 # Delete appointment
+# Citation for delete appointments page, this code was adapted from this module.  
+# Scope: Module 
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
 @app.route("/appointments/delete", methods=["POST"])
 def delete_appointment():
         try:
@@ -425,6 +515,17 @@ def delete_appointment():
                 dbConnection.close()
 
 # Update appointment
+# Citation for update appointments page, this code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
+
+# Citation for traceback.print_exc() and traceback, used for debugging in cud routes
+# Scope: Line, 563 
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/traceback-in-python/
+# Date: 5/20/2025
 @app.route("/appointments/update", methods=["POST"])
 def update_appointments():
         try:
@@ -488,6 +589,17 @@ def update_appointments():
                 dbConnection.close()
 
 # Display patients
+# Citation for displaying the patients page. This code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
+# Date: 5/2/2025
+
+# Citation for query parameters
+# Scope: Line, 629
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/get-request-query-parameters-with-flask/
+# Date: 5/4/2025
 @app.route("/patients", methods=["GET", "POST"])
 def patients():
     try:
@@ -542,6 +654,11 @@ def patients():
             dbConnection.close()
 
 # Create patient
+# Citation for create patients page, this code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
 @app.route("/patients/create", methods=["POST"])
 def create_patient():
     try:
@@ -596,6 +713,17 @@ def create_patient():
             dbConnection.close()
 
 # Update patient
+# Citation for update patients page, this code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
+
+# Citation for traceback.print_exc() and traceback, used for debugging in cud routes
+# Scope: Line, 799
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/traceback-in-python/
+# Date: 5/20/2025
 @app.route("/patients/update", methods=["POST"])
 def update_patient():
         try:
@@ -679,6 +807,17 @@ def update_patient():
                 dbConnection.close()
 
 # Display statuses
+# Citation for displaying the statuses page. This code was adapted from this module.   
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
+# Date: 5/2/2025
+
+# Citation for query parameters
+# Scope: Line, 835
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/get-request-query-parameters-with-flask/
+# Date: 5/4/2025
 @app.route("/statuses", methods=["GET", "POST"])
 def statuses():
     try:
@@ -721,6 +860,17 @@ def statuses():
             dbConnection.close()
 
 # Update status
+# Citation for update statuses page, this code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
+
+# Citation for traceback.print_exc() and traceback, used for debugging in cud routes
+# Scope: Line, 908
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/traceback-in-python/
+# Date: 5/20/2025
 @app.route("/statuses/update", methods=["POST"])
 def update_status():
         try:
@@ -766,6 +916,17 @@ def update_status():
                 dbConnection.close()
 
 # Display tests
+# Citation for displaying the Tests page. This code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
+# Date: 5/2/2025
+
+# Citation for query parameters
+# Scope: Line, 941
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/get-request-query-parameters-with-flask/
+# Date: 5/4/2025
 @app.route("/tests", methods=["GET", "POST"])
 def tests():
     try:
@@ -803,6 +964,11 @@ def tests():
             dbConnection.close()
 
 # Create test
+# Citation for create tests page, this code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
 @app.route("/tests/create", methods=["POST"])
 def create_test():
     try:
@@ -843,6 +1009,17 @@ def create_test():
             dbConnection.close()
 
 # Update test
+# Citation for update tests page, this code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
+
+# Citation for traceback.print_exc() and traceback, used for debugging in cud routes
+# Scope: Line, 1057
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/traceback-in-python/
+# Date: 5/20/2025
 @app.route("/tests/update", methods=["POST"])
 def update_test():
         try:
@@ -888,6 +1065,11 @@ def update_test():
                 dbConnection.close()
 
 # Delete test
+# Citation for delete tests page, this code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
 @app.route("/tests/delete", methods=["POST"])
 def delete_test():
         try:
@@ -924,6 +1106,17 @@ def delete_test():
                 dbConnection.close()
 
 # Display results
+# Citation for displaying the results page. This code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
+# Date: 5/2/2025
+
+# Citation for query parameters
+# Scope: Line, 1131
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/get-request-query-parameters-with-flask/
+# Date: 5/4/2025
 @app.route("/results", methods=["GET", "POST"])
 def results():
     try:
@@ -963,6 +1156,17 @@ def results():
             dbConnection.close()
 
 # Update result
+# Citation for update results page, this code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
+
+# Citation for traceback.print_exc() and traceback, used for debugging in cud routes
+# Scope: Line, 1204
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/traceback-in-python/
+# Date: 5/20/2025
 @app.route("/results/update", methods=["POST"])
 def update_result():
         try:
@@ -1008,6 +1212,17 @@ def update_result():
                 dbConnection.close()
 
 # Display scheduled tests (data from AppointmentsTests)
+# Citation for displaying the Schedules Tests (AppointmentsTests) page, this code was heavily adapted from this module 
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-web-application-technology-2?module_item_id=25352948
+# Date: 5/2/2025
+
+# Citation for query parameters
+# Scope: Line, 1268
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/get-request-query-parameters-with-flask/
+# Date: 5/4/2025
 @app.route("/scheduledtests", methods=["GET", "POST"])
 def scheduledtests():
     try:
@@ -1078,6 +1293,11 @@ def scheduledtests():
             dbConnection.close()
 
 # Create scheduled test / appointmentstests
+# Citation for create scheduled tests page, this code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
 @app.route("/scheduledtests/create", methods=["POST"])
 def create_scheduledtest():
     try:
@@ -1124,6 +1344,17 @@ def create_scheduledtest():
             dbConnection.close()
 
 # Update scheduled test / appointmentstests
+# Citation for update scheduled tests page, this code was adapted from this module.  
+# Scope: Module
+# Originality: Adapted
+# Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25352968
+# Date: 5/20/2025
+
+# Citation for traceback.print_exc() and traceback, used for debugging in cud routes
+# Scope: Line, 1405
+# Originality: Adapted
+# Source URL: https://www.geeksforgeeks.org/traceback-in-python/
+# Date: 5/20/2025
 @app.route("/scheduledtests/update", methods=["POST"])
 def update_scheduledtest():
         try:
