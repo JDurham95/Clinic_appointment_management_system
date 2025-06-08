@@ -15,18 +15,21 @@ Citation for general query formats:
     Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-design-patterns-part-2?module_item_id=25352922
 
 Citation for CASCADE operations:
+    Scope: Line, 102, 165 - 167, 237, 239
     Originality: Adapted
     Date: 4/25/2025
     Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-mysql-cascade
 
 
 Citation for START TRANSACTION and COMMIT
+    Scope: Line, 64,261
     Originality: Adapted
     Date: 4/25/2025
     Source URL: https://www.geeksforgeeks.org/mysql-transaction/
 
 
-Citation for stored procedures
+Citation for stored procedures, all stored procedures were based on this starter code  
+    Scope: Module 
     Originality: Adapted
     Date: 5/17/2025
     Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-pl-slash-sql-part-2-stored-procedures-for-cud?module_item_id=25352959

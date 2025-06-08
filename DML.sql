@@ -16,12 +16,14 @@ Citation for general query formats:
 
 
 Citation for CONCAT:
+    Scope: Line, 71, 144 - 145, 178 -179
     Originality: Adapted
     Date: 5/3/2025
     Source URL: https://www.mysqltutorial.org/mysql-string-functions/mysql-concat/ 
 
 
 Citation for DATE_FORMAT
+    Scope: Line, 69, 143, 180
     Originality: Adapted
     Date: 5/10/2025
     Source URL: https://www.mysqltutorial.org/mysql-date-functions/mysql-date_format/ 
