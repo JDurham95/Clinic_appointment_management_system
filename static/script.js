@@ -5,17 +5,20 @@ CS340 - Introduction to Databases Spring 2025
 
 Citations: 
 
-Citation for JS event listeners
+Citation for JS event listeners used for clicking on buttons 
+Scope: Function
 Originality: Adapted
 Source URL: https://www.w3schools.com/js/js_htmldom_eventlistener.asp
 Date: 5/3/2025
 
 Citation for JS window location
+Scope: Function
 Originality: Adapted
-Source URL: https://www.geeksforgeeks.org/using-python-environment-variables-with-python-dotenv/
+Source URL: https://www.w3schools.com/js/js_window_location.asp
 Date: 5/4/2025
 
 Citation for JS Split and Slice
+Scope: Line, 38
 Originality: Adapted
 Source URL: https://www.w3schools.com/jsref/jsref_split.asp
 Source URL: https://www.w3schools.com/jsref/jsref_slice_string.asp
