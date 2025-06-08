@@ -11,6 +11,7 @@
 # Date: 5/2/2025
 
 # Citation for environment variables. We used personal .env files so each partner was able to use their own SQL database and no password sharing was necessary.  
+# Scope: Line, 23, 27-29
 # Originality: Adapted
 # Source URL: https://www.geeksforgeeks.org/using-python-environment-variables-with-python-dotenv/
 # Date: 5/2/2025
