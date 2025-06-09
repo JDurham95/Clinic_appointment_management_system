@@ -96,7 +96,7 @@ Date: 5/28/2025
 
             <div class="flex-center">
                 <label for="phoneNumber">Phone Number: <span class="red">*</span></label>
-                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}|[0-9]{10}" placeholder="123-456-7890 or 1234567890" name="phoneNumber" id="phoneNumber" value="{{ patient['phoneNumber'] }}" required>
+                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}|[0-9]{10}" maxlength="12" placeholder="123-456-7890 or 1234567890" name="phoneNumber" id="phoneNumber" value="{{ patient['phoneNumber'] }}" required>
             </div>
 
             <div class="flex-center">
