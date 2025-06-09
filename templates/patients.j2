@@ -124,7 +124,12 @@ Date: 5/28/2025
             <div class="flex-center">
                 <label for="clinic">Primary Clinic:</label>
                 <select name="clinic" id="clinic" value="{{ patient['clinicId'] }}">
-                    <option value="">Select a clinic</option>
+                    {% if action == "Add" %}
+                        <option value="">Select a clinic</option>
+                    {% endif %}
+                    {% if action == "Update" %}
+                        <option>None</option>
+                    {% endif %}
                     {% for clinic in clinics %}
                         <option value="{{ clinic['clinicId'] }}" {% if clinic['clinicId'] == patient['clinicId'] %} selected {% endif %}>{{ clinic['primaryClinic'] }}</option>
                     {% endfor %}
