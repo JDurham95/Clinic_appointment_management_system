@@ -95,7 +95,7 @@ Date: 5/28/2025
                 <label for="appointmentId">Appointment: <span class="red">*</span></label>
                 <select name="appointmentId" id="appointmentId" value="{{ appointmenttest['appointmentId'] }}" required>
                     {% if action == "Add" %}
-                        <option>Select an appointment</option>
+                        <option value="">Select an appointment</option>
                     {% endif %}
                     {% if action == "Update" %}
                         <option>None</option>
