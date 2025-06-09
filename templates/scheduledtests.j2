@@ -98,7 +98,7 @@ Date: 5/28/2025
                         <option>Select an appointment</option>
                     {% endif %}
                     {% if action == "Update" %}
-                        <option>N/A</option>
+                        <option>None</option>
                     {% endif %}
                     {% for appointment in appointments %}
                         <option value="{{ appointment['appointmentId'] }}" {% if appointment['appointmentId'] == appointmenttest['appointmentId'] %} selected {% endif %}>{{ appointment['dropDownInfo'] }}</option>
@@ -125,7 +125,7 @@ Date: 5/28/2025
                         <option>Select a result</option>
                     {% endif %}
                     {% if action == "Update" %}
-                        <option>N/A</option>
+                        <option>None</option>
                     {% endif %}
                     {% for result in results %}
                         <option value="{{ result['testResultId'] }}" {% if result['testResultId'] == appointmenttest['testResultId'] %} selected {% endif %}>{{ result.result }}</option>
