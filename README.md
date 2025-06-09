@@ -8,6 +8,7 @@ Database with patient, test, appointment, and clinic entities for managing patie
 Citations: 
 
 app.py:
+
     Citation for initilizing/creating the base app.py. The routes for home, clinics, appointments, patients, statuses, tests, results, and patients were adapted from this starter code.  
     Scope: Module
     Originality: Adapted
@@ -47,6 +48,7 @@ app.py:
 
 
 db_connector.py
+
     Citation for creating db_connector.py, this code was adapted from this starter code 
     Scope: Module
     Originality: Adapted
@@ -61,6 +63,7 @@ db_connector.py
 
 
 script.js
+
     Citation for JS event listeners used for clicking on buttons 
     Scope: Function
     Originality: Adapted
@@ -81,6 +84,7 @@ script.js
     Date: 5/4/2025 
 
 style.css
+
     Background linear-gradient CSS from Figma (designed a quick mock-up on Figma before starting)
     Scope: Line, 36
     Originality: Copied
@@ -103,6 +107,7 @@ style.css
     All other CSS styling and design is original. 
 
 appointments.j2
+
     citation for creating the base template page, most of the this page was adapted from this starter code
     scope: Module
     Originality: Adapted
@@ -128,6 +133,7 @@ appointments.j2
     Date: 5/28/2025
 
 clinics.j2
+
     citation for creating the base template page, most of this page was adapted from this start code
     Scope: Module
     Originality: Adapted
@@ -159,6 +165,7 @@ clinics.j2
     Date: 6/6/2025
 
 home.j2
+
     citation for creating the base home template page, this page was entirely adapted from the starter code 
     Scope: Module
     Originality: Adapted
@@ -166,6 +173,7 @@ home.j2
     Date: 5/2/2025
 
 main.j2
+
     citation for creating the base main template page, most of this page was adapted from the start code 
     Scope: Module
     Originality: Adapted
@@ -183,6 +191,7 @@ main.j2
     Date: 5/2/2025
 
 patients.j2
+
     citation for creating the base template page, most of this page was adapted from this starter code 
     Scope: Module
     Originality: Adapted
@@ -208,6 +217,7 @@ patients.j2
     Date: 5/28/2025
 
 results.j2 
+
     citation for creating the base template page, most of this page was adapted from this starter code 
     Scope: Module
     Originality: Adapted
@@ -244,6 +254,7 @@ results.j2
     Date: 5/28/2025
 
 scheduledtests.j2
+
     citation for creating the base template page, most of this page was adapted from the starter code
     Scope: Module
     Originality: Adapted
@@ -275,6 +286,7 @@ scheduledtests.j2
     Date: 5/28/2025
 
 statuses.j2
+
     citation for creating the base template page, most of this page was adapted from the start code 
     Scope: Module
     Originality: Adapted
@@ -300,6 +312,7 @@ statuses.j2
     Date: 5/28/2025
 
 tests.j2
+
     citation for creating the base template page, most of this page was adapted from this starter code 
     Scope: 
     Originality: Adapted
@@ -325,6 +338,7 @@ tests.j2
     Date: 5/28/2025
 
 DDL.sql
+
     Citation for general query formats:
     Multiple weeks in CS340 were spent teaching us how to write SQL queries. All DDL queries were written based on that education. 
     Date: Learning was done over the course of the spring quarter, from 3/25 to 6/25
@@ -354,6 +368,7 @@ DDL.sql
     Source URL: https://canvas.oregonstate.edu/courses/1999601/pages/exploration-pl-slash-sql-part-2-stored-procedures-for-cud?module_item_id=25352959
 
 DML.sql
+
     Citation for general query formats:
     Multiple weeks in CS340 were spent teaching us how to write SQL queries. All DML queries were written based on that education. 
     Date: Learning was done over the course of the spring quarter, from 3/25 to 6/25
@@ -377,6 +392,7 @@ DML.sql
     Source URL: https://www.mysqltutorial.org/mysql-date-functions/mysql-date_format/ 
 
 PL.sql
+
     Citation for Stored Procedures, All stored procedure were adapted from the starter code.  
     Scope: Module 
     Originality: Adapted
