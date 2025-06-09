@@ -1,5 +1,6 @@
-Clinic Appointment Management System README
-Fidella Wu, Jacob Durham
+# Capital Family Clinic Appointment Management System README
+
+Fidella Wu, Jacob Durham<br>
 CS340 - Introduction to Databases Spring 2025
 
 Clinic_appointment_managment_system
